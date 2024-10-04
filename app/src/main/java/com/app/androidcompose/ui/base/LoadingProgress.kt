@@ -1,4 +1,4 @@
-package com.app.androidcompose.ui.base.composable
+package com.app.androidcompose.ui.base
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
@@ -13,7 +13,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.app.androidcompose.support.extensions.takeIfValidRes
-import com.app.androidcompose.ui.base.LoadingState
 
 @Composable
 fun LoadingProgress(loading: LoadingState.Loading) {

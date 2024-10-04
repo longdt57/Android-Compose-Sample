@@ -19,6 +19,7 @@ class AppApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        INSTANCE = this
         kronosClock.syncInBackground()
         AppNotificationManager.createDefaultNotificationChannel(this)
         setupLogging()
@@ -35,6 +36,10 @@ class AppApplication : Application() {
     private fun setupFirebase() {
         FirebaseApp.initializeApp(this)
         Firebase.analytics.setUserProperty("FLAVOR", BuildConfig.FLAVOR)
+    }
+
+    companion object {
+        lateinit var INSTANCE: AppApplication
     }
 
 }

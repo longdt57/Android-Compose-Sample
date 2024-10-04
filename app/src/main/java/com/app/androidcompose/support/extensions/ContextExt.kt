@@ -23,6 +23,13 @@ fun Context.openSettings() {
     }
 }
 
+fun Context.openAppSetting() {
+    val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+    val uri: Uri = Uri.fromParts("package", packageName, null)
+    intent.data = uri
+    startActivity(intent)
+}
+
 fun Context.shareText(content: String) {
     val sendIntent = Intent().apply {
         action = Intent.ACTION_SEND

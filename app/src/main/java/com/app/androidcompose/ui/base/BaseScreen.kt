@@ -3,8 +3,6 @@ package com.app.androidcompose.ui.base
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.app.androidcompose.ui.base.composable.AlertDialogView
-import com.app.androidcompose.ui.base.composable.LoadingProgress
 
 @Composable
 fun BaseScreen(

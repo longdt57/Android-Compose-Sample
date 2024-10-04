@@ -1,4 +1,4 @@
-package com.app.androidcompose.ui.base.composable
+package com.app.androidcompose.ui.base
 
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Icon

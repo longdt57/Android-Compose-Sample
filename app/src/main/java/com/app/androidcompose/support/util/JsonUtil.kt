@@ -20,7 +20,7 @@ object JsonUtil {
         }
     }
 
-    fun encodeToString(value: Any): String {
+    inline fun <reified T> encodeToString(value: T): String {
         return Json.encodeToString(value)
     }
 
