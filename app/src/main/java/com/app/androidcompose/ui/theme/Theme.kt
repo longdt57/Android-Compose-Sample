@@ -40,13 +40,30 @@ private val LightColorScheme = lightColorScheme(
     onSurface = Black100,
 )
 
+enum class ThemeType(val value: String) {
+    DARK("Dark"), LIGHT("Light"), SYSTEM("System");
+
+    companion object {
+        fun fromCode(value: String): ThemeType {
+            return entries.first { it.value.equals(value, ignoreCase = true) }
+        }
+    }
+}
+
 @Composable
 fun ComposeTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+    theme: ThemeType = ThemeType.SYSTEM,
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
+
+    val darkTheme: Boolean = when (theme) {
+        ThemeType.LIGHT -> false
+        ThemeType.DARK -> true
+        else -> isSystemInDarkTheme()
+    }
+
     val colorScheme = when {
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
             val context = LocalContext.current
