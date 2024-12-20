@@ -14,7 +14,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -26,7 +25,6 @@ import com.app.androidcompose.data.model.User
 import com.app.androidcompose.support.extensions.collectAsEffect
 import com.app.androidcompose.ui.base.BaseDestination
 import com.app.androidcompose.ui.base.BaseScreen
-import com.app.androidcompose.ui.showToast
 import com.app.androidcompose.ui.theme.ComposeTheme
 
 @Composable
@@ -36,11 +34,11 @@ fun HomeScreen(
 ) = BaseScreen(viewModel) {
     viewModel.navigator.collectAsEffect { destination -> navigator(destination) }
 
-    val uiModels: List<User> by viewModel.uiModels.collectAsStateWithLifecycle()
+    val uiModel by viewModel.uiModels.collectAsStateWithLifecycle()
 
     HomeScreenContent(
         title = stringResource(id = R.string.app_name),
-        uiModels = uiModels
+        uiModels = uiModel.users
     )
 }
 
