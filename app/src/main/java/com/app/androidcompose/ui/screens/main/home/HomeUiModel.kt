@@ -1,7 +1,7 @@
 package com.app.androidcompose.ui.screens.main.home
 
-import com.app.androidcompose.data.model.User
+import com.app.androidcompose.domain.model.UserModel
 
 data class HomeUiModel(
-    val users: List<User> = emptyList()
+    val users: List<UserModel> = emptyList()
 )

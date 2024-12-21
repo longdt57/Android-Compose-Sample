@@ -9,6 +9,7 @@ import com.app.androidcompose.ui.base.LoadingState
 import com.app.androidcompose.ui.screens.main.home.HomeViewModel
 import com.app.androidcompose.support.util.DispatchersProvider
 import com.app.androidcompose.ui.base.ErrorState
+import com.app.androidcompose.ui.screens.main.home.HomeUiModel
 import io.kotest.matchers.shouldBe
 import io.mockk.every
 import io.mockk.mockk
@@ -30,7 +31,7 @@ class HomeViewModelTest {
 
     @Before
     fun setUp() {
-        every { mockUseCase() } returns flowOf(MockUtil.users)
+        every { mockUseCase() } returns flowOf(MockUtil.userModels)
 
         initViewModel()
     }
@@ -38,7 +39,7 @@ class HomeViewModelTest {
     @Test
     fun `When loading models successfully, it shows the model list`() = runTest {
         viewModel.uiModels.test {
-            expectMostRecentItem() shouldBe MockUtil.users
+            expectMostRecentItem() shouldBe HomeUiModel(users = MockUtil.userModels)
         }
     }
 

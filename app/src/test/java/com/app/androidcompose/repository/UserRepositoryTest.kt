@@ -38,7 +38,7 @@ class UserRepositoryTest {
         coEvery { mockUserDao.insertAll(expected) } returns Unit
 
         repository.getUserRemote().collect {
-            it shouldBe expected
+            it shouldBe MockUtil.userModels
         }
     }
 

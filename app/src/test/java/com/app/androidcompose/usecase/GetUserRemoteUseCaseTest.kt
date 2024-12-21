@@ -30,7 +30,7 @@ class GetUserRemoteUseCaseTest {
 
     @Test
     fun `When request successful, it returns success`() = runTest {
-        val expected = MockUtil.users
+        val expected = MockUtil.userModels
         coEvery { mockRepository.getUserRemote() } returns flowOf(expected)
 
         useCase().collect {

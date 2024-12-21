@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.app.androidcompose.R
-import com.app.androidcompose.data.model.User
+import com.app.androidcompose.domain.model.UserModel
 import com.app.androidcompose.support.extensions.collectAsEffect
 import com.app.androidcompose.ui.base.BaseDestination
 import com.app.androidcompose.ui.base.BaseScreen
@@ -45,7 +45,7 @@ fun HomeScreen(
 @Composable
 private fun HomeScreenContent(
     title: String,
-    uiModels: List<User>
+    uiModels: List<UserModel>
 ) {
     Column(
         modifier = Modifier
@@ -76,7 +76,7 @@ private fun HomeScreenContent(
 
 @Composable
 @VisibleForTesting(otherwise = PRIVATE)
-fun UserContent(user: User) {
+fun UserContent(user: UserModel) {
     Text(
         text = "${user.firstName} ${user.lastName}",
         textAlign = TextAlign.Center,
@@ -90,21 +90,22 @@ private fun HomeScreenPreview() {
         HomeScreenContent(
             title = stringResource(id = R.string.app_name),
             uiModels = listOf(
-                User(
+                UserModel(
                     id = 1,
                     firstName = "Logan",
                     lastName = "Do"
                 ),
-                User(
+                UserModel(
                     id = 1,
                     firstName = "Logan",
                     lastName = "Do"
                 ),
-                User(
+                UserModel(
                     id = 1,
                     firstName = "Logan",
                     lastName = "Do"
-                ), User(
+                ),
+                UserModel(
                     id = 1,
                     firstName = "Logan",
                     lastName = "Do"

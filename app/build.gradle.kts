@@ -12,6 +12,7 @@ plugins {
     alias(libs.plugins.firebase.pref)
     alias(libs.plugins.firebase.app.distribution)
     alias(libs.plugins.navigation.safeargs)
+    alias(libs.plugins.kotlinx.kover)
 
     id("kotlin-parcelize")
 //    alias(libs.plugins.androidx.room)
@@ -23,7 +24,7 @@ val release = "release"
 
 android {
     namespace = "com.app.androidcompose"
-    compileSdk = 34
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
 //    room {
 //        schemaDirectory("$projectDir/schemas")
@@ -31,8 +32,8 @@ android {
 
     defaultConfig {
         applicationId = "com.app.androidcompose"
-        minSdk = 24
-        targetSdk = 34
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
         ndk {
@@ -129,6 +130,14 @@ android {
         abortOnError = false
         warningsAsErrors = true
         ignoreTestSources = true
+    }
+    testOptions {
+        unitTests {
+            // Robolectric resource processing/loading https://github.com/robolectric/robolectric/pull/4736
+            isIncludeAndroidResources = true
+        }
+        // Disable device's animation for instrument testing
+        // animationsDisabled = true
     }
 }
 
@@ -248,3 +257,37 @@ dependencies {
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
 }
+
+koverReport {
+    defaults {
+        mergeWith("stagingDebug")
+        filters {
+            val excludedFiles = listOf(
+                "*.BuildConfig.*",
+                "*.BuildConfig",
+                // Enum
+                "*.*\$Creator*",
+                // DI
+                "*.di.*",
+                // Hilt
+                "*.*_ComponentTreeDeps*",
+                "*.*_HiltComponents*",
+                "*.*_HiltModules*",
+                "*.*_MembersInjector*",
+                "*.*_Factory*",
+                "*.Hilt_*",
+                "dagger.hilt.internal.*",
+                "hilt_aggregated_deps.*",
+                // Jetpack Compose
+                "*.ComposableSingletons*",
+                "*.*\$*Preview\$*",
+                "*.ui.preview.*",
+            )
+
+            excludes {
+                classes(excludedFiles)
+            }
+        }
+    }
+}
+

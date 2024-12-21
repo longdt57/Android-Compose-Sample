@@ -4,6 +4,7 @@ import androidx.annotation.Keep
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.app.androidcompose.domain.model.UserModel
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -20,3 +21,5 @@ data class User(
     @SerialName("lastName")
     @ColumnInfo(name = "last_name") val lastName: String?
 )
+
+fun User.mapToDomain() = this

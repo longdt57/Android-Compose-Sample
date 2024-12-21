@@ -1,6 +1,7 @@
 package com.app.androidcompose
 
 import com.app.androidcompose.data.model.User
+import com.app.androidcompose.data.model.mapToDomain
 import com.app.androidcompose.data.remote.models.responses.ErrorResponse
 import io.mockk.every
 import io.mockk.mockk
@@ -43,4 +44,6 @@ object MockUtil {
             lastName = "Do"
         )
     )
+
+    val userModels = users.map { it.mapToDomain() }
 }

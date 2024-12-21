@@ -1,4 +1,8 @@
 [versions]
+minSdk = "24"
+targetSdk = "34"
+compileSdk = "34"
+
 agp = "8.5.2"
 billing = "7.1.0"
 coil = "2.7.0"
@@ -52,6 +56,7 @@ appDistribution = "5.0.0"
 playserviceAd = "23.3.0"
 safeargs = "2.8.1"
 coroutines = "1.8.1"
+kover = "0.7.0"
 
 [libraries]
 androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
@@ -157,3 +162,4 @@ firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "
 firebase-pref = { id = "com.google.firebase.firebase-perf", version.ref = "firebasePref" }
 firebase-app-distribution = { id = "com.google.firebase.appdistribution", version.ref = "appDistribution" }
 navigation-safeargs = { id = "androidx.navigation.safeargs", version.ref = "safeargs" }
+kotlinx-kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
