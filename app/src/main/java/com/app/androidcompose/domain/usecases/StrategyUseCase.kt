@@ -27,41 +27,37 @@ abstract class StrategyUseCase<Param, T> {
     protected open suspend fun onRemoteSuccess(param: Param, result: T) = Unit
 
     private fun getRemoteWithOnEachAction(param: Param): Flow<T> {
-        return getRemote(param).onEach {
-            onRemoteSuccess(param, it)
+        return getRemote(param).onEach { response ->
+            onRemoteSuccess(param, response)
         }
     }
 
 
     private fun remoteFirst(param: Param): Flow<T> {
-        return getRemoteWithOnEachAction(param)
-            .catch { cause ->
-                val localData = getAndCheckLocal(param)
-                if (localData != null) {
-                    emit(localData) // Emit local data if valid
-                } else {
-                    throw cause
-                }
+        return getRemoteWithOnEachAction(param).catch { cause ->
+            when (val localData = getAndCheckLocal(param)) {
+                null -> throw cause // If local data is invalid, emit the remote result
+                else -> emit(localData)
             }
+        }
     }
 
     private fun localFirst(param: Param): Flow<T> {
         return flow<T> {
-            getAndCheckLocal(param = param)?.let {
-                emit(it)
-            } ?: error("Local data is invalid")
+            when (val localData = getAndCheckLocal(param)) {
+                null -> error("Local data is invalid")
+                else -> emit(localData)
+            }
         }.catch {
             emitAll(getRemoteWithOnEachAction(param))
         }
     }
 
     private suspend fun getAndCheckLocal(param: Param): T? {
-        return getLocal(param).firstOrNull()?.let { localData ->
-            if (isLocalValid(localData)) {
-                localData
-            } else {
-                null
-            }
+        val localData = getLocal(param).firstOrNull() ?: return null
+        return when (isLocalValid(localData)) {
+            true -> localData
+            else -> null
         }
     }
 
