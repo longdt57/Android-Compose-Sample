@@ -1,7 +1,6 @@
 package leegroup.module.data.local.preferences
 
 import android.content.SharedPreferences
-import leegroup.module.data.util.JsonUtil
 import kotlin.reflect.KProperty
 
 fun SharedPreferences.execute(operation: (SharedPreferences.Editor) -> Unit) {
@@ -23,9 +22,8 @@ inline fun <reified T> SharedPreferences.get(key: String): T? =
             Float::class -> this.getFloat(key, 0f) as T?
             Int::class -> this.getInt(key, 0) as T?
             Long::class -> this.getLong(key, 0L) as T?
-            else -> this.getString(key, null).takeUnless { it.isNullOrBlank() }?.let {
-                JsonUtil.decodeFromString<T>(it)
-            }
+            Set::class -> this.getStringSet(key, null) as T?
+            else -> error("Illegal type: ${T::class}")
         }
     } else {
         null
@@ -43,7 +41,8 @@ fun SharedPreferences.set(key: String, value: Any?) {
             is Float -> it.putFloat(key, value)
             is Long -> it.putLong(key, value)
             is Int -> it.putInt(key, value)
-            else -> it.putString(key, JsonUtil.encodeToString(value))
+            is Set<*> -> it.putStringSet(key, value as Set<String>)
+            else -> error("Illegal item: $value")
         }
     }
 }
