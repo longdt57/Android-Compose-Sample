@@ -2,22 +2,26 @@ package com.app.androidcompose.ui.screen.home
 
 import app.cash.turbine.test
 import com.app.androidcompose.MockUtil
-import com.app.androidcompose.domain.exceptions.NoConnectivityException
-import com.app.androidcompose.domain.usecases.user.GetUserRemoteUseCase
 import com.app.androidcompose.support.CoroutineTestRule
-import com.app.androidcompose.ui.base.LoadingState
-import com.app.androidcompose.ui.screens.main.home.HomeViewModel
 import com.app.androidcompose.support.util.DispatchersProvider
 import com.app.androidcompose.ui.base.ErrorState
+import com.app.androidcompose.ui.base.LoadingState
 import com.app.androidcompose.ui.screens.main.home.HomeUiModel
+import com.app.androidcompose.ui.screens.main.home.HomeViewModel
 import io.kotest.matchers.shouldBe
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.test.*
-import org.junit.*
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.advanceUntilIdle
+import kotlinx.coroutines.test.runTest
+import leegroup.module.domain.exceptions.NoConnectivityException
+import leegroup.module.domain.usecases.user.GetUserRemoteUseCase
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
 
 @ExperimentalCoroutinesApi
 class HomeViewModelTest {

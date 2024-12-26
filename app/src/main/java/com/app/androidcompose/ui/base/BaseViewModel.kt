@@ -1,14 +1,16 @@
 package com.app.androidcompose.ui.base
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.app.androidcompose.domain.exceptions.ApiException
-import com.app.androidcompose.domain.exceptions.NoConnectivityException
-import com.app.androidcompose.domain.exceptions.ServerException
-import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
-import kotlin.coroutines.CoroutineContext
-import kotlin.coroutines.EmptyCoroutineContext
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.onStart
+import leegroup.module.domain.exceptions.ApiException
+import leegroup.module.domain.exceptions.NoConnectivityException
+import leegroup.module.domain.exceptions.ServerException
 
 @Suppress("PropertyName")
 abstract class BaseViewModel : ViewModel() {
@@ -22,15 +24,15 @@ abstract class BaseViewModel : ViewModel() {
     protected val _navigator = MutableSharedFlow<BaseDestination>()
     val navigator = _navigator.asSharedFlow()
 
-    protected fun showLoading() {
+    protected open fun showLoading() {
         _loading.value = LoadingState.Loading()
     }
 
-    protected fun hideLoading() {
+    protected open fun hideLoading() {
         _loading.value = LoadingState.None
     }
 
-    protected fun handleError(e: Throwable) {
+    protected open fun handleError(e: Throwable) {
         val error = when (e) {
             is NoConnectivityException -> ErrorState.Network()
             is ServerException -> ErrorState.Server()
@@ -40,15 +42,9 @@ abstract class BaseViewModel : ViewModel() {
         _error.tryEmit(error)
     }
 
-
     fun hideError() {
         _error.tryEmit(ErrorState.None)
     }
-
-    protected fun launch(context: CoroutineContext = EmptyCoroutineContext, job: suspend () -> Unit) =
-        viewModelScope.launch(context) {
-            job.invoke()
-        }
 
     protected fun <T> Flow<T>.injectLoading(): Flow<T> = this
         .onStart { showLoading() }

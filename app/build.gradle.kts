@@ -144,6 +144,9 @@ android {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
+    implementation(project(":data"))
+    implementation(project(":domain"))
+    implementation(project(":analytics"))
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
@@ -256,6 +259,12 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+}
+
+dependencies {
+    kover(project(":data"))
+    kover(project(":domain"))
+    kover(project(":analytics"))
 }
 
 koverReport {

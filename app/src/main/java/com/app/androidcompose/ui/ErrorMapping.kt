@@ -2,7 +2,7 @@ package com.app.androidcompose.ui
 
 import android.content.Context
 import com.app.androidcompose.R
-import com.app.androidcompose.domain.exceptions.ApiException
+import leegroup.module.domain.exceptions.ApiException
 import com.app.androidcompose.support.extensions.showToast
 
 fun Throwable.userReadableMessage(context: Context): String {

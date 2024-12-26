@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.serialization) apply false
     alias(libs.plugins.compose.compiler) apply false
     alias(libs.plugins.google.service) apply false
+    alias(libs.plugins.android.library) apply false
     alias(libs.plugins.kotlinx.kover) apply false
 //    alias(libs.plugins.androidx.room) apply false
 }

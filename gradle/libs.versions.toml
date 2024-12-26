@@ -56,7 +56,10 @@ appDistribution = "5.0.0"
 playserviceAd = "23.3.0"
 safeargs = "2.8.1"
 coroutines = "1.8.1"
+appcompat = "1.7.0"
+materialVersion = "1.12.0"
 kover = "0.7.0"
+javaInject = "1"
 
 [libraries]
 androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
@@ -120,6 +123,9 @@ kotlinx-coroutines-play-services = { module = "org.jetbrains.kotlinx:kotlinx-cor
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutineTest" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 
+# Java
+java-inject = { module = "javax.inject:javax.inject", version.ref = "javaInject"}
+
 library-chucker = { module = "com.github.chuckerteam.chucker:library", version.ref = "chucker" }
 library-chucker-no-op = { module = "com.github.chuckerteam.chucker:library-no-op", version.ref = "chucker" }
 lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
@@ -148,6 +154,8 @@ stetho = { module = "com.facebook.stetho:stetho", version.ref = "stetho" }
 stetho-okhttp3 = { module = "com.facebook.stetho:stetho-okhttp3", version.ref = "stetho" }
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "materialVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -162,4 +170,6 @@ firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "
 firebase-pref = { id = "com.google.firebase.firebase-perf", version.ref = "firebasePref" }
 firebase-app-distribution = { id = "com.google.firebase.appdistribution", version.ref = "appDistribution" }
 navigation-safeargs = { id = "androidx.navigation.safeargs", version.ref = "safeargs" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+java-library = { id = "java-library" }
 kotlinx-kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }

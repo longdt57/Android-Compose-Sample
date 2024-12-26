@@ -1,8 +1,8 @@
 package com.app.androidcompose.di
 
-import com.app.androidcompose.analytics.AnalyticsManager
-import com.app.androidcompose.analytics.clients.ClientType
-import com.app.androidcompose.analytics.clients.FirebaseClient
+import leegroup.module.analytics.AnalyticsManager
+import leegroup.module.analytics.clients.ClientType
+import leegroup.module.analytics.clients.FirebaseClient
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -10,15 +10,15 @@ import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(SingletonComponent::class)
-object AnalyticModule {
+class AnalyticModule {
 
     @Provides
     fun provideAnalytics(
-        firebaseClient: FirebaseClient
-    ): AnalyticsManager {
-        return AnalyticsManager(
+        firebaseClient: leegroup.module.analytics.clients.FirebaseClient
+    ): leegroup.module.analytics.AnalyticsManager {
+        return leegroup.module.analytics.AnalyticsManager(
             listOf(firebaseClient),
-            defaultLogEventClientType = ClientType.FIREBASE
+            defaultLogEventClientType = leegroup.module.analytics.clients.ClientType.FIREBASE
         )
     }
 

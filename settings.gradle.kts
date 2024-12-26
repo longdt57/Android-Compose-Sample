@@ -21,4 +21,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "Android Compose"
 include(":app")
- 
+include(":data")
+include(":domain")
+include(":data")
+include(":analytics")

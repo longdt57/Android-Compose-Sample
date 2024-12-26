@@ -23,12 +23,3 @@ fun <T> Flow<T>.collectAsEffect(
         onEach(block).flowOn(context).launchIn(this)
     }
 }
-
-fun <T> Flow<T>.launchCollectLatest(lifecycleOwner: LifecycleOwner, state: Lifecycle.State = Lifecycle.State.CREATED, collector: (T) -> Unit): Job {
-    return lifecycleOwner.lifecycleScope.launch {
-        lifecycleOwner.lifecycle.repeatOnLifecycle(state) {
-            collectLatest { collector.invoke(it) }
-        }
-    }
-}
-

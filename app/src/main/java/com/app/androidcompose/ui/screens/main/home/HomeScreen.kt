@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.app.androidcompose.R
-import com.app.androidcompose.domain.model.UserModel
+import leegroup.module.domain.models.UserModel
 import com.app.androidcompose.support.extensions.collectAsEffect
 import com.app.androidcompose.ui.base.BaseDestination
 import com.app.androidcompose.ui.base.BaseScreen
@@ -90,22 +90,22 @@ private fun HomeScreenPreview() {
         HomeScreenContent(
             title = stringResource(id = R.string.app_name),
             uiModels = listOf(
-                UserModel(
+                leegroup.module.domain.models.UserModel(
                     id = 1,
                     firstName = "Logan",
                     lastName = "Do"
                 ),
-                UserModel(
+                leegroup.module.domain.models.UserModel(
                     id = 1,
                     firstName = "Logan",
                     lastName = "Do"
                 ),
-                UserModel(
+                leegroup.module.domain.models.UserModel(
                     id = 1,
                     firstName = "Logan",
                     lastName = "Do"
                 ),
-                UserModel(
+                leegroup.module.domain.models.UserModel(
                     id = 1,
                     firstName = "Logan",
                     lastName = "Do"
