@@ -9,7 +9,6 @@ object MockUtil {
     val apiException = ApiException(
         error = Error(
             message = "message",
-            code = 1,
         ),
         httpCode = 400,
         httpMessage = "Bad Request "

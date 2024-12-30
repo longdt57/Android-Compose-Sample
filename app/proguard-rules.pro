@@ -22,6 +22,6 @@
 
 -dontwarn java.lang.invoke.StringConcatFactory
 
--keepclassmembers class com.app.androidcompose.data.model.** { *; }
--keepclassmembers class com.app.androidcompose.data.remote.models.requests.** { *; }
--keepclassmembers class com.app.androidcompose.data.remote.models.responses.** { *; }
+-keep class leegroup.module.data.models.** { *; }
+-keep class leegroup.module.data.remote.models.requests.** { *; }
+-keep class leegroup.module.data.remote.models.responses.** { *; }

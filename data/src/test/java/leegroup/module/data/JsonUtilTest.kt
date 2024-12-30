@@ -3,8 +3,6 @@ package leegroup.module.data
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertNotNull
 import junit.framework.TestCase.assertNull
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 import leegroup.module.data.util.JsonUtil
 import org.junit.Test
 
@@ -16,7 +14,7 @@ class JsonUtilTest {
         val json = """{"id":1,"firstName":"John","lastName":"Doe"}"""
 
         // Act
-        val result = JsonUtil.decodeFromString<UserTest>(json)
+        val result = JsonUtil.decodeFromString<TestUser>(json)
 
         // Assert
         assertNotNull(result)
@@ -31,7 +29,7 @@ class JsonUtilTest {
         val invalidJson = """{"id":1,"firstName":"John","lastName":}"""
 
         // Act
-        val result = JsonUtil.decodeFromString<UserTest>(invalidJson)
+        val result = JsonUtil.decodeFromString<TestUser>(invalidJson)
 
         // Assert
         assertNull(result)
@@ -43,7 +41,7 @@ class JsonUtilTest {
         val json = """{"name":"John","age":30}"""
 
         // Act
-        val result = JsonUtil.decodeFromString<UserTest>(json)
+        val result = JsonUtil.decodeFromString<TestUser>(json)
 
         // Assert
         assertNull(result)
@@ -52,7 +50,7 @@ class JsonUtilTest {
     @Test
     fun `encodeToString should return valid JSON for User`() {
         // Arrange
-        val user = UserTest(1, "Jane", "Doe")
+        val user = TestUser(1, "Jane", "Doe")
 
         // Act
         val result = JsonUtil.encodeToString(user)
@@ -62,14 +60,3 @@ class JsonUtilTest {
     }
 }
 
-@Serializable
-private data class UserTest(
-    @SerialName("id")
-    val id: Int,
-
-    @SerialName("firstName")
-    val firstName: String,
-
-    @SerialName("lastName")
-    val lastName: String
-)

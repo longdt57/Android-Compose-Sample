@@ -1,32 +1,25 @@
 package com.app.androidcompose.ui.base
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.app.androidcompose.support.extensions.textOrStringResource
 
 @Composable
 fun BaseScreen(
-    viewModel: BaseViewModel? = null,
-    onErrorConfirmation: (ErrorState) -> Unit = {},
-    onErrorDismissRequest: (ErrorState) -> Unit = {},
+    viewModel: BaseViewModel,
     content: @Composable () -> Unit,
 ) {
     content()
-    if (viewModel != null) {
-        LoadingView(loading = viewModel.loading.collectAsStateWithLifecycle().value)
-        ErrorView(
-            error = viewModel.error.collectAsStateWithLifecycle().value,
-            onErrorConfirmation = {
-                viewModel.hideError()
-                onErrorConfirmation(it)
-            },
-            onErrorDismissRequest = {
-                viewModel.hideError()
-                onErrorDismissRequest(it)
-            }
-        )
-    }
+    LoadingView(viewModel)
+    ErrorView(viewModel)
+}
 
+@Composable
+private fun LoadingView(viewModel: BaseViewModel) {
+    val loading by viewModel.loading.collectAsStateWithLifecycle()
+    LoadingView(loading = loading)
 }
 
 @Composable
@@ -41,6 +34,16 @@ private fun LoadingView(loading: LoadingState) {
 }
 
 @Composable
+private fun ErrorView(viewModel: BaseViewModel) {
+    val error by viewModel.error.collectAsStateWithLifecycle()
+    ErrorView(
+        error = error,
+        onErrorConfirmation = { viewModel.onErrorConfirmation(it) },
+        onErrorDismissRequest = { viewModel.onErrorDismissClick(it) }
+    )
+}
+
+@Composable
 private fun ErrorView(
     error: ErrorState,
     onErrorConfirmation: (ErrorState) -> Unit = {},
@@ -48,9 +51,13 @@ private fun ErrorView(
 ) {
     when (error) {
         is ErrorState.MessageError -> {
+            val message = when (error) {
+                is ErrorState.Api -> textOrStringResource(text = error.message, id = error.messageRes)
+                else -> stringResource(error.messageRes)
+            }
             AlertDialogView(
-                dialogTitle = error.titleRes?.let { stringResource(id = it) },
-                dialogText = error.messageRes?.let { stringResource(id = it) },
+                dialogTitle = stringResource(id = error.titleRes),
+                dialogText = message,
                 confirmText = error.primaryRes?.let { stringResource(id = it) },
                 dismissText = error.secondaryRes?.let { stringResource(id = it) },
                 onConfirmation = { onErrorConfirmation(error) },

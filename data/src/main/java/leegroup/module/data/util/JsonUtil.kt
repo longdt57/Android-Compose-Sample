@@ -6,9 +6,14 @@ import kotlinx.serialization.json.Json
 
 object JsonUtil {
 
-    inline fun <reified T> decodeFromString(json: String): T? {
+    val json = Json {
+        ignoreUnknownKeys = true
+        explicitNulls = false
+    }
+
+    inline fun <reified T> decodeFromString(value: String): T? {
         return try {
-            Json.decodeFromString<T>(json)
+            json.decodeFromString<T>(value)
         } catch (ex: SerializationException) {
             null
         } catch (ex: IllegalArgumentException) {
@@ -17,6 +22,6 @@ object JsonUtil {
     }
 
     inline fun <reified T> encodeToString(value: T): String {
-        return Json.encodeToString(value)
+        return json.encodeToString(value)
     }
 }

@@ -1,7 +1,9 @@
 package com.app.androidcompose.ui.base
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -10,32 +12,30 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.Dialog
-import androidx.compose.ui.window.DialogProperties
+import com.app.androidcompose.R
 import com.app.androidcompose.support.extensions.takeIfValidRes
+import com.app.androidcompose.ui.theme.ComposeTheme
 
 @Composable
 fun LoadingProgress(loading: LoadingState.Loading) {
-    Dialog(
-        onDismissRequest = {},
-        DialogProperties(dismissOnBackPress = loading.cancelable, dismissOnClickOutside = loading.cancelable)
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
     ) {
-        Box(
-            contentAlignment = Alignment.Center,
-            modifier = Modifier
-                .size(100.dp)
-        ) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
             CircularProgressIndicator()
-            loading.message.takeIfValidRes()?.let {
+            loading.messageRes.takeIfValidRes()?.let {
                 val text = stringResource(id = it)
-                Text(text = text)
+                Text(modifier = Modifier.padding(8.dp), text = text)
             }
         }
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun LoadingProgressPreview() {
-    LoadingProgress(loading = LoadingState.Loading())
+    ComposeTheme {
+        LoadingProgress(loading = LoadingState.Loading(messageRes = R.string.loading))
+    }
 }

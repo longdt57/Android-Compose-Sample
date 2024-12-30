@@ -1,16 +1,15 @@
 [versions]
 minSdk = "24"
-targetSdk = "34"
-compileSdk = "34"
+targetSdk = "35"
+compileSdk = "35"
 
 agp = "8.5.2"
-billing = "7.1.0"
+billing = "7.1.1"
 coil = "2.7.0"
-constraintlayout = "2.1.4"
 core = "1.6.1"
 coreSplashscreen = "1.0.1"
 datastorePreferences = "1.1.1"
-firebaseBom = "33.3.0"
+firebaseBom = "33.7.0"
 hiltAndroid = "2.51.1"
 hiltNavigationCompose = "1.2.0"
 installreferrer = "2.2"
@@ -19,7 +18,7 @@ jjwtJackson = "0.12.6"
 jodaTime = "2.10.14"
 kotestAssertionsCore = "5.6.2"
 kotlin = "2.0.0"
-coreKtx = "1.13.1"
+coreKtx = "1.15.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
@@ -27,19 +26,18 @@ kotlinxCoroutinesPlayServices = "1.8.1"
 kotlinxSerializationJson = "1.7.1"
 chucker = "4.0.0"
 kronosAndroid = "0.0.1-alpha11"
-lifecycleRuntimeKtx = "2.8.6"
-activityCompose = "1.9.2"
-composeBom = "2024.09.02"
+lifecycleRuntimeKtx = "2.8.7"
+activityCompose = "1.9.3"
+composeBom = "2024.12.01"
 ksp = "2.0.0-1.0.22"
 lottie = "6.3.0"
-material = "1.12.0"
 mockk = "1.13.5"
-navigationCompose = "2.5.3"
-playServicesAuth = "21.2.0"
-retrofit = "2.9.0"
+navigationCompose = "2.8.5"
+playServicesAuth = "21.3.0"
+retrofit = "2.11.0"
 okhttp = "4.12.0"
 retrofit2KotlinxSerializationConverter = "1.0.0"
-reviewKtx = "2.0.1"
+reviewKtx = "2.0.2"
 robolectric = "4.13"
 room = "2.6.1"
 securityCrypto = "1.0.0"
@@ -47,22 +45,18 @@ startupRuntime = "1.2.0"
 stetho = "1.6.0"
 timber = "5.0.1"
 turbine = "0.13.0"
-workRuntimeKtx = "2.9.1"
+workRuntimeKtx = "2.10.0"
 coroutineTest = "1.8.1"
 googleService = "4.4.2"
 crashlytic = "3.0.2"
 firebasePref = "1.4.2"
 appDistribution = "5.0.0"
-playserviceAd = "23.3.0"
-safeargs = "2.8.1"
+safeargs = "2.8.5"
 coroutines = "1.8.1"
-appcompat = "1.7.0"
-materialVersion = "1.12.0"
-kover = "0.7.0"
+kover = "0.9.0"
 javaInject = "1"
 
 [libraries]
-androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
 androidx-core = { module = "androidx.test:core", version.ref = "core" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
@@ -111,10 +105,8 @@ integrity = { module = "com.google.android.play:integrity", version.ref = "integ
 
 joda-time = { module = "joda-time:joda-time", version.ref = "jodaTime" }
 kronos-android = { module = "com.lyft.kronos:kronos-android", version.ref = "kronosAndroid" }
-play-services-ads = { module = "com.google.android.gms:play-services-ads", version.ref = "playserviceAd" }
 play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuth" }
 
-jjwt-jackson = { module = "io.jsonwebtoken:jjwt-jackson", version.ref = "jjwtJackson" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 
 kotlin-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
@@ -154,8 +146,6 @@ stetho = { module = "com.facebook.stetho:stetho", version.ref = "stetho" }
 stetho-okhttp3 = { module = "com.facebook.stetho:stetho-okhttp3", version.ref = "stetho" }
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
-androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-material = { group = "com.google.android.material", name = "material", version.ref = "materialVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -171,5 +161,4 @@ firebase-pref = { id = "com.google.firebase.firebase-perf", version.ref = "fireb
 firebase-app-distribution = { id = "com.google.firebase.appdistribution", version.ref = "appDistribution" }
 navigation-safeargs = { id = "androidx.navigation.safeargs", version.ref = "safeargs" }
 android-library = { id = "com.android.library", version.ref = "agp" }
-java-library = { id = "java-library" }
 kotlinx-kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }

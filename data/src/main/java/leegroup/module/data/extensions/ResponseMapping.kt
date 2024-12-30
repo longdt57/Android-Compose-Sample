@@ -7,10 +7,9 @@ import javax.net.ssl.SSLException
 import kotlin.experimental.ExperimentalTypeInference
 import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.flow
-import kotlinx.serialization.SerializationException
-import kotlinx.serialization.json.Json
 import leegroup.module.data.remote.models.responses.ErrorResponse
 import leegroup.module.data.remote.models.responses.mapToError
+import leegroup.module.data.util.JsonUtil
 import leegroup.module.domain.exceptions.ApiException
 import leegroup.module.domain.exceptions.NoConnectivityException
 import leegroup.module.domain.exceptions.ServerException
@@ -22,6 +21,14 @@ fun <T> flowTransform(@BuilderInference block: suspend FlowCollector<T>.() -> T)
     runCatching { block() }
         .onSuccess { result -> emit(result) }
         .onFailure { exception -> throw exception.mapError() }
+}
+
+suspend fun <T> transform(block: suspend () -> T): T {
+    return runCatching {
+        block()
+    }.getOrElse { exception ->
+        throw exception.mapError()
+    }
 }
 
 private fun Throwable.mapError(): Throwable {
@@ -46,11 +53,5 @@ private fun Throwable.mapError(): Throwable {
 
 private fun parseErrorResponse(response: Response<*>?): ErrorResponse? {
     val jsonString = response?.errorBody()?.string() ?: return null
-    return try {
-        Json.decodeFromString<ErrorResponse>(jsonString)
-    } catch (ex: SerializationException) {
-        null
-    } catch (ex: IllegalArgumentException) {
-        null
-    }
+    return JsonUtil.decodeFromString(jsonString)
 }

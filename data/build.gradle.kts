@@ -18,7 +18,7 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = true
+            isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
         debug {
@@ -55,9 +55,6 @@ dependencies {
     implementation(libs.okhttp.logging.interceptor)
     implementation(libs.okhttp.dnsoverhttps)
     implementation(libs.okhttp)
-
-    // Jwt
-    implementation(libs.jjwt.jackson)
 
     // Room
     implementation(libs.room.runtime)

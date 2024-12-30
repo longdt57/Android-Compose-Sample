@@ -2,14 +2,18 @@ package com.app.androidcompose.ui.screens.main.home
 
 import androidx.annotation.VisibleForTesting
 import androidx.annotation.VisibleForTesting.Companion.PRIVATE
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -21,11 +25,11 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.app.androidcompose.R
-import leegroup.module.domain.models.UserModel
 import com.app.androidcompose.support.extensions.collectAsEffect
 import com.app.androidcompose.ui.base.BaseDestination
 import com.app.androidcompose.ui.base.BaseScreen
 import com.app.androidcompose.ui.theme.ComposeTheme
+import leegroup.module.domain.models.UserModel
 
 @Composable
 fun HomeScreen(
@@ -37,6 +41,11 @@ fun HomeScreen(
     val uiModel by viewModel.uiModels.collectAsStateWithLifecycle()
 
     HomeScreenContent(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = MaterialTheme.colorScheme.background)
+            .navigationBarsPadding()
+            .statusBarsPadding(),
         title = stringResource(id = R.string.app_name),
         uiModels = uiModel.users
     )
@@ -44,14 +53,11 @@ fun HomeScreen(
 
 @Composable
 private fun HomeScreenContent(
+    modifier: Modifier = Modifier,
     title: String,
     uiModels: List<UserModel>
 ) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(8.dp),
-    ) {
+    Column(modifier = modifier) {
         Text(
             text = title,
             textAlign = TextAlign.Center,
@@ -90,22 +96,22 @@ private fun HomeScreenPreview() {
         HomeScreenContent(
             title = stringResource(id = R.string.app_name),
             uiModels = listOf(
-                leegroup.module.domain.models.UserModel(
+                UserModel(
                     id = 1,
                     firstName = "Logan",
                     lastName = "Do"
                 ),
-                leegroup.module.domain.models.UserModel(
+                UserModel(
                     id = 1,
                     firstName = "Logan",
                     lastName = "Do"
                 ),
-                leegroup.module.domain.models.UserModel(
+                UserModel(
                     id = 1,
                     firstName = "Logan",
                     lastName = "Do"
                 ),
-                leegroup.module.domain.models.UserModel(
+                UserModel(
                     id = 1,
                     firstName = "Logan",
                     lastName = "Do"

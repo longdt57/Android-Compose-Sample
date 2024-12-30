@@ -1,6 +1,7 @@
 package com.app.androidcompose.ui.base
 
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,7 +13,7 @@ import leegroup.module.domain.exceptions.ApiException
 import leegroup.module.domain.exceptions.NoConnectivityException
 import leegroup.module.domain.exceptions.ServerException
 
-@Suppress("PropertyName")
+@Suppress("PropertyName", "MemberVisibilityCanBePrivate")
 abstract class BaseViewModel : ViewModel() {
 
     private val _loading: MutableStateFlow<LoadingState> = MutableStateFlow(LoadingState.None)
@@ -21,11 +22,18 @@ abstract class BaseViewModel : ViewModel() {
     protected val _error = MutableStateFlow<ErrorState>(ErrorState.None)
     val error = _error.asStateFlow()
 
-    protected val _navigator = MutableSharedFlow<BaseDestination>()
+    protected val _navigator = MutableSharedFlow<BaseDestination>(
+        extraBufferCapacity = 1,
+        onBufferOverflow = BufferOverflow.DROP_OLDEST
+    )
     val navigator = _navigator.asSharedFlow()
 
     protected open fun showLoading() {
         _loading.value = LoadingState.Loading()
+    }
+
+    protected open fun isLoading(): Boolean {
+        return _loading.value is LoadingState.Loading
     }
 
     protected open fun hideLoading() {
@@ -36,10 +44,21 @@ abstract class BaseViewModel : ViewModel() {
         val error = when (e) {
             is NoConnectivityException -> ErrorState.Network()
             is ServerException -> ErrorState.Server()
-            is ApiException -> ErrorState.Api()
-            else -> ErrorState.Network()
+            is ApiException -> ErrorState.Api(
+                message = e.error?.message
+            )
+
+            else -> ErrorState.Common
         }
         _error.tryEmit(error)
+    }
+
+    open fun onErrorConfirmation(errorState: ErrorState) {
+        hideError()
+    }
+
+    open fun onErrorDismissClick(errorState: ErrorState) {
+        hideError()
     }
 
     fun hideError() {

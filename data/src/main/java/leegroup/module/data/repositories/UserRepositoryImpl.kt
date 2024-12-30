@@ -5,6 +5,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import leegroup.module.data.extensions.flowTransform
 import leegroup.module.data.local.room.UserDao
+import leegroup.module.data.local.room.models.UserEntity
 import leegroup.module.data.local.room.models.mapToDomain
 import leegroup.module.data.remote.models.responses.User
 import leegroup.module.data.remote.models.responses.mapToDomain
@@ -21,15 +22,27 @@ class UserRepositoryImpl @Inject constructor(
     override fun getRemote() = flowTransform {
         val users = appService.getUser().users
         saveToLocal(users)
-        users.map { it.mapToDomain() }
+        mapFromPojoToDomain(users)
     }
 
     override fun getLocal(): Flow<List<UserModel>> {
-        return userDao.getAllAsFlow().map { items -> items.map { it.mapToDomain() } }
+        return userDao.getAllAsFlow().map { users -> mapFromEntityToDomain(users) }
     }
 
     private suspend fun saveToLocal(users: List<User>) {
         userDao.clearTable()
-        userDao.upsert(users.map { it.mapToEntity() })
+        userDao.upsert(mapToEntity(users))
+    }
+
+    private fun mapFromPojoToDomain(users: List<User>): List<UserModel> {
+        return users.map { it.mapToDomain() }
+    }
+
+    private fun mapFromEntityToDomain(users: List<UserEntity>): List<UserModel> {
+        return users.map { it.mapToDomain() }
+    }
+
+    private fun mapToEntity(users: List<User>): List<UserEntity> {
+        return users.map { it.mapToEntity() }
     }
 }

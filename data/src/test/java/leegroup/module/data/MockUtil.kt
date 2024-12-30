@@ -1,12 +1,11 @@
 package leegroup.module.data
 
-import leegroup.module.data.remote.models.responses.User
-import leegroup.module.data.remote.models.responses.mapToDomain
-import leegroup.module.data.remote.models.responses.ErrorResponse
 import io.mockk.every
 import io.mockk.mockk
-import leegroup.module.data.remote.models.responses.mapToEntity
-import leegroup.module.data.remote.models.responses.mapToError
+import leegroup.module.data.local.room.models.UserEntity
+import leegroup.module.data.remote.models.responses.User
+import leegroup.module.domain.models.Error
+import leegroup.module.domain.models.UserModel
 import okhttp3.ResponseBody
 import retrofit2.HttpException
 import retrofit2.Response
@@ -27,19 +26,13 @@ object MockUtil {
             every { responseBody.string() } returns
                 """
                     {
-                        "message": "message",
-                        "code": 1
+                        "message": "message"
                     }
                 """.trimIndent()
             return httpException
         }
 
-    val errorResponse = ErrorResponse(
-        message = "message",
-        code = 1
-    )
-
-    val error = errorResponse.mapToError()
+    val error = Error(message = "message")
 
     val users = listOf(
         User(
@@ -54,6 +47,28 @@ object MockUtil {
         )
     )
 
-    val userModels = users.map { it.mapToDomain() }
-    val userEntities = users.map { it.mapToEntity() }
+    val userModels = listOf(
+        UserModel(
+            id = 1,
+            firstName = "Logan",
+            lastName = "Do"
+        ),
+        UserModel(
+            id = 2,
+            firstName = "Nick",
+            lastName = "Do"
+        )
+    )
+    val userEntities = listOf(
+        UserEntity(
+            id = 1,
+            firstName = "Logan",
+            lastName = "Do"
+        ),
+        UserEntity(
+            id = 2,
+            firstName = "Nick",
+            lastName = "Do"
+        )
+    )
 }

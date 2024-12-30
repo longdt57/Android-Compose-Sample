@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.test.runTest
 import leegroup.module.data.MockUtil
-import leegroup.module.data.remote.models.responses.User
+import leegroup.module.data.TestUser
 import leegroup.module.domain.exceptions.ApiException
 import leegroup.module.domain.exceptions.NoConnectivityException
 import org.junit.Test
@@ -30,7 +30,7 @@ class ResponseMappingTest {
     @Test
     fun `When mapping API request flow failed with InterruptedIOException, it returns mapped NoConnectivityException error`() =
         runTest {
-            flowTransform<User> {
+            flowTransform<TestUser> {
                 throw InterruptedIOException()
             }.catch {
                 it shouldBe NoConnectivityException
@@ -41,7 +41,7 @@ class ResponseMappingTest {
     fun `When mapping API request flow failed with HttpException, it returns mapped ApiException error`() =
         runTest {
             val httpException = MockUtil.mockHttpException
-            flowTransform<User> {
+            flowTransform<TestUser> {
                 throw httpException
             }.catch {
                 it shouldBe ApiException(
@@ -56,7 +56,7 @@ class ResponseMappingTest {
     fun `When mapping API request flow failed with unhandled exceptions, it should throw that error`() =
         runTest {
             val exception = IOException("Canceled")
-            flowTransform<User> {
+            flowTransform<TestUser> {
                 throw exception
             }.catch {
                 it shouldBe exception

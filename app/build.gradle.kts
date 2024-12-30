@@ -44,6 +44,8 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        buildConfigField("String", "BASE_API_URL", "\"https://dummyjson.com/\"")
     }
 
     signingConfigs {
@@ -65,9 +67,9 @@ android {
 
     buildTypes {
         debug {
+            isDefault = true
             isMinifyEnabled = false
             signingConfig = signingConfigs[debug]
-            buildConfigField("String", "BASE_API_URL", "\"https://dummyjson.com/\"")
         }
         release {
             isMinifyEnabled = true
@@ -75,34 +77,18 @@ android {
             isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
             signingConfig = signingConfigs[release]
-            buildConfigField("String", "BASE_API_URL", "\"https://dummyjson.com/\"")
-
-            firebaseCrashlytics {
-                mappingFileUploadEnabled = true
-            }
         }
     }
 
     flavorDimensions += "version"
     productFlavors {
         create("staging") {
+            isDefault = true
             applicationIdSuffix = ".staging"
-
-            firebaseAppDistribution {
-                releaseNotes = "Test"
-                testers = "full@testers.com"
-                groups = "Beta, QA"
-            }
         }
 
         create("prod") {
             applicationIdSuffix = ".prod"
-        }
-    }
-
-    testOptions {
-        unitTests {
-            isIncludeAndroidResources = true
         }
     }
 
@@ -133,11 +119,8 @@ android {
     }
     testOptions {
         unitTests {
-            // Robolectric resource processing/loading https://github.com/robolectric/robolectric/pull/4736
             isIncludeAndroidResources = true
         }
-        // Disable device's animation for instrument testing
-        // animationsDisabled = true
     }
 }
 
@@ -147,6 +130,7 @@ dependencies {
     implementation(project(":data"))
     implementation(project(":domain"))
     implementation(project(":analytics"))
+
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
@@ -156,7 +140,6 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.process)
     implementation(libs.androidx.navigation.compose)
@@ -188,7 +171,6 @@ dependencies {
     implementation(libs.kotlin.coroutines.android)
 
     // Google Service
-//    implementation(libs.play.services.ads)
     implementation(libs.billing)
     implementation(libs.billing.ktx)
     implementation(libs.play.services.auth)
@@ -209,9 +191,6 @@ dependencies {
     implementation(libs.okhttp.logging.interceptor)
     implementation(libs.okhttp.dnsoverhttps)
     implementation(libs.okhttp)
-
-    // Jwt
-    implementation(libs.jjwt.jackson)
 
     // Room
     implementation(libs.room.runtime)
@@ -267,36 +246,25 @@ dependencies {
     kover(project(":analytics"))
 }
 
-koverReport {
-    defaults {
-        mergeWith("stagingDebug")
+kover {
+    reports {
         filters {
-            val excludedFiles = listOf(
-                "*.BuildConfig.*",
-                "*.BuildConfig",
-                // Enum
-                "*.*\$Creator*",
-                // DI
-                "*.di.*",
-                // Hilt
-                "*.*_ComponentTreeDeps*",
-                "*.*_HiltComponents*",
-                "*.*_HiltModules*",
-                "*.*_MembersInjector*",
-                "*.*_Factory*",
-                "*.Hilt_*",
-                "dagger.hilt.internal.*",
-                "hilt_aggregated_deps.*",
-                // Jetpack Compose
-                "*.ComposableSingletons*",
-                "*.*\$*Preview\$*",
-                "*.ui.preview.*",
-            )
-
+            includes {
+                classes("*ViewModel")
+                classes("*UseCase")
+                classes("*Mapper")
+                classes("*MapperImpl")
+                classes("*Repository")
+                classes("*RepositoryImpl")
+                classes("*Util")
+                classes("*Formatter")
+                classes("*FormatterImpl")
+                classes("*Converter")
+                classes("*ConverterImpl")
+            }
             excludes {
-                classes(excludedFiles)
+                classes("_")
             }
         }
     }
 }
-

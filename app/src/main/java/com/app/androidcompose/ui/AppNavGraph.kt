@@ -1,5 +1,6 @@
 package com.app.androidcompose.ui
 
+import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
@@ -25,7 +26,7 @@ fun AppNavGraph(
 
 fun NavGraphBuilder.composable(
     destination: BaseDestination,
-    content: @Composable (NavBackStackEntry) -> Unit,
+    content: @Composable AnimatedContentScope.(NavBackStackEntry) -> Unit,
 ) {
     composable(
         route = destination.route,
@@ -39,7 +40,14 @@ fun NavGraphBuilder.composable(
     )
 }
 
-fun NavHostController.navigate(destination: BaseDestination) {
+fun NavHostController.appNavigate(destination: Any) {
+    when (destination) {
+        is BaseDestination -> navigateWithDestination(destination)
+        else -> navigate(destination)
+    }
+}
+
+fun NavHostController.navigateWithDestination(destination: BaseDestination) {
     when (destination) {
         is BaseDestination.Up -> {
             destination.results.forEach { (key, value) ->

@@ -1,6 +1,7 @@
 package com.app.androidcompose.di.data
 
 import android.content.Context
+import com.app.androidcompose.BuildConfig
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.chuckerteam.chucker.api.RetentionManager
@@ -21,14 +22,17 @@ class OkHttpClientModule {
     @Singleton
     @Provides
     fun provideOkHttpClientWithInterceptor(
-        chuckerInterceptor: ChuckerInterceptor
+        chuckerInterceptor: ChuckerInterceptor,
+        loggingInterceptor: HttpLoggingInterceptor
     ): OkHttpClient {
         return OkHttpClient.Builder().apply {
-            addInterceptor(HttpLoggingInterceptor().apply {
-                level = HttpLoggingInterceptor.Level.BODY
-            })
+            addInterceptor(loggingInterceptor)
             addInterceptor(chuckerInterceptor)
+
             readTimeout(30L, TimeUnit.SECONDS)
+            callTimeout(30L, TimeUnit.SECONDS)
+            connectTimeout(30L, TimeUnit.SECONDS)
+            writeTimeout(30L, TimeUnit.SECONDS)
         }.build()
     }
 
@@ -46,5 +50,15 @@ class OkHttpClientModule {
             .collector(chuckerCollector)
             .alwaysReadResponseBody(true)
             .build()
+    }
+
+    @Provides
+    fun provideLoggingInterceptor(): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor().apply {
+            level = when (BuildConfig.DEBUG) {
+                true -> HttpLoggingInterceptor.Level.BODY
+                else -> HttpLoggingInterceptor.Level.NONE
+            }
+        }
     }
 }
