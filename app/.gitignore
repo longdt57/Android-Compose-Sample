@@ -1,2 +1,5 @@
 /build
 /prod
+
+# Google services
+google-services.json

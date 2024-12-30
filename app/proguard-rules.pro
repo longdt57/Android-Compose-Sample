@@ -20,8 +20,6 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--dontwarn java.lang.invoke.StringConcatFactory
-
 -keep class leegroup.module.data.models.** { *; }
 -keep class leegroup.module.data.remote.models.requests.** { *; }
 -keep class leegroup.module.data.remote.models.responses.** { *; }

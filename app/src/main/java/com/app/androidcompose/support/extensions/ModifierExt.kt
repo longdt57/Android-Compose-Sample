@@ -25,6 +25,7 @@ fun Modifier.widthForFixedItems(numOfItems: Float, totalSpacing: Int): Modifier 
     return width(itemWidth.dp)
 }
 
+@Suppress("LongMethod", "ComplexMethod", "MagicNumber")
 @Composable
 fun Modifier.verticalScrollBar(
     state: ScrollState,
@@ -67,6 +68,7 @@ fun Modifier.verticalScrollBar(
     }
 }
 
+@Suppress("LongMethod", "ComplexMethod", "MagicNumber")
 @Composable
 fun Modifier.verticalScrollbar(
     state: LazyGridState,
@@ -78,7 +80,8 @@ fun Modifier.verticalScrollbar(
 
     val alphaAnimation: Float by animateFloatAsState(
         targetValue = targetAlpha,
-        animationSpec = tween(durationMillis = duration)
+        animationSpec = tween(durationMillis = duration),
+        label = ""
     )
 
     val firstVisibleItem by remember {
@@ -101,9 +104,13 @@ fun Modifier.verticalScrollbar(
         derivedStateOf {
             firstVisibleItem?.let { firstVisibleItem ->
                 val layoutInfo = state.layoutInfo
-                val totalRows =
-                    (state.layoutInfo.totalItemsCount.toFloat() / numOfItemsInRow.toFloat()).ceilToInt()
-                totalRows * firstVisibleItem.size.height + layoutInfo.beforeContentPadding + layoutInfo.afterContentPadding + layoutInfo.mainAxisItemSpacing * (totalRows - 1)
+                val totalItems = state.layoutInfo.totalItemsCount.toFloat()
+                val numItemsInRow = numOfItemsInRow.toFloat()
+                val totalRows = (totalItems / numItemsInRow).ceilToInt()
+                totalRows * firstVisibleItem.size.height +
+                    layoutInfo.beforeContentPadding +
+                    layoutInfo.afterContentPadding +
+                    layoutInfo.mainAxisItemSpacing * (totalRows - 1)
             } ?: run {
                 0
             }

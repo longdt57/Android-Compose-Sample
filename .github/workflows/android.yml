@@ -24,6 +24,8 @@ jobs:
         run: chmod +x gradlew
       - name: Lint
         run: ./gradlew lint
+      - name: Detekt
+        run: ./gradlew detekt
       - name: Unit test
         run: ./gradlew app:testStagingDebugUnitTest data:testDebugUnitTest domain:test analytics:testDebugUnitTest
       - name: Release build

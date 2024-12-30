@@ -1,3 +1,4 @@
+@file:Suppress("ComplexMethod")
 package com.app.androidcompose.support.extensions
 
 import android.os.Bundle

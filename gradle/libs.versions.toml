@@ -2,6 +2,9 @@
 minSdk = "24"
 targetSdk = "35"
 compileSdk = "35"
+release = "release"
+prod = "prod"
+staging = "staging"
 
 agp = "8.5.2"
 billing = "7.1.1"
@@ -9,6 +12,7 @@ coil = "2.7.0"
 core = "1.6.1"
 coreSplashscreen = "1.0.1"
 datastorePreferences = "1.1.1"
+detektVersion = "1.21.0"
 firebaseBom = "33.7.0"
 hiltAndroid = "2.51.1"
 hiltNavigationCompose = "1.2.0"
@@ -147,9 +151,19 @@ stetho-okhttp3 = { module = "com.facebook.stetho:stetho-okhttp3", version.ref = 
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 
+[bundles]
+androidx-lifecycle = ["androidx-lifecycle-runtime-ktx", "androidx-lifecycle-viewmodel-ktx", "androidx-lifecycle-process", "androidx-lifecycle-viewmodel-compose"]
+room = ["room-runtime", "room-ktx"]
+networking = ["retrofit", "okhttp", "okhttp-logging-interceptor", "retrofit2-kotlin-coroutines-adapter", "retrofit2-kotlinx-serialization-converter", "okhttp-dnsoverhttps"]
+coil = ["coil", "coil-compose", "coil-gif", "coil-svg"]
+firebase = ["firebase-analytics", "firebase-config", "firebase-crashlytics", "firebase-inappmessaging-display-ktx", "firebase-messaging-ktx", "firebase-perf"]
+google-services = ["billing", "play-services-auth", "integrity", "billing-ktx", "kotlinx-coroutines-play-services", "review-ktx", "installreferrer"]
+test = ["junit", "androidx-core", "turbine", "kotest-assertions-core", "room-testing", "mockk", "kotlinx-coroutines-test", "robolectric"]
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 google-dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hiltAndroid"}
 google-devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp"}
@@ -162,3 +176,4 @@ firebase-app-distribution = { id = "com.google.firebase.appdistribution", versio
 navigation-safeargs = { id = "androidx.navigation.safeargs", version.ref = "safeargs" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 kotlinx-kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detektVersion" }

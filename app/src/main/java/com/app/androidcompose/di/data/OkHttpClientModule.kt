@@ -15,6 +15,8 @@ import javax.inject.Singleton
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 
+private const val NETWORK_TIMEOUT = 30L
+
 @Module
 @InstallIn(SingletonComponent::class)
 class OkHttpClientModule {
@@ -29,10 +31,10 @@ class OkHttpClientModule {
             addInterceptor(loggingInterceptor)
             addInterceptor(chuckerInterceptor)
 
-            readTimeout(30L, TimeUnit.SECONDS)
-            callTimeout(30L, TimeUnit.SECONDS)
-            connectTimeout(30L, TimeUnit.SECONDS)
-            writeTimeout(30L, TimeUnit.SECONDS)
+            readTimeout(NETWORK_TIMEOUT, TimeUnit.SECONDS)
+            callTimeout(NETWORK_TIMEOUT, TimeUnit.SECONDS)
+            connectTimeout(NETWORK_TIMEOUT, TimeUnit.SECONDS)
+            writeTimeout(NETWORK_TIMEOUT, TimeUnit.SECONDS)
         }.build()
     }
 

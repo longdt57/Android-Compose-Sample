@@ -1,7 +1,7 @@
 plugins {
     id("java-library")
-    id("org.jetbrains.kotlin.jvm")
-    id("org.jetbrains.kotlinx.kover")
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlinx.kover)
 }
 
 java {

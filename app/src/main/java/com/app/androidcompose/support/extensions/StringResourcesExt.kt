@@ -8,7 +8,9 @@ import androidx.compose.ui.res.stringResource
 @Composable
 @ReadOnlyComposable
 fun textOrStringResource(text: String?, @StringRes id: Int?): String? {
-    if (text != null) return text
-    if (id == null) return null
-    return stringResource(id = id)
+    return when {
+        text != null -> text
+        id != null -> stringResource(id = id)
+        else -> null
+    }
 }

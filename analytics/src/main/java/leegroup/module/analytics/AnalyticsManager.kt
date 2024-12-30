@@ -18,7 +18,10 @@ class AnalyticsManager(
     @AnalyticsClientType private val defaultLogEventClientType: Int = ClientType.FIREBASE
 ) {
 
-    fun logEvent(event: AnalyticsEvent, @AnalyticsClientType clients: Int = defaultLogEventClientType) {
+    fun logEvent(
+        event: AnalyticsEvent,
+        @AnalyticsClientType clients: Int = defaultLogEventClientType
+    ) {
         list.forEach {
             invokeIfValid(clients, it) {
                 it.logEvent(event)
@@ -26,7 +29,10 @@ class AnalyticsManager(
         }
     }
 
-    fun setUserProperty(property: AnalyticsUserProperty, @AnalyticsClientType clients: Int = defaultLogEventClientType) {
+    fun setUserProperty(
+        property: AnalyticsUserProperty,
+        @AnalyticsClientType clients: Int = defaultLogEventClientType
+    ) {
         list.forEach {
             invokeIfValid(clients, it) {
                 it.setUserProperty(property)
@@ -34,7 +40,10 @@ class AnalyticsManager(
         }
     }
 
-    fun logHandledThrowable(error: AnalyticsError, @AnalyticsClientType clients: Int = defaultLogEventClientType) {
+    fun logHandledThrowable(
+        error: AnalyticsError,
+        @AnalyticsClientType clients: Int = defaultLogEventClientType
+    ) {
         list.forEach {
             invokeIfValid(clients, it) {
                 it.logHandledThrowable(error)
@@ -42,7 +51,10 @@ class AnalyticsManager(
         }
     }
 
-    fun log(message: String, @AnalyticsClientType clients: Int = defaultLogEventClientType) {
+    fun log(
+        message: String,
+        @AnalyticsClientType clients: Int = defaultLogEventClientType
+    ) {
         list.forEach {
             invokeIfValid(clients, it) {
                 it.log(message)
@@ -50,7 +62,10 @@ class AnalyticsManager(
         }
     }
 
-    fun setUserId(userId: String, @AnalyticsClientType clients: Int = defaultLogEventClientType) {
+    fun setUserId(
+        userId: String,
+        @AnalyticsClientType clients: Int = defaultLogEventClientType
+    ) {
         list.forEach {
             invokeIfValid(clients, it) {
                 it.setUserId(userId)
@@ -58,7 +73,10 @@ class AnalyticsManager(
         }
     }
 
-    private fun invokeIfValid(clients: Int, client: AnalyticsClient, callback: () -> Unit) {
+    private fun invokeIfValid(
+        clients: Int,
+        client: AnalyticsClient, callback: () -> Unit
+    ) {
         val isValid = (clients and client.type) != 0
         if (isValid) {
             callback.invoke()

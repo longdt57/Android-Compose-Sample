@@ -137,15 +137,14 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
+    // Lifecycle
+    implementation(libs.bundles.androidx.lifecycle)
+
     implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    implementation(libs.androidx.lifecycle.process)
-    implementation(libs.androidx.navigation.compose)
-    implementation(libs.androidx.lifecycle.viewmodel.compose)
-    implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.core.splashscreen)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.work.runtime.ktx)
     implementation(libs.androidx.startup.runtime)
 
@@ -155,12 +154,7 @@ dependencies {
 
     // Firebase
     implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.analytics)
-    implementation(libs.firebase.crashlytics)
-    implementation(libs.firebase.config)
-    implementation(libs.firebase.perf)
-    implementation(libs.firebase.messaging.ktx)
-    implementation(libs.firebase.inappmessaging.display.ktx)
+    implementation(libs.bundles.firebase)
 
     // Lottie
     implementation(libs.lottie)
@@ -171,38 +165,25 @@ dependencies {
     implementation(libs.kotlin.coroutines.android)
 
     // Google Service
-    implementation(libs.billing)
-    implementation(libs.billing.ktx)
-    implementation(libs.play.services.auth)
-    implementation(libs.integrity)
-    implementation(libs.kotlinx.coroutines.play.services)
-    implementation(libs.review.ktx)
-    implementation(libs.installreferrer)
+    implementation(libs.bundles.google.services)
 
     // Hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
 
     // Retrofit
-    implementation(libs.retrofit)
-    implementation(libs.retrofit2.kotlinx.serialization.converter)
-    implementation(libs.retrofit2.kotlin.coroutines.adapter)
+    implementation(libs.bundles.networking)
+
+    // Serialization
     implementation(libs.kotlinx.serialization.json)
-    implementation(libs.okhttp.logging.interceptor)
-    implementation(libs.okhttp.dnsoverhttps)
-    implementation(libs.okhttp)
 
     // Room
-    implementation(libs.room.runtime)
+    implementation(libs.bundles.room)
     annotationProcessor(libs.room.compiler)
     ksp(libs.room.compiler)
-    implementation(libs.room.ktx)
 
     // Coil
-    implementation(libs.coil)
-    implementation(libs.coil.compose)
-    implementation(libs.coil.gif)
-    implementation(libs.coil.svg)
+    implementation(libs.bundles.coil)
 
     // Inspect
     debugImplementation(libs.library.chucker)
@@ -222,14 +203,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    testImplementation(libs.junit)
-    testImplementation(libs.androidx.core)
-    testImplementation(libs.turbine)
-    testImplementation(libs.kotest.assertions.core)
-    testImplementation(libs.robolectric)
-    testImplementation(libs.room.testing)
-    testImplementation(libs.mockk)
-    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.bundles.test)
     testImplementation(libs.androidx.ui.test.junit4)
     testImplementation(platform(libs.androidx.compose.bom))
 

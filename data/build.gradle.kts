@@ -48,26 +48,15 @@ dependencies {
     implementation(libs.androidx.security.crypto)
 
     // Retrofit
-    implementation(libs.retrofit)
-    implementation(libs.retrofit2.kotlinx.serialization.converter)
-    implementation(libs.retrofit2.kotlin.coroutines.adapter)
+    implementation(libs.bundles.networking)
+
+    // Serialization
     implementation(libs.kotlinx.serialization.json)
-    implementation(libs.okhttp.logging.interceptor)
-    implementation(libs.okhttp.dnsoverhttps)
-    implementation(libs.okhttp)
 
     // Room
-    implementation(libs.room.runtime)
+    implementation(libs.bundles.room)
     annotationProcessor(libs.room.compiler)
     ksp(libs.room.compiler)
-    implementation(libs.room.ktx)
 
-    testImplementation(libs.junit)
-    testImplementation(libs.androidx.core)
-    testImplementation(libs.turbine)
-    testImplementation(libs.kotest.assertions.core)
-    testImplementation(libs.room.testing)
-    testImplementation(libs.mockk)
-    testImplementation(libs.kotlinx.coroutines.test)
-    testImplementation(libs.robolectric)
+    testImplementation(libs.bundles.test)
 }
