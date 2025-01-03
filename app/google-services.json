@@ -1,0 +1,154 @@
+{
+  "project_info": {
+    "project_number": "81684282970",
+    "project_id": "androidapp-8dea1",
+    "storage_bucket": "androidapp-8dea1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:81684282970:android:47cfea9dd5ef6ee6bfa263",
+        "android_client_info": {
+          "package_name": "com.app.androidcompose.prod"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "81684282970-pjcsbo0aj5qo1fvia9lr0aiuki4kdbad.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCc4d-R9FsWWv-f_grr2TIIUj0ff7UG6D8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "81684282970-pjcsbo0aj5qo1fvia9lr0aiuki4kdbad.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "81684282970-6h90dv8e571p5fsag25qgcfurp2roemi.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "tech.lexly.lexlyhealth"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:81684282970:android:2e726cab265c1df3bfa263",
+        "android_client_info": {
+          "package_name": "com.app.androidcompose.staging"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "81684282970-pjcsbo0aj5qo1fvia9lr0aiuki4kdbad.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCc4d-R9FsWWv-f_grr2TIIUj0ff7UG6D8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "81684282970-pjcsbo0aj5qo1fvia9lr0aiuki4kdbad.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "81684282970-6h90dv8e571p5fsag25qgcfurp2roemi.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "tech.lexly.lexlyhealth"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:81684282970:android:48bc7da1afde1d36bfa263",
+        "android_client_info": {
+          "package_name": "tech.lexly.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "81684282970-pjcsbo0aj5qo1fvia9lr0aiuki4kdbad.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCc4d-R9FsWWv-f_grr2TIIUj0ff7UG6D8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "81684282970-pjcsbo0aj5qo1fvia9lr0aiuki4kdbad.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "81684282970-6h90dv8e571p5fsag25qgcfurp2roemi.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "tech.lexly.lexlyhealth"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:81684282970:android:b4d0524948f43a22bfa263",
+        "android_client_info": {
+          "package_name": "tech.lexly.app.staging"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "81684282970-pjcsbo0aj5qo1fvia9lr0aiuki4kdbad.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCc4d-R9FsWWv-f_grr2TIIUj0ff7UG6D8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "81684282970-pjcsbo0aj5qo1fvia9lr0aiuki4kdbad.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "81684282970-6h90dv8e571p5fsag25qgcfurp2roemi.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "tech.lexly.lexlyhealth"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
