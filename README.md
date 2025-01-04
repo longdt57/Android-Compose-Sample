@@ -1,4 +1,5 @@
-# Android Templates
+# Clean Architecture
+https://github.com/longdt57/Android-Clean-Architecture
 
 ## Setup
 
