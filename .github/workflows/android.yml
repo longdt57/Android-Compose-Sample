@@ -27,6 +27,6 @@ jobs:
       - name: Detekt
         run: ./gradlew detekt
       - name: Unit test
-        run: ./gradlew app:testStagingDebugUnitTest data:testDebugUnitTest domain:test
+        run: ./gradlew koverHtmlReport
       - name: Build
         run: ./gradlew app:assembleStagingDebug
