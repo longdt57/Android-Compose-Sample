@@ -1,4 +1,4 @@
-# Android Templates
+# Clean Architecture
 
 ## Setup
 
