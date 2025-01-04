@@ -5,11 +5,11 @@ import kotlinx.serialization.Serializable
 import leegroup.module.domain.models.Error
 
 @Serializable
-data class ErrorResponse(
+internal data class ErrorResponse(
     @SerialName("message")
     val message: String,
 )
 
-fun ErrorResponse.mapToError() = Error(
+internal fun ErrorResponse.mapToError() = Error(
     message = message
 )

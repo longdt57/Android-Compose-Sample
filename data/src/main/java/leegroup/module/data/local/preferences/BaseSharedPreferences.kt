@@ -10,11 +10,11 @@ abstract class BaseSharedPreferences(
     prefName: String
 ) {
 
-    open val sharedPreferences: SharedPreferences by lazy {
+    protected open val sharedPreferences: SharedPreferences by lazy {
         applicationContext.getSharedPreferences(prefName, Context.MODE_PRIVATE)
     }
 
-    inline fun <reified T> argsNullable(
+    internal inline fun <reified T> argsNullable(
         key: String? = null,
         defaultValue: T? = null
     ): ReadWriteProperty<Any, T?> {
@@ -34,7 +34,7 @@ abstract class BaseSharedPreferences(
         }
     }
 
-    inline fun <reified T> args(
+    internal inline fun <reified T> args(
         key: String? = null,
         defaultValue: T
     ): ReadWriteProperty<Any, T> {

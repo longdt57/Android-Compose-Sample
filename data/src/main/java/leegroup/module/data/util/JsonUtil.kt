@@ -4,7 +4,7 @@ import kotlinx.serialization.SerializationException
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-object JsonUtil {
+internal object JsonUtil {
 
     val json = Json {
         ignoreUnknownKeys = true

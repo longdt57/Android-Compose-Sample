@@ -17,13 +17,13 @@ import javax.net.ssl.SSLException
 import kotlin.experimental.ExperimentalTypeInference
 
 @OptIn(ExperimentalTypeInference::class)
-fun <T> flowTransform(@BuilderInference block: suspend FlowCollector<T>.() -> T) = flow {
+internal fun <T> flowTransform(@BuilderInference block: suspend FlowCollector<T>.() -> T) = flow {
     runCatching { block() }
         .onSuccess { result -> emit(result) }
         .onFailure { exception -> throw exception.mapError() }
 }
 
-suspend fun <T> transform(block: suspend () -> T): T {
+internal suspend fun <T> transform(block: suspend () -> T): T {
     return runCatching {
         block()
     }.getOrElse { exception ->

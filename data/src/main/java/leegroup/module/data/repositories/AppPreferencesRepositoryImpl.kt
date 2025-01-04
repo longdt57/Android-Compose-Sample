@@ -7,7 +7,7 @@ import leegroup.module.data.local.datastore.PreferenceKey.APP_PREFERENCE
 import leegroup.module.domain.repositories.AppPreferencesRepository
 import javax.inject.Inject
 
-class AppPreferencesRepositoryImpl @Inject constructor(
+class AppPreferencesRepositoryImpl @Inject internal constructor(
     private val appDataStore: AppDataStore
 ) : AppPreferencesRepository {
 

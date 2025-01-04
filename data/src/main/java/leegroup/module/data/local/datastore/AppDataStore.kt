@@ -9,7 +9,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import javax.inject.Inject
 
-class AppDataStore @Inject constructor(
+internal class AppDataStore @Inject constructor(
     private val dataStore: DataStore<Preferences>
 ) {
 

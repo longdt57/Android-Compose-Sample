@@ -3,18 +3,18 @@ package leegroup.module.data.local.preferences
 import android.content.SharedPreferences
 import kotlin.reflect.KProperty
 
-fun SharedPreferences.execute(operation: (SharedPreferences.Editor) -> Unit) {
+internal fun SharedPreferences.execute(operation: (SharedPreferences.Editor) -> Unit) {
     with(edit()) {
         operation(this)
         apply()
     }
 }
 
-fun KProperty<*>.getKey(key: String?): String {
+internal fun KProperty<*>.getKey(key: String?): String {
     return key ?: name
 }
 
-inline fun <reified T> SharedPreferences.get(key: String): T? =
+internal inline fun <reified T> SharedPreferences.get(key: String): T? =
     if (this.contains(key)) {
         when (T::class) {
             Boolean::class -> this.getBoolean(key, false) as T?
@@ -29,7 +29,7 @@ inline fun <reified T> SharedPreferences.get(key: String): T? =
         null
     }
 
-fun SharedPreferences.set(key: String, value: Any?) {
+internal fun SharedPreferences.set(key: String, value: Any?) {
     this.execute {
         if (value == null) {
             it.remove(key)
