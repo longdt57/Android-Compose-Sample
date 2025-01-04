@@ -172,6 +172,9 @@ dependencies {
     debugImplementation(libs.library.chucker)
     releaseImplementation(libs.library.chucker.no.op)
 
+    // Leak Canary
+    debugImplementation(libs.squareup.leakcanary)
+
     // Room
     implementation(libs.bundles.room)
     annotationProcessor(libs.room.compiler)
