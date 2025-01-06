@@ -4,7 +4,6 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import androidx.navigation.toRoute
 import com.app.androidcompose.ui.AppDestination
 import com.app.androidcompose.ui.base.BaseDestination
 import com.app.androidcompose.ui.composable
@@ -25,10 +24,8 @@ fun NavGraphBuilder.mainNavGraph(
                 navigator = { destination -> navController.appNavigate(destination) }
             )
         }
-        composable<MainDestination.GitUserDetail.GitUserDetailLogin> { backStackEntry ->
-            val item = backStackEntry.toRoute<MainDestination.GitUserDetail.GitUserDetailLogin>()
+        composable<MainDestination.GitUserDetail.GitUserDetailNav> { backStackEntry ->
             GitUserDetailScreen(
-                login = item.login,
                 navigator = { destination ->
                     navController.appNavigate(destination)
                 }

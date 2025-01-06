@@ -3,8 +3,11 @@ package leegroup.module.data.util
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.encodeToJsonElement
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
 
-internal object JsonUtil {
+object JsonUtil {
 
     val json = Json {
         ignoreUnknownKeys = true
@@ -23,5 +26,10 @@ internal object JsonUtil {
 
     inline fun <reified T> encodeToString(value: T): String {
         return json.encodeToString(value)
+    }
+
+    inline fun <reified T> encodeToMap(value: T): Map<String, Any> {
+        val jsonObject = json.encodeToJsonElement(value).jsonObject
+        return jsonObject.mapValues { it.value.jsonPrimitive.content }
     }
 }

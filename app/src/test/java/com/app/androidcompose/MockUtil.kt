@@ -7,7 +7,7 @@ import leegroup.module.domain.models.Error
 object MockUtil {
     private const val API_ERROR_MESSAGE = "Something went wrong"
 
-    val apiErrorState = ErrorState.Api(message = API_ERROR_MESSAGE)
+    val apiErrorState = ErrorState.Api(customMessage = API_ERROR_MESSAGE)
 
     val apiError = ApiException(
         error = Error(message = API_ERROR_MESSAGE),

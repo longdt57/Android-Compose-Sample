@@ -13,7 +13,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.app.androidcompose.R
-import com.app.androidcompose.support.extensions.takeIfValidRes
 import com.app.androidcompose.ui.theme.ComposeTheme
 
 @Composable
@@ -24,9 +23,8 @@ fun LoadingProgress(loading: LoadingState.Loading) {
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             CircularProgressIndicator()
-            loading.messageRes.takeIfValidRes()?.let {
-                val text = stringResource(id = it)
-                Text(modifier = Modifier.padding(8.dp), text = text)
+            loading.message().takeUnless { it.isNullOrBlank() }?.let {
+                Text(modifier = Modifier.padding(8.dp), text = it)
             }
         }
     }
@@ -36,6 +34,8 @@ fun LoadingProgress(loading: LoadingState.Loading) {
 @Composable
 private fun LoadingProgressPreview() {
     ComposeTheme {
-        LoadingProgress(loading = LoadingState.Loading(messageRes = R.string.loading))
+        LoadingProgress(loading = LoadingState.Loading(message = {
+            stringResource(R.string.loading)
+        }))
     }
 }
