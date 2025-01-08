@@ -185,7 +185,7 @@ dependencies {
 
     // Logging
     implementation(libs.timber)
-    implementation("com.github.longdt57:Android-Tracking:1.0.6")
+    implementation(libs.android.tracking)
 
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)

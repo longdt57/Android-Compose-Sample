@@ -1,4 +1,5 @@
 [versions]
+androidTracking = "1.0.6"
 minSdk = "24"
 targetSdk = "35"
 compileSdk = "35"
@@ -50,6 +51,7 @@ turbine = "0.13.0"
 workRuntimeKtx = "2.10.0"
 
 [libraries]
+android-tracking = { module = "com.github.longdt57:Android-Tracking", version.ref = "androidTracking" }
 androidx-core = { module = "androidx.test:core", version.ref = "core" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
