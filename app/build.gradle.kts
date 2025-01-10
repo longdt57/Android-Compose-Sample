@@ -16,8 +16,10 @@ plugins {
 }
 
 val signingProperties = loadProperties("$rootDir/signing.properties")
-val debug = "debug"
-val release = "release"
+val debug = libs.versions.debug.get()
+val release = libs.versions.release.get()
+val prod = libs.versions.prod.get()
+val staging = libs.versions.staging.get()
 
 android {
     namespace = "com.app.androidcompose"
@@ -76,7 +78,7 @@ android {
 
     flavorDimensions += "version"
     productFlavors {
-        create("staging") {
+        create(staging) {
             isDefault = true
             applicationIdSuffix = ".staging"
 
@@ -87,7 +89,7 @@ android {
             }
         }
 
-        create("prod") {
+        create(prod) {
             applicationIdSuffix = ".prod"
         }
     }
@@ -107,7 +109,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.4"
+        kotlinCompilerExtensionVersion = libs.versions.composeExtensionVersion.get()
     }
 
     lint {
