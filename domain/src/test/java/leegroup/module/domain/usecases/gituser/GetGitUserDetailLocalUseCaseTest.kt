@@ -47,7 +47,7 @@ class GetGitUserDetailLocalUseCaseTest {
 
     @Test
     fun `When request failed, it returns error`() = runTest {
-        val expected = MockUtil.apiException
+        val expected = RuntimeException()
         coEvery { mockRepository.getLocal(login) } throws expected
 
         useCase(login).catch {

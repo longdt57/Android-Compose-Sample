@@ -45,6 +45,7 @@ android {
 
 dependencies {
     implementation(project(":domain"))
+    implementation(project(":extension"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.java.inject)
     implementation(libs.androidx.datastore.preferences)

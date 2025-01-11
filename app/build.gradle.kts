@@ -129,6 +129,8 @@ dependencies {
 
     implementation(project(":data"))
     implementation(project(":domain"))
+    implementation(project(":compose"))
+    implementation(project(":extension"))
 
     // Lifecycle
     implementation(libs.bundles.androidx.lifecycle)
@@ -205,6 +207,8 @@ dependencies {
 dependencies {
     kover(project(":data"))
     kover(project(":domain"))
+//    kover(project(":compose")) // Disable this because the report is incorrect.
+    kover(project(":extension"))
 }
 
 kover {
@@ -222,6 +226,8 @@ kover {
                 classes("*FormatterImpl")
                 classes("*Converter")
                 classes("*ConverterImpl")
+                classes("*State")
+                classes("*Model")
             }
             excludes {
                 classes("_")

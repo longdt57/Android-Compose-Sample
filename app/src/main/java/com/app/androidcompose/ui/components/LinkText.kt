@@ -10,7 +10,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import com.app.androidcompose.support.extensions.formatAndOpenUrl
-import com.app.androidcompose.ui.theme.ComposeTheme
+import leegroup.module.compose.ui.theme.ComposeTheme
 
 @Composable
 fun LinkText(modifier: Modifier = Modifier, url: String) {

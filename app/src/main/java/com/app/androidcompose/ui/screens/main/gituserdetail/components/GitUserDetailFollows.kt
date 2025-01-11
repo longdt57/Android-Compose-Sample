@@ -22,8 +22,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.app.androidcompose.R
-import com.app.androidcompose.ui.theme.ComposeTheme
-import com.app.androidcompose.ui.theme.GreySoft200
+import leegroup.module.compose.ui.theme.ComposeTheme
+import leegroup.module.compose.ui.theme.GreySoft200
 
 @Composable
 fun GitUserDetailFollows(

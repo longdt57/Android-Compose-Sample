@@ -18,14 +18,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.app.androidcompose.support.extensions.collectAsEffect
-import com.app.androidcompose.ui.base.BaseScreen
-import com.app.androidcompose.ui.base.LoadingState
+import leegroup.module.compose.support.extensions.collectAsEffect
+import leegroup.module.compose.ui.components.BaseScreen
+import leegroup.module.compose.ui.models.LoadingState
 import com.app.androidcompose.ui.screens.main.MainDestination
 import com.app.androidcompose.ui.screens.main.gituser.components.GitUserList
 import com.app.androidcompose.ui.screens.main.gituser.components.GitUserListAppBar
 import com.app.androidcompose.ui.screens.main.gituser.components.GitUserListEmpty
-import com.app.androidcompose.ui.theme.ComposeTheme
+import leegroup.module.compose.ui.theme.ComposeTheme
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import leegroup.module.domain.models.GitUserModel
@@ -47,6 +47,9 @@ fun GitUserListScreen(
     LaunchedEffect(Unit) {
         viewModel.handleAction(GitUserListAction.LoadIfEmpty)
     }
+    LaunchedEffect(Unit) {
+        viewModel.handleAction(GitUserListAction.TrackLaunch)
+    }
 
     GitUserListScreenContent(
         modifier = Modifier
@@ -60,6 +63,7 @@ fun GitUserListScreen(
             viewModel.handleAction(GitUserListAction.LoadMore)
         },
         onClick = { user ->
+            viewModel.handleAction(GitUserListAction.TrackOpenUserDetail(user.login))
             navigator(MainDestination.GitUserDetail.GitUserDetailNav(user.login))
         },
         onRefresh = {

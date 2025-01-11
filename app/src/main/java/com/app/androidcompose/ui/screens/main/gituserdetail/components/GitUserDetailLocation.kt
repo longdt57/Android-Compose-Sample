@@ -17,7 +17,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.app.androidcompose.R
-import com.app.androidcompose.ui.theme.ComposeTheme
+import leegroup.module.compose.ui.theme.ComposeTheme
 
 @Composable
 fun GitUserDetailLocation(modifier: Modifier = Modifier, location: String) {

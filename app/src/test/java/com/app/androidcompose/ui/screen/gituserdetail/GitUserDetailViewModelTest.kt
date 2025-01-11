@@ -4,7 +4,6 @@ import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import com.app.androidcompose.MockUtil
 import com.app.androidcompose.support.CoroutineTestRule
-import com.app.androidcompose.ui.base.ErrorState
 import com.app.androidcompose.ui.mapper.GitUserDetailUiMapper
 import com.app.androidcompose.ui.models.GitUserDetailUiModel
 import com.app.androidcompose.ui.screens.main.MainDestination
@@ -18,11 +17,11 @@ import junit.framework.TestCase.assertTrue
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
-import leegroup.module.data.util.JsonUtil
-import leegroup.module.domain.exceptions.NoConnectivityException
+import leegroup.module.compose.ui.models.ErrorState
 import leegroup.module.domain.models.GitUserDetailModel
 import leegroup.module.domain.usecases.gituser.GetGitUserDetailLocalUseCase
 import leegroup.module.domain.usecases.gituser.GetGitUserDetailRemoteUseCase
+import leegroup.module.extension.JsonUtil
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -174,7 +173,7 @@ class GitUserDetailViewModelTest {
     fun `When Api onErrorConfirmation is called, it calls fetchRemote again`() = runTest {
         every { mockLocalUseCase(userLogin) } returns flowOf()
         every { mockRemoteUseCase(userLogin) } returns flow {
-            throw MockUtil.apiError
+            MockUtil.noConnectivityException
         }
 
         initViewModel()
@@ -186,7 +185,7 @@ class GitUserDetailViewModelTest {
     fun `When Network onErrorConfirmation is called, it calls fetchRemote again`() = runTest {
         every { mockLocalUseCase(userLogin) } returns flowOf()
         every { mockRemoteUseCase(userLogin) } returns flow {
-            throw NoConnectivityException
+            throw MockUtil.noConnectivityException
         }
 
         initViewModel()
@@ -198,7 +197,7 @@ class GitUserDetailViewModelTest {
     fun `When Api onDismissClick is called, it hides error`() = runTest {
         every { mockLocalUseCase(userLogin) } returns flowOf()
         every { mockRemoteUseCase(userLogin) } returns flow {
-            throw MockUtil.apiError
+            throw MockUtil.noConnectivityException
         }
 
         initViewModel()

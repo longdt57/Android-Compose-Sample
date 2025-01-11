@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import com.app.androidcompose.ui.components.AppHorizontalDivider
 import com.app.androidcompose.ui.components.LinkText
 import com.app.androidcompose.ui.components.UserAvatar
-import com.app.androidcompose.ui.theme.ComposeTheme
+import leegroup.module.compose.ui.theme.ComposeTheme
 
 @Composable
 fun GitUserListItem(

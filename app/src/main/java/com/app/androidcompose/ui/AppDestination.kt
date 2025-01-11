@@ -1,6 +1,6 @@
 package com.app.androidcompose.ui
 
-import com.app.androidcompose.ui.base.BaseDestination
+import leegroup.module.compose.ui.models.BaseDestination
 
 sealed class AppDestination {
 

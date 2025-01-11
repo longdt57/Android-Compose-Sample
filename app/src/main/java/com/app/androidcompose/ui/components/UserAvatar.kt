@@ -18,8 +18,8 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.app.androidcompose.R
-import com.app.androidcompose.ui.theme.ComposeTheme
-import com.app.androidcompose.ui.theme.GreySoft950
+import leegroup.module.compose.ui.theme.ComposeTheme
+import leegroup.module.compose.ui.theme.GreySoft950
 
 @Composable
 fun UserAvatar(modifier: Modifier = Modifier, avatarUrl: String?) {

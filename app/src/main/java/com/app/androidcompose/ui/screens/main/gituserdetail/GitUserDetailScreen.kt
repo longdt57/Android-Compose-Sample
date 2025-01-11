@@ -15,15 +15,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.app.androidcompose.support.extensions.collectAsEffect
-import com.app.androidcompose.ui.base.BaseDestination
-import com.app.androidcompose.ui.base.BaseScreen
+import leegroup.module.compose.support.extensions.collectAsEffect
+import leegroup.module.compose.ui.models.BaseDestination
+import leegroup.module.compose.ui.components.BaseScreen
 import com.app.androidcompose.ui.models.GitUserDetailUiModel
 import com.app.androidcompose.ui.screens.main.gituserdetail.components.GitUserDetailAppBar
 import com.app.androidcompose.ui.screens.main.gituserdetail.components.GitUserDetailBlog
 import com.app.androidcompose.ui.screens.main.gituserdetail.components.GitUserDetailCard
 import com.app.androidcompose.ui.screens.main.gituserdetail.components.GitUserDetailFollows
-import com.app.androidcompose.ui.theme.ComposeTheme
+import leegroup.module.compose.ui.theme.ComposeTheme
 
 @Composable
 fun GitUserDetailScreen(

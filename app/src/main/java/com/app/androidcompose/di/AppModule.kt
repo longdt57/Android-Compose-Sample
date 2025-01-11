@@ -1,8 +1,8 @@
 package com.app.androidcompose.di
 
 import android.content.Context
-import com.app.androidcompose.support.util.DispatchersProvider
-import com.app.androidcompose.support.util.DispatchersProviderImpl
+import leegroup.module.compose.support.util.DispatchersProvider
+import leegroup.module.compose.support.util.DispatchersProviderImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

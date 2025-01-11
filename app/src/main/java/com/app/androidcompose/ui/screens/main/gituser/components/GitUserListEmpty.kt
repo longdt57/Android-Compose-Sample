@@ -10,8 +10,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.app.androidcompose.R
-import com.app.androidcompose.ui.theme.ComposeTheme
+import leegroup.module.compose.R
+import leegroup.module.compose.ui.theme.ComposeTheme
 
 @Composable
 fun GitUserListEmpty(modifier: Modifier = Modifier, onRefresh: () -> Unit) {

@@ -3,8 +3,7 @@ package com.app.androidcompose.ui.screen.gituser
 import app.cash.turbine.test
 import com.app.androidcompose.MockUtil
 import com.app.androidcompose.support.CoroutineTestRule
-import com.app.androidcompose.ui.base.ErrorState
-import com.app.androidcompose.ui.base.LoadingState
+import com.app.androidcompose.tracking.GitUserListScreenTracker
 import com.app.androidcompose.ui.screens.main.gituser.GitUserListAction
 import com.app.androidcompose.ui.screens.main.gituser.GitUserListViewModel
 import com.app.androidcompose.ui.screens.main.gituser.GitUserListViewModel.Companion.PER_PAGE
@@ -17,6 +16,8 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
+import leegroup.module.compose.ui.models.ErrorState
+import leegroup.module.compose.ui.models.LoadingState
 import leegroup.module.domain.models.GitUserModel
 import leegroup.module.domain.usecases.gituser.GetGitUserUseCase
 import org.junit.Assert.assertEquals
@@ -31,6 +32,7 @@ class GitUserListViewModelTest {
     val coroutinesRule = CoroutineTestRule()
 
     private val mockUseCase: GetGitUserUseCase = mockk()
+    private val mockTracker: GitUserListScreenTracker = mockk()
 
     private lateinit var viewModel: GitUserListViewModel
 
@@ -59,9 +61,12 @@ class GitUserListViewModelTest {
     @Before
     fun setUp() {
         every { mockUseCase(since = 0, perPage = perPage) } returns flowOf(gitUserModels)
+        every { mockTracker.launch() } returns Unit
+        every { mockTracker.openUserDetail(any()) } returns Unit
         viewModel = GitUserListViewModel(
             coroutinesRule.testDispatcherProvider,
-            mockUseCase
+            useCase = mockUseCase,
+            gitUserListScreenTracker = mockTracker
         )
     }
 
@@ -69,6 +74,19 @@ class GitUserListViewModelTest {
     fun `When trigger load if empty & state is empty, it should load more`() = runTest {
         viewModel.handleAction(GitUserListAction.LoadIfEmpty)
         verify(exactly = 1) { mockUseCase(since = 0, perPage = perPage) }
+    }
+
+    @Test
+    fun `When track launch, trigger tracker`() = runTest {
+        viewModel.handleAction(GitUserListAction.TrackLaunch)
+        verify(exactly = 1) { mockTracker.launch() }
+    }
+
+    @Test
+    fun `When track open user detail, trigger tracker`() = runTest {
+        val login = "longdt57"
+        viewModel.handleAction(GitUserListAction.TrackOpenUserDetail(login))
+        verify(exactly = 1) { mockTracker.openUserDetail(login) }
     }
 
     @Test

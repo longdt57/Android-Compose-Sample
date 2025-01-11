@@ -1,42 +1,14 @@
 package leegroup.module.data
 
-import io.mockk.every
-import io.mockk.mockk
 import leegroup.module.data.models.GitUser
 import leegroup.module.data.models.GitUserDetail
-import leegroup.module.domain.models.Error
 import leegroup.module.domain.models.GitUserDetailModel
 import leegroup.module.domain.models.GitUserModel
-import okhttp3.ResponseBody
-import retrofit2.HttpException
-import retrofit2.Response
 
 object MockUtil {
     const val GIT_USER_DETAIL_LOGIN = "longdt57"
     const val GIT_USER_SINCE = 0
     const val GIT_USER_PER_PAGE = 3
-
-    val mockHttpException: HttpException
-        get() {
-            val response = mockk<Response<Any>>()
-            val httpException = mockk<HttpException>()
-            val responseBody = mockk<ResponseBody>()
-            every { response.code() } returns 500
-            every { response.message() } returns "message"
-            every { response.errorBody() } returns responseBody
-            every { httpException.code() } returns response.code()
-            every { httpException.message() } returns response.message()
-            every { httpException.response() } returns response
-            every { responseBody.string() } returns
-                    """
-                    {
-                        "message": "message"
-                    }
-                """.trimIndent()
-            return httpException
-        }
-
-    val error = Error(message = "message")
 
     val gitUserDetail = GitUserDetail(
         id = 8809113,

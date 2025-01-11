@@ -1,6 +1,6 @@
 package com.app.androidcompose.support
 
-import com.app.androidcompose.support.util.DispatchersProvider
+import leegroup.module.compose.support.util.DispatchersProvider
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

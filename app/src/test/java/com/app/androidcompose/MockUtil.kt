@@ -1,17 +1,36 @@
 package com.app.androidcompose
 
-import com.app.androidcompose.ui.base.ErrorState
-import leegroup.module.domain.exceptions.ApiException
-import leegroup.module.domain.models.Error
+import io.mockk.every
+import io.mockk.mockk
+import leegroup.module.compose.ui.models.ErrorState
+import okhttp3.ResponseBody
+import retrofit2.HttpException
+import retrofit2.Response
+import java.net.ConnectException
+import java.net.UnknownHostException
 
 object MockUtil {
-    private const val API_ERROR_MESSAGE = "Something went wrong"
+    val serverException: Throwable = ConnectException()
+    val noConnectivityException: Throwable = UnknownHostException()
+    val apiErrorState = ErrorState.Api()
 
-    val apiErrorState = ErrorState.Api(customMessage = API_ERROR_MESSAGE)
-
-    val apiError = ApiException(
-        error = Error(message = API_ERROR_MESSAGE),
-        httpCode = 404,
-        httpMessage = "Not Found"
-    )
+    val apiError: HttpException
+        get() {
+            val response = mockk<Response<Any>>()
+            val httpException = mockk<HttpException>()
+            val responseBody = mockk<ResponseBody>()
+            every { response.code() } returns 500
+            every { response.message() } returns "message"
+            every { response.errorBody() } returns responseBody
+            every { httpException.code() } returns response.code()
+            every { httpException.message() } returns response.message()
+            every { httpException.response() } returns response
+            every { responseBody.string() } returns
+                    """
+                    {
+                        "message": "message"
+                    }
+                """.trimIndent()
+            return httpException
+        }
 }

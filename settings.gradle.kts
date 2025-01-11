@@ -24,3 +24,5 @@ rootProject.name = "Android Clean Architecture"
 include(":app")
 include(":data")
 include(":domain")
+include(":compose")
+include(":extension")

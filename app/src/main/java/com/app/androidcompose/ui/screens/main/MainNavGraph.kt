@@ -5,7 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.app.androidcompose.ui.AppDestination
-import com.app.androidcompose.ui.base.BaseDestination
+import leegroup.module.compose.ui.models.BaseDestination
 import com.app.androidcompose.ui.composable
 import com.app.androidcompose.ui.navigateWithDestination
 import com.app.androidcompose.ui.screens.main.gituser.GitUserListScreen

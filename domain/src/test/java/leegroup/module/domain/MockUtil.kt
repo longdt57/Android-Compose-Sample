@@ -1,19 +1,11 @@
 package leegroup.module.domain
 
-import leegroup.module.domain.exceptions.ApiException
-import leegroup.module.domain.models.Error
 import leegroup.module.domain.models.GitUserDetailModel
 
 object MockUtil {
     const val GIT_USER_DETAIL_LOGIN = "longdt57"
 
-    val apiException = ApiException(
-        error = Error(
-            message = "message",
-        ),
-        httpCode = 400,
-        httpMessage = "Bad Request "
-    )
+    val apiException = RuntimeException()
 
     val gitUserDetail = GitUserDetailModel(
         id = 8809113,

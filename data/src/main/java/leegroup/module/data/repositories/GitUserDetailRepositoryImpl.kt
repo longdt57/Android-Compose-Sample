@@ -1,6 +1,5 @@
 package leegroup.module.data.repositories
 
-import leegroup.module.data.extensions.transform
 import leegroup.module.data.local.room.GitUserDetailDao
 import leegroup.module.data.models.GitUserDetail
 import leegroup.module.data.models.mapToDomain
@@ -14,8 +13,8 @@ class GitUserDetailRepositoryImpl @Inject constructor(
     private val userDao: GitUserDetailDao,
 ) : GitUserDetailRepository {
 
-    override suspend fun getRemote(login: String) = transform {
-        appService.getGitUserDetail(login).let { userDetail ->
+    override suspend fun getRemote(login: String): GitUserDetailModel {
+        return appService.getGitUserDetail(login).let { userDetail ->
             saveToLocal(userDetail)
             mapToDomain(userDetail)
         }

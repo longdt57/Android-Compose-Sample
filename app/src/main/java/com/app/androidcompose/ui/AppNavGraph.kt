@@ -8,7 +8,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navDeepLink
-import com.app.androidcompose.ui.base.BaseDestination
+import leegroup.module.compose.ui.models.BaseDestination
 import com.app.androidcompose.ui.screens.main.mainNavGraph
 
 @Composable

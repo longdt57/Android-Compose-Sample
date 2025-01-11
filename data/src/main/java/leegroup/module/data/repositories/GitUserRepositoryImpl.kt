@@ -1,6 +1,5 @@
 package leegroup.module.data.repositories
 
-import leegroup.module.data.extensions.transform
 import leegroup.module.data.local.room.GitUserDao
 import leegroup.module.data.models.GitUser
 import leegroup.module.data.models.mapToDomain
@@ -14,10 +13,10 @@ class GitUserRepositoryImpl @Inject constructor(
     private val userDao: GitUserDao,
 ) : GitUserRepository {
 
-    override suspend fun getRemote(since: Int, perPage: Int) = transform {
+    override suspend fun getRemote(since: Int, perPage: Int): List<GitUserModel> {
         val users = appService.getGitUser(since = since, perPage = perPage)
         saveToLocal(users)
-        mapToDomain(users)
+        return mapToDomain(users)
     }
 
     override suspend fun getLocal(since: Int, perPage: Int): List<GitUserModel> {

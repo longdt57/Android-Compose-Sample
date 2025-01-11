@@ -2,10 +2,10 @@ package com.app.androidcompose.ui.screens.main.gituserdetail
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
-import com.app.androidcompose.support.extensions.toNavModel
-import com.app.androidcompose.support.util.DispatchersProvider
-import com.app.androidcompose.ui.base.BaseViewModel
-import com.app.androidcompose.ui.base.ErrorState
+import leegroup.module.compose.support.extensions.toNavModel
+import leegroup.module.compose.support.util.DispatchersProvider
+import leegroup.module.compose.ui.viewmodel.BaseViewModel
+import leegroup.module.compose.ui.models.ErrorState
 import com.app.androidcompose.ui.mapper.GitUserDetailUiMapper
 import com.app.androidcompose.ui.models.GitUserDetailUiModel
 import com.app.androidcompose.ui.screens.main.MainDestination

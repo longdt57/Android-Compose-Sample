@@ -1,6 +1,6 @@
 package com.app.androidcompose.ui.screens.main
 
-import com.app.androidcompose.ui.base.BaseDestination
+import leegroup.module.compose.ui.models.BaseDestination
 import kotlinx.serialization.Serializable
 
 sealed class MainDestination {

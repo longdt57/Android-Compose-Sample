@@ -1,5 +1,4 @@
 [versions]
-androidTracking = "1.0.6"
 minSdk = "24"
 targetSdk = "35"
 compileSdk = "35"
@@ -10,6 +9,7 @@ release = "release"
 prod = "prod"
 staging = "staging"
 
+androidTracking = "1.0.9"
 activityCompose = "1.9.3"
 agp = "8.7.3"
 appDistribution = "5.0.0"

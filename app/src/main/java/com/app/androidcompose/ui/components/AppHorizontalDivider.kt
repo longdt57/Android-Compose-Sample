@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
-import com.app.androidcompose.ui.theme.GreySoft800
+import leegroup.module.compose.ui.theme.GreySoft800
 
 @Composable
 fun AppHorizontalDivider(

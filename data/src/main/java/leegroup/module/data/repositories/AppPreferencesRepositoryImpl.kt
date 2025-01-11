@@ -12,7 +12,8 @@ class AppPreferencesRepositoryImpl @Inject internal constructor(
 ) : AppPreferencesRepository {
 
     override fun getAppPreference(): Flow<Boolean> {
-        return appDataStore.getValue(APP_PREFERENCE).map { it ?: true }
+        return appDataStore.getValue(APP_PREFERENCE)
+            .map { it ?: true }
     }
 
     override suspend fun updateAppPreference(appPreferencesValue: Boolean) {
