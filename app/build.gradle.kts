@@ -11,7 +11,6 @@ plugins {
     alias(libs.plugins.firebase.crashlytics)
     alias(libs.plugins.firebase.pref)
     alias(libs.plugins.firebase.app.distribution)
-    alias(libs.plugins.navigation.safeargs)
     alias(libs.plugins.kotlinx.kover)
 }
 

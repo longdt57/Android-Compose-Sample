@@ -152,6 +152,5 @@ google-service = { id = "com.google.gms.google-services", version.ref = "googleS
 firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "crashlytic" }
 firebase-pref = { id = "com.google.firebase.firebase-perf", version.ref = "firebasePref" }
 firebase-app-distribution = { id = "com.google.firebase.appdistribution", version.ref = "appDistribution" }
-navigation-safeargs = { id = "androidx.navigation.safeargs", version.ref = "safeargs" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 kotlinx-kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
