@@ -2,7 +2,10 @@ package leegroup.module.compose.ui.components
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
+import leegroup.module.compose.ui.models.ErrorModel
 import leegroup.module.compose.ui.models.ErrorState
+import leegroup.module.compose.ui.theme.ComposeTheme
 
 @Composable
 fun ErrorView(
@@ -28,4 +31,51 @@ fun ErrorView(
         is ErrorState.None -> {}
     }
 }
+
+@Preview(showBackground = true)
+@Composable
+private fun CommonErrorViewPreview() {
+    ComposeTheme {
+        ErrorView(ErrorState.Common)
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun NetworkErrorViewPreview() {
+    ComposeTheme {
+        ErrorView(ErrorState.Network())
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun ServerErrorViewPreview() {
+    ComposeTheme {
+        ErrorView(ErrorState.Server())
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun ApiErrorViewPreview() {
+    ComposeTheme {
+        ErrorView(ErrorState.Api())
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun CustomApiErrorViewPreview() {
+    ComposeTheme {
+        ErrorView(
+            ErrorState.Api(
+                error = ErrorModel(
+                    message = "Custom message"
+                )
+            )
+        )
+    }
+}
+
 
