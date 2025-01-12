@@ -1,6 +1,8 @@
 package leegroup.module.compose.ui.components
 
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import leegroup.module.compose.ui.models.ErrorModel
@@ -20,6 +22,14 @@ fun ErrorView(
                 else -> stringResource(error.messageRes)
             }
             AlertDialogView(
+                icon = {
+                    error.iconRes?.let {
+                        Icon(
+                            painter = painterResource(id = it),
+                            contentDescription = stringResource(id = error.titleRes)
+                        )
+                    }
+                },
                 title = stringResource(id = error.titleRes),
                 text = message,
                 confirmText = stringResource(id = error.primaryRes),
@@ -44,7 +54,7 @@ private fun CommonErrorViewPreview() {
 @Composable
 private fun NetworkErrorViewPreview() {
     ComposeTheme {
-        ErrorView(ErrorState.Network())
+        ErrorView(ErrorState.Network)
     }
 }
 
@@ -52,7 +62,7 @@ private fun NetworkErrorViewPreview() {
 @Composable
 private fun ServerErrorViewPreview() {
     ComposeTheme {
-        ErrorView(ErrorState.Server())
+        ErrorView(ErrorState.Server)
     }
 }
 

@@ -189,7 +189,7 @@ class GitUserDetailViewModelTest {
         }
 
         initViewModel()
-        viewModel.onErrorConfirmation(ErrorState.Network())
+        viewModel.onErrorConfirmation(ErrorState.Network)
         verify(exactly = 2) { mockRemoteUseCase(userLogin) }
     }
 

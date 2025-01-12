@@ -13,9 +13,9 @@ inline fun <reified Model : ErrorModel> Throwable.mapApiError(): ErrorState {
     return when (this) {
         is UnknownHostException,
         is SSLException,
-        is InterruptedIOException -> ErrorState.Network()
+        is InterruptedIOException -> ErrorState.Network
 
-        is ConnectException -> ErrorState.Server()
+        is ConnectException -> ErrorState.Server
         is HttpException -> mapHttpException<Model>(this)
         else -> ErrorState.Common
     }

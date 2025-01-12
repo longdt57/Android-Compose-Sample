@@ -25,7 +25,7 @@ class MapApiErrorTest {
 
         networkExceptions.forEach { exception ->
             val result = exception.mapApiError<ErrorModel>()
-            assertEquals(ErrorState.Network(), result)
+            assertEquals(ErrorState.Network, result)
         }
     }
 
@@ -33,7 +33,7 @@ class MapApiErrorTest {
     fun `mapApiError returns Server ErrorState for ConnectException`() {
         val exception = ConnectException()
         val result = exception.mapApiError<ErrorModel>()
-        assertEquals(ErrorState.Server(), result)
+        assertEquals(ErrorState.Server, result)
     }
 
     @Test
