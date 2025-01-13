@@ -5,11 +5,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.app.androidcompose.ui.AppDestination
-import leegroup.module.compose.ui.models.BaseDestination
-import com.app.androidcompose.ui.composable
-import com.app.androidcompose.ui.navigateWithDestination
 import com.app.androidcompose.ui.screens.main.gituser.GitUserListScreen
 import com.app.androidcompose.ui.screens.main.gituserdetail.GitUserDetailScreen
+import leegroup.module.compose.support.extensions.appNavigate
+import leegroup.module.compose.support.extensions.composable
 
 fun NavGraphBuilder.mainNavGraph(
     navController: NavHostController,
@@ -24,19 +23,12 @@ fun NavGraphBuilder.mainNavGraph(
                 navigator = { destination -> navController.appNavigate(destination) }
             )
         }
-        composable<MainDestination.GitUserDetail.GitUserDetailNav> { backStackEntry ->
+        composable<MainDestination.GitUserDetail.GitUserDetailNav> {
             GitUserDetailScreen(
                 navigator = { destination ->
                     navController.appNavigate(destination)
                 }
             )
         }
-    }
-}
-
-fun NavHostController.appNavigate(destination: Any) {
-    when (destination) {
-        is BaseDestination -> navigateWithDestination(destination)
-        else -> navigate(destination)
     }
 }
