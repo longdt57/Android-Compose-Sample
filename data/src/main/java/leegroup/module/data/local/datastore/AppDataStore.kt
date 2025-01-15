@@ -1,41 +1,26 @@
 package leegroup.module.data.local.datastore
 
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.edit
+import android.content.Context
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
+import leegroup.module.extension.datastore.BaseDataStore
 import javax.inject.Inject
 
-internal class AppDataStore @Inject constructor(
-    private val dataStore: DataStore<Preferences>
-) {
+private const val APP_PREFERENCES = "app-datastore"
 
-    fun <T> getValue(key: Preferences.Key<T>): Flow<T?> {
-        return dataStore.data.map { preferences ->
-            preferences[key]
-        }
+class AppDataStore @Inject constructor(
+    context: Context,
+) : BaseDataStore(context, APP_PREFERENCES) {
+
+    fun getAppPreference(): Flow<Boolean?> {
+        return getValue(APP_PREFERENCE)
     }
 
-    suspend fun <T> setValue(key: Preferences.Key<T>, value: T) {
-        dataStore.edit { settings ->
-            settings[key] = value
-        }
+    suspend fun setAppPreference(value: Boolean) {
+        setValue(APP_PREFERENCE, value)
     }
 
-    fun <T> getListValue(key: Preferences.Key<String>): Flow<List<T>> {
-        return dataStore.data.map { preferences ->
-            val value = preferences[key] ?: return@map emptyList()
-            Json.decodeFromString<List<T>>(value)
-        }
-    }
-
-    suspend fun <T> setValue(key: Preferences.Key<String>, value: List<T>) {
-        dataStore.edit { settings ->
-            val jsonValue = Json.encodeToString(value)
-            settings[key] = jsonValue
-        }
+    companion object {
+        private val APP_PREFERENCE = booleanPreferencesKey("APP_PREFERENCE")
     }
 }

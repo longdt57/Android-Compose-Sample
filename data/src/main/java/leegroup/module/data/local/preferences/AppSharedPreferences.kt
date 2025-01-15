@@ -1,6 +1,7 @@
 package leegroup.module.data.local.preferences
 
 import android.content.Context
+import leegroup.module.extension.sharepreference.BaseSharedPreferences
 import javax.inject.Inject
 
 private const val APP_SHARED_PREFERENCES_NAME = "app_preferences"

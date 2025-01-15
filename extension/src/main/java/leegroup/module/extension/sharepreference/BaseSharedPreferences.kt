@@ -1,4 +1,4 @@
-package leegroup.module.data.local.preferences
+package leegroup.module.extension.sharepreference
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -14,7 +14,7 @@ abstract class BaseSharedPreferences(
         applicationContext.getSharedPreferences(prefName, Context.MODE_PRIVATE)
     }
 
-    internal inline fun <reified T> argsNullable(
+    protected inline fun <reified T> argsNullable(
         key: String? = null,
         defaultValue: T? = null
     ): ReadWriteProperty<Any, T?> {
@@ -34,7 +34,7 @@ abstract class BaseSharedPreferences(
         }
     }
 
-    internal inline fun <reified T> args(
+    protected inline fun <reified T> args(
         key: String? = null,
         defaultValue: T
     ): ReadWriteProperty<Any, T> {

@@ -1,6 +1,5 @@
 package leegroup.module.data.repositories
 
-import androidx.datastore.preferences.core.Preferences
 import app.cash.turbine.test
 import io.mockk.Runs
 import io.mockk.coEvery
@@ -29,7 +28,7 @@ class AppPreferencesRepositoryImplTest {
     @Test
     fun `getAppPreference returns true when value is null`() = runTest {
         // Arrange
-        every { mockAppDataStore.getValue(any<Preferences.Key<Boolean>>()) } returns flowOf(null)
+        every { mockAppDataStore.getAppPreference() } returns flowOf(null)
 
         // Act & Assert
         appPreferencesRepository.getAppPreference().test {
@@ -41,7 +40,7 @@ class AppPreferencesRepositoryImplTest {
     @Test
     fun `getAppPreference returns stored value when not null`() = runTest {
         // Arrange
-        every { mockAppDataStore.getValue(any<Preferences.Key<Boolean>>()) } returns flowOf(false)
+        every { mockAppDataStore.getAppPreference() } returns flowOf(false)
 
         // Act & Assert
         appPreferencesRepository.getAppPreference().test {
@@ -55,16 +54,13 @@ class AppPreferencesRepositoryImplTest {
         // Arrange
         val newPreferenceValue = false
         coEvery {
-            mockAppDataStore.setValue(
-                any<Preferences.Key<Boolean>>(),
-                newPreferenceValue
-            )
+            mockAppDataStore.setAppPreference(newPreferenceValue)
         } just Runs
 
         // Act
         appPreferencesRepository.updateAppPreference(newPreferenceValue)
 
         // Assert
-        coVerify { mockAppDataStore.setValue(any<Preferences.Key<Boolean>>(), newPreferenceValue) }
+        coVerify { mockAppDataStore.setAppPreference(newPreferenceValue) }
     }
 }
