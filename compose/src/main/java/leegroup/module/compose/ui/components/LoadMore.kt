@@ -1,4 +1,4 @@
-package com.app.androidcompose.ui.components
+package leegroup.module.compose.ui.components
 
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.Composable

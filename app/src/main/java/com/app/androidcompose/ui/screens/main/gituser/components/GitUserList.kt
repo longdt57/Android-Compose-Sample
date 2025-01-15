@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.app.androidcompose.ui.components.LoadMore
+import leegroup.module.compose.ui.components.LoadMore
 import leegroup.module.compose.ui.theme.ComposeTheme
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
@@ -33,7 +33,7 @@ fun GitUserList(
         item {
             Spacer(modifier = Modifier.height(8.dp))
         }
-        items(users) { user ->
+        items(users, key = { it.id }) { user ->
             GitUserListCard(user, onClick)
         }
         item {

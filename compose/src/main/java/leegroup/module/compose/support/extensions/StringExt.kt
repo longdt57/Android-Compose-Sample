@@ -7,4 +7,4 @@ fun String.hexToColor(): Color {
     return Color(android.graphics.Color.parseColor(this))
 }
 
-fun randomString(length: Int): String = LoremIpsum(length).values.first()
+fun randomString(words: Int): String = LoremIpsum(words).values.joinToString()
