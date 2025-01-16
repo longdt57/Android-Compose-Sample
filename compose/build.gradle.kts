@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.serialization)
     alias(libs.plugins.compose.compiler)
-//    alias(libs.plugins.kotlinx.kover)
+    alias(libs.plugins.kotlinx.kover)
 }
 
 android {

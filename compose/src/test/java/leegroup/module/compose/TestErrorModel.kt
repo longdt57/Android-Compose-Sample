@@ -47,6 +47,7 @@ class MapApiErrorTest {
 
         assert(result is ErrorState.Api)
         result as ErrorState.Api
+        assertEquals(ErrorModel("message").message, result.customMessage)
     }
 
     @Test
@@ -54,6 +55,17 @@ class MapApiErrorTest {
         val exception = IllegalArgumentException("Some error")
         val result = exception.mapApiError<ErrorModel>()
         assertEquals(ErrorState.Common, result)
+    }
+
+    @Test
+    fun `assert error common is similar to message error`() {
+        val messageError = object : ErrorState.MessageError {}
+        assertEquals(ErrorState.Common.iconRes, messageError.iconRes)
+        assertEquals(ErrorState.Common.messageRes, messageError.messageRes)
+        assertEquals(ErrorState.Common.titleRes, messageError.titleRes)
+        assertEquals(ErrorState.Common.primaryRes, messageError.primaryRes)
+        assertEquals(ErrorState.Common.secondaryRes, messageError.secondaryRes)
+
     }
 
     @Test

@@ -207,7 +207,7 @@ dependencies {
 dependencies {
     kover(project(":data"))
     kover(project(":domain"))
-//    kover(project(":compose")) // Disable this because the report is incorrect.
+    kover(project(":compose"))
     kover(project(":extension"))
 }
 

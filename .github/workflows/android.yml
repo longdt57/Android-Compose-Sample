@@ -27,6 +27,6 @@ jobs:
       - name: Detekt
         run: ./gradlew detekt
       - name: Unit test
-        run: ./gradlew koverHtmlReport
+        run: ./gradlew :app:koverHtmlReport
       - name: Build
         run: ./gradlew app:assembleStagingDebug
