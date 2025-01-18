@@ -2,6 +2,7 @@ package leegroup.module.sample.gituser.data.local.datastore
 
 import android.content.Context
 import androidx.datastore.preferences.core.booleanPreferencesKey
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import leegroup.module.extension.datastore.BaseDataStore
 import javax.inject.Inject
@@ -11,7 +12,7 @@ private const val APP_DATASTORE = "app-datastore"
 
 @Singleton
 class AppDataStore @Inject constructor(
-    context: Context,
+    @ApplicationContext context: Context,
 ) : BaseDataStore(context, APP_DATASTORE) {
 
     fun getAppPreference(): Flow<Boolean?> {
