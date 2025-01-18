@@ -8,7 +8,7 @@ import leegroup.module.extension.datastore.BaseDataStore
 import javax.inject.Inject
 import javax.inject.Singleton
 
-private const val APP_DATASTORE = "app-datastore"
+private const val APP_DATASTORE = "git-user-datastore"
 
 @Singleton
 class GitUserDataStore @Inject constructor(

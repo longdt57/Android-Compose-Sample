@@ -11,7 +11,7 @@ import leegroup.module.sample.gituser.data.local.room.GitUserDao
 import leegroup.module.sample.gituser.data.local.room.GitUserDatabase
 import leegroup.module.sample.gituser.data.local.room.GitUserDetailDao
 
-private const val APP_DATABASE = "app-database"
+private const val APP_DATABASE = "git-user-database"
 
 @Module
 @InstallIn(SingletonComponent::class)
