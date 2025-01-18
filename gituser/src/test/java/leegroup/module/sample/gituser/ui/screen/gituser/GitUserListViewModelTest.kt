@@ -8,19 +8,18 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import leegroup.module.compose.ui.models.ErrorState
 import leegroup.module.compose.ui.models.LoadingState
 import leegroup.module.domain.models.GitUserModel
 import leegroup.module.domain.params.GetGitUserListParam
 import leegroup.module.domain.usecases.gituser.GetGitUserUseCase
-import leegroup.module.sample.gituser.CoroutineTestRule
 import leegroup.module.sample.gituser.MockUtil
 import leegroup.module.sample.gituser.tracking.GitUserListScreenTracker
 import leegroup.module.sample.gituser.ui.screens.gituser.GitUserListAction
 import leegroup.module.sample.gituser.ui.screens.gituser.GitUserListViewModel
 import leegroup.module.sample.gituser.ui.screens.gituser.GitUserListViewModel.Companion.PER_PAGE
+import leegroup.module.test.CoroutineTestRule
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
@@ -94,7 +93,6 @@ class GitUserListViewModelTest {
     @Test
     fun `When trigger load if empty & state is not empty, it should not load more`() = runTest {
         viewModel.handleAction(GitUserListAction.LoadMore)
-        advanceUntilIdle()
         viewModel.handleAction(GitUserListAction.LoadIfEmpty)
         verify(exactly = 1) { mockUseCase(param) }
     }

@@ -16,12 +16,12 @@ import leegroup.module.domain.models.GitUserDetailModel
 import leegroup.module.domain.usecases.gituser.GetGitUserDetailLocalUseCase
 import leegroup.module.domain.usecases.gituser.GetGitUserDetailRemoteUseCase
 import leegroup.module.extension.JsonUtil
-import leegroup.module.sample.gituser.CoroutineTestRule
 import leegroup.module.sample.gituser.MockUtil
 import leegroup.module.sample.gituser.ui.mapper.GitUserDetailUiMapper
 import leegroup.module.sample.gituser.ui.models.GitUserDetailUiModel
 import leegroup.module.sample.gituser.ui.screens.GitUserDestination
 import leegroup.module.sample.gituser.ui.screens.gituserdetail.GitUserDetailViewModel
+import leegroup.module.test.CoroutineTestRule
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
