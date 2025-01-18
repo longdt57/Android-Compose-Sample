@@ -4,11 +4,14 @@ import leegroup.module.data.models.GitUser
 import leegroup.module.data.models.GitUserDetail
 import leegroup.module.domain.models.GitUserDetailModel
 import leegroup.module.domain.models.GitUserModel
+import leegroup.module.domain.params.GetGitUserListParam
 
 object MockUtil {
     const val GIT_USER_DETAIL_LOGIN = "longdt57"
-    const val GIT_USER_SINCE = 0
+    const val GIT_USER_SINCE = 0L
     const val GIT_USER_PER_PAGE = 3
+
+    val param = GetGitUserListParam(since = GIT_USER_SINCE, perPage = GIT_USER_PER_PAGE)
 
     val gitUserDetail = GitUserDetail(
         id = 8809113,

@@ -10,7 +10,7 @@ interface ApiService {
 
     @GET("users")
     suspend fun getGitUser(
-        @Query("since") since: Int,
+        @Query("since") since: Long,
         @Query("per_page") perPage: Int,
     ): List<GitUser>
 

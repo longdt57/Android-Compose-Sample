@@ -19,6 +19,7 @@ import kotlinx.coroutines.test.runTest
 import leegroup.module.compose.ui.models.ErrorState
 import leegroup.module.compose.ui.models.LoadingState
 import leegroup.module.domain.models.GitUserModel
+import leegroup.module.domain.params.GetGitUserListParam
 import leegroup.module.domain.usecases.gituser.GetGitUserUseCase
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -36,7 +37,8 @@ class GitUserListViewModelTest {
 
     private lateinit var viewModel: GitUserListViewModel
 
-    private val perPage = PER_PAGE
+    private val param = GetGitUserListParam(0, PER_PAGE)
+
     private val gitUserModels = listOf(
         GitUserModel(
             id = 1,
@@ -60,7 +62,7 @@ class GitUserListViewModelTest {
 
     @Before
     fun setUp() {
-        every { mockUseCase(since = 0, perPage = perPage) } returns flowOf(gitUserModels)
+        every { mockUseCase(param) } returns flowOf(gitUserModels)
         every { mockTracker.launch() } returns Unit
         every { mockTracker.openUserDetail(any()) } returns Unit
         viewModel = GitUserListViewModel(
@@ -73,7 +75,7 @@ class GitUserListViewModelTest {
     @Test
     fun `When trigger load if empty & state is empty, it should load more`() = runTest {
         viewModel.handleAction(GitUserListAction.LoadIfEmpty)
-        verify(exactly = 1) { mockUseCase(since = 0, perPage = perPage) }
+        verify(exactly = 1) { mockUseCase(param) }
     }
 
     @Test
@@ -94,7 +96,7 @@ class GitUserListViewModelTest {
         viewModel.handleAction(GitUserListAction.LoadMore)
         advanceUntilIdle()
         viewModel.handleAction(GitUserListAction.LoadIfEmpty)
-        verify(exactly = 1) { mockUseCase(since = 0, perPage = perPage) }
+        verify(exactly = 1) { mockUseCase(param) }
     }
 
     @Test
@@ -108,13 +110,13 @@ class GitUserListViewModelTest {
                 updated.users
             )
         }
-        verify(exactly = 1) { mockUseCase(since = 0, perPage = perPage) }
+        verify(exactly = 1) { mockUseCase(param) }
     }
 
     @Test
     fun `When loading users failed, it shows the corresponding error`() = runTest {
         val error = RuntimeException("Network error")
-        every { mockUseCase(since = 0, perPage = perPage) } returns flow { throw error }
+        every { mockUseCase(param) } returns flow { throw error }
 
         viewModel.handleAction(GitUserListAction.LoadMore)
         viewModel.error.test {
@@ -125,7 +127,7 @@ class GitUserListViewModelTest {
 
     @Test
     fun `When loading users, it shows and hides loading correctly`() = runTest {
-        every { mockUseCase(since = 0, perPage = perPage) } returns flow {
+        every { mockUseCase(param) } returns flow {
             delay(1000)
             emit(gitUserModels)
         }
@@ -138,31 +140,31 @@ class GitUserListViewModelTest {
 
     @Test
     fun `When loading users, it can't call load more`() = runTest {
-        every { mockUseCase(since = 0, perPage = perPage) } returns flow {
+        every { mockUseCase(param) } returns flow {
             delay(1000)
             emit(gitUserModels)
         }
         viewModel.handleAction(GitUserListAction.LoadMore)
         viewModel.handleAction(GitUserListAction.LoadMore)
-        verify(exactly = 1) { mockUseCase(since = 0, perPage = perPage) }
+        verify(exactly = 1) { mockUseCase(param) }
     }
 
     @Test
     fun `When api onErrorConfirmation is called, it calls load if empty again`() = runTest {
         viewModel.onErrorConfirmation(MockUtil.apiErrorState)
-        verify(exactly = 1) { mockUseCase(since = 0, perPage = perPage) }
+        verify(exactly = 1) { mockUseCase(param) }
     }
 
     @Test
     fun `When network onErrorConfirmation is called, it calls load if empty again`() = runTest {
         viewModel.onErrorConfirmation(ErrorState.Network)
-        verify(exactly = 1) { mockUseCase(since = 0, perPage = perPage) }
+        verify(exactly = 1) { mockUseCase(param) }
     }
 
     @Test
     fun `When common onErrorConfirmation is called, it doesn't calls load if empty again`() =
         runTest {
             viewModel.onErrorConfirmation(ErrorState.Common)
-            verify(exactly = 0) { mockUseCase(since = 0, perPage = perPage) }
+            verify(exactly = 0) { mockUseCase(param) }
         }
 }

@@ -6,6 +6,7 @@ import io.mockk.mockk
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import leegroup.module.domain.models.GitUserModel
+import leegroup.module.domain.params.GetGitUserListParam
 import leegroup.module.domain.repositories.GitUserRepository
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -26,6 +27,8 @@ class GetGitUserUseCaseTest {
         GitUserModel(2, "user2", "avatar2", "htmlUrl2")
     )
 
+    private val param = GetGitUserListParam(since = 0, perPage = 2)
+
     @Before
     fun setUp() {
         repository = mockk()
@@ -34,24 +37,24 @@ class GetGitUserUseCaseTest {
 
     @Test
     fun `should return local data when local is not empty`() = runTest {
-        coEvery { repository.getLocal(0, 2) } returns gitUserModels
+        coEvery { repository.getLocal(param) } returns gitUserModels
 
-        val result = getGitUserUseCase(0, 2).first()
+        val result = getGitUserUseCase(param).first()
 
         assertEquals(gitUserModels, result)
-        coVerify(exactly = 1) { repository.getLocal(0, 2) }
-        coVerify(exactly = 0) { repository.getRemote(0, 2) }
+        coVerify(exactly = 1) { repository.getLocal(param) }
+        coVerify(exactly = 0) { repository.getRemote(param) }
     }
 
     @Test
     fun `should fetch remote data when local is empty`() = runTest {
-        coEvery { repository.getLocal(0, 2) } returns emptyList()
-        coEvery { repository.getRemote(0, 2) } returns gitUserModels
+        coEvery { repository.getLocal(param) } returns emptyList()
+        coEvery { repository.getRemote(param) } returns gitUserModels
 
-        val result = getGitUserUseCase(0, 2).first()
+        val result = getGitUserUseCase(param).first()
 
         assertEquals(gitUserModels, result)
-        coVerify(exactly = 1) { repository.getLocal(0, 2) }
-        coVerify(exactly = 1) { repository.getRemote(0, 2) }
+        coVerify(exactly = 1) { repository.getLocal(param) }
+        coVerify(exactly = 1) { repository.getRemote(param) }
     }
 }

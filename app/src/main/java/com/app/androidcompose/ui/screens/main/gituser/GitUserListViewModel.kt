@@ -17,6 +17,7 @@ import leegroup.module.compose.support.util.DispatchersProvider
 import leegroup.module.compose.ui.models.ErrorState
 import leegroup.module.compose.ui.viewmodel.BaseViewModel
 import leegroup.module.domain.models.GitUserModel
+import leegroup.module.domain.params.GetGitUserListParam
 import leegroup.module.domain.usecases.gituser.GetGitUserUseCase
 import javax.inject.Inject
 
@@ -47,7 +48,8 @@ class GitUserListViewModel @Inject constructor(
 
     private fun loadMore() {
         if (isLoading()) return
-        useCase(since = getSince(), perPage = PER_PAGE)
+        val param = GetGitUserListParam(getSince(), PER_PAGE)
+        useCase(param)
             .injectLoading()
             .onEach { result ->
                 handleSuccess(result)
@@ -69,14 +71,14 @@ class GitUserListViewModel @Inject constructor(
 
     private fun handleSuccess(result: List<GitUserModel>) {
         _uiModel.update { oldValue ->
-            val users = oldValue.users.plus(result).toImmutableList()
+            val users = oldValue.users.plus(result).toSet().toImmutableList()
             oldValue.copy(users = users)
         }
     }
 
     private fun isEmpty() = _uiModel.value.users.isEmpty()
 
-    private fun getSince() = _uiModel.value.users.size
+    private fun getSince() = _uiModel.value.users.lastOrNull()?.id ?: 0L
 
     private fun trackLaunch() {
         viewModelScope.launch(dispatchersProvider.io) {

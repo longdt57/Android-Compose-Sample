@@ -5,6 +5,7 @@ import leegroup.module.data.models.GitUser
 import leegroup.module.data.models.mapToDomain
 import leegroup.module.data.remote.services.ApiService
 import leegroup.module.domain.models.GitUserModel
+import leegroup.module.domain.params.GetGitUserListParam
 import leegroup.module.domain.repositories.GitUserRepository
 import javax.inject.Inject
 
@@ -13,15 +14,15 @@ class GitUserRepositoryImpl @Inject constructor(
     private val userDao: GitUserDao,
 ) : GitUserRepository {
 
-    override suspend fun getRemote(since: Int, perPage: Int): List<GitUserModel> {
-        val users = appService.getGitUser(since = since, perPage = perPage)
+    override suspend fun getRemote(param: GetGitUserListParam): List<GitUserModel> {
+        val users = appService.getGitUser(since = param.since, perPage = param.perPage)
         saveToLocal(users)
         return mapToDomain(users)
     }
 
-    override suspend fun getLocal(since: Int, perPage: Int): List<GitUserModel> {
+    override suspend fun getLocal(param: GetGitUserListParam): List<GitUserModel> {
         return userDao
-            .getUsers(since = since, perPage = perPage)
+            .getUsers(since = param.since, perPage = param.perPage)
             .let { mapToDomain(it) }
     }
 

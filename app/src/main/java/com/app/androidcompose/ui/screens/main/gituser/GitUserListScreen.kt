@@ -38,9 +38,9 @@ fun GitUserListScreen(
     viewModel.navigator.collectAsEffect { destination -> navigator(destination) }
     val uiModel by viewModel.uiModel.collectAsStateWithLifecycle()
     val loading by viewModel.loading.collectAsStateWithLifecycle()
-    val isLoading by remember {
+    val showRefresh by remember {
         derivedStateOf {
-            loading is LoadingState.Loading
+            uiModel.users.isEmpty() && loading !is LoadingState.Loading
         }
     }
 
@@ -57,7 +57,7 @@ fun GitUserListScreen(
             .background(MaterialTheme.colorScheme.background)
             .navigationBarsPadding()
             .statusBarsPadding(),
-        showRefresh = uiModel.users.isEmpty() && isLoading.not(),
+        showRefresh = showRefresh,
         users = uiModel.users,
         onLoadMore = {
             viewModel.handleAction(GitUserListAction.LoadMore)

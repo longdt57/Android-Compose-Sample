@@ -6,11 +6,11 @@ import kotlinx.coroutines.flow.Flow
 import leegroup.module.extension.datastore.BaseDataStore
 import javax.inject.Inject
 
-private const val APP_PREFERENCES = "app-datastore"
+private const val APP_DATASTORE = "app-datastore"
 
 class AppDataStore @Inject constructor(
     context: Context,
-) : BaseDataStore(context, APP_PREFERENCES) {
+) : BaseDataStore(context, APP_DATASTORE) {
 
     fun getAppPreference(): Flow<Boolean?> {
         return getValue(APP_PREFERENCE)

@@ -20,10 +20,10 @@ class GitUserRepositoryTest {
     private lateinit var mockUserDao: GitUserDao
     private lateinit var repository: GitUserRepository
 
-    private val since = MockUtil.GIT_USER_SINCE
-    private val perPage = MockUtil.GIT_USER_PER_PAGE
+    private val param = MockUtil.param
     private val sampleGitUsers = MockUtil.sampleGitUsers
     private val sampleGitUserModels = MockUtil.sampleGitUserModels
+
 
     @Before
     fun setUp() {
@@ -35,20 +35,30 @@ class GitUserRepositoryTest {
     @Test
     fun `When request successful, it returns success`() = runTest {
         val expected = sampleGitUsers
-        coEvery { mockService.getGitUser(since = since, perPage = perPage) } returns expected
+        coEvery {
+            mockService.getGitUser(
+                since = param.since,
+                perPage = param.perPage
+            )
+        } returns expected
         coEvery { mockUserDao.upsert(expected) } returns Unit
 
-        repository.getRemote(since = since, perPage = perPage) shouldBe sampleGitUserModels
+        repository.getRemote(param) shouldBe sampleGitUserModels
         coVerify(exactly = 1) { mockUserDao.upsert(expected) }
     }
 
     @Test
     fun `When request failed, it returns error`() = runTest {
         val expected = RuntimeException()
-        coEvery { mockService.getGitUser(since = since, perPage = perPage) } throws expected
+        coEvery {
+            mockService.getGitUser(
+                since = param.since,
+                perPage = param.perPage
+            )
+        } throws expected
 
         try {
-            repository.getRemote(since = since, perPage = perPage)
+            repository.getRemote(param)
         } catch (ex: Exception) {
             ex shouldBe expected
         }
@@ -57,15 +67,25 @@ class GitUserRepositoryTest {
     @Test
     fun `getLocal should return transformed local data`() = runTest {
         val expected = sampleGitUsers
-        coEvery { mockUserDao.getUsers(since = since, perPage = perPage) } returns expected
+        coEvery {
+            mockUserDao.getUsers(
+                since = param.since,
+                perPage = param.perPage
+            )
+        } returns expected
 
-        repository.getLocal(since = since, perPage = perPage) shouldBe sampleGitUserModels
+        repository.getLocal(param) shouldBe sampleGitUserModels
     }
 
     @Test
     fun `getLocal should return empty when database is empty`() = runTest {
-        coEvery { mockUserDao.getUsers(since = since, perPage = perPage) } returns emptyList()
+        coEvery {
+            mockUserDao.getUsers(
+                since = param.since,
+                perPage = param.perPage
+            )
+        } returns emptyList()
 
-        repository.getLocal(since = since, perPage = perPage) shouldBe emptyList()
+        repository.getLocal(param) shouldBe emptyList()
     }
 }
