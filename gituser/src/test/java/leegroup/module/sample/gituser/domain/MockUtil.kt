@@ -1,6 +1,6 @@
-package leegroup.module.domain
+package leegroup.module.sample.gituser.domain
 
-import leegroup.module.domain.models.GitUserDetailModel
+import leegroup.module.sample.gituser.domain.models.GitUserDetailModel
 
 object MockUtil {
     const val GIT_USER_DETAIL_LOGIN = "longdt57"

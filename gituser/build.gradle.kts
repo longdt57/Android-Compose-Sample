@@ -56,7 +56,6 @@ android {
 
 dependencies {
 
-    implementation(project(":domain"))
     implementation(project(":compose"))
     implementation(project(":extension"))
     implementation(libs.android.tracking)

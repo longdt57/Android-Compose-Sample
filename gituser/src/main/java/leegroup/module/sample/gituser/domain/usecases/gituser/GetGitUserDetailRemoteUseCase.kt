@@ -1,7 +1,7 @@
-package leegroup.module.domain.usecases.gituser
+package leegroup.module.sample.gituser.domain.usecases.gituser
 
 import kotlinx.coroutines.flow.flow
-import leegroup.module.domain.repositories.GitUserDetailRepository
+import leegroup.module.sample.gituser.domain.repositories.GitUserDetailRepository
 import javax.inject.Inject
 
 class GetGitUserDetailRemoteUseCase @Inject constructor(

@@ -1,4 +1,4 @@
-package leegroup.module.domain.params
+package leegroup.module.sample.gituser.domain.params
 
 data class GetGitUserListParam(
     val since: Long,

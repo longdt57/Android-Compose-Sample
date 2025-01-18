@@ -2,8 +2,8 @@ package leegroup.module.sample.gituser.data.repositories
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import leegroup.module.domain.repositories.AppPreferencesRepository
 import leegroup.module.sample.gituser.data.local.datastore.AppDataStore
+import leegroup.module.sample.gituser.domain.repositories.AppPreferencesRepository
 import javax.inject.Inject
 
 class AppPreferencesRepositoryImpl @Inject internal constructor(

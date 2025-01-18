@@ -1,12 +1,12 @@
 package leegroup.module.sample.gituser.data.repositories
 
-import leegroup.module.domain.models.GitUserModel
-import leegroup.module.domain.params.GetGitUserListParam
-import leegroup.module.domain.repositories.GitUserRepository
 import leegroup.module.sample.gituser.data.local.room.GitUserDao
 import leegroup.module.sample.gituser.data.models.GitUser
 import leegroup.module.sample.gituser.data.models.mapToDomain
 import leegroup.module.sample.gituser.data.remote.services.ApiService
+import leegroup.module.sample.gituser.domain.models.GitUserModel
+import leegroup.module.sample.gituser.domain.params.GetGitUserListParam
+import leegroup.module.sample.gituser.domain.repositories.GitUserRepository
 import javax.inject.Inject
 
 class GitUserRepositoryImpl @Inject constructor(

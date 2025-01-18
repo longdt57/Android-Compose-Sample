@@ -14,9 +14,9 @@ import kotlinx.coroutines.launch
 import leegroup.module.compose.support.util.DispatchersProvider
 import leegroup.module.compose.ui.models.ErrorState
 import leegroup.module.compose.ui.viewmodel.BaseViewModel
-import leegroup.module.domain.models.GitUserModel
-import leegroup.module.domain.params.GetGitUserListParam
-import leegroup.module.domain.usecases.gituser.GetGitUserUseCase
+import leegroup.module.sample.gituser.domain.models.GitUserModel
+import leegroup.module.sample.gituser.domain.params.GetGitUserListParam
+import leegroup.module.sample.gituser.domain.usecases.gituser.GetGitUserUseCase
 import leegroup.module.sample.gituser.tracking.GitUserListScreenTracker
 import leegroup.module.sample.gituser.ui.models.GitUserListUiModel
 import javax.inject.Inject

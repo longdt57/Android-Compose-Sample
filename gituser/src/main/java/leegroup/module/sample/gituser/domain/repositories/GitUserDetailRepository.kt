@@ -1,6 +1,6 @@
-package leegroup.module.domain.repositories
+package leegroup.module.sample.gituser.domain.repositories
 
-import leegroup.module.domain.models.GitUserDetailModel
+import leegroup.module.sample.gituser.domain.models.GitUserDetailModel
 
 interface GitUserDetailRepository {
     suspend fun getRemote(login: String): GitUserDetailModel

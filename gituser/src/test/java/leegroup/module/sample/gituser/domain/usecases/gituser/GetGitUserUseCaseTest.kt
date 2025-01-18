@@ -1,13 +1,13 @@
-package leegroup.module.domain.usecases.gituser
+package leegroup.module.sample.gituser.domain.usecases.gituser
 
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
-import leegroup.module.domain.models.GitUserModel
-import leegroup.module.domain.params.GetGitUserListParam
-import leegroup.module.domain.repositories.GitUserRepository
+import leegroup.module.sample.gituser.domain.models.GitUserModel
+import leegroup.module.sample.gituser.domain.params.GetGitUserListParam
+import leegroup.module.sample.gituser.domain.repositories.GitUserRepository
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test

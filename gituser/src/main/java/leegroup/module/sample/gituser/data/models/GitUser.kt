@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import leegroup.module.domain.models.GitUserModel
+import leegroup.module.sample.gituser.domain.models.GitUserModel
 
 @Entity
 @Serializable

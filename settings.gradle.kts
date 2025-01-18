@@ -22,8 +22,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "Android Clean Architecture"
 include(":app")
-include(":domain")
+include(":gituser")
 include(":compose")
 include(":extension")
-include(":gituser")
 include(":test")

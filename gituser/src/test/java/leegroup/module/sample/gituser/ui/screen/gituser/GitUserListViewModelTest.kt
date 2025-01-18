@@ -11,10 +11,10 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import leegroup.module.compose.ui.models.ErrorState
 import leegroup.module.compose.ui.models.LoadingState
-import leegroup.module.domain.models.GitUserModel
-import leegroup.module.domain.params.GetGitUserListParam
-import leegroup.module.domain.usecases.gituser.GetGitUserUseCase
 import leegroup.module.sample.gituser.MockUtil
+import leegroup.module.sample.gituser.domain.models.GitUserModel
+import leegroup.module.sample.gituser.domain.params.GetGitUserListParam
+import leegroup.module.sample.gituser.domain.usecases.gituser.GetGitUserUseCase
 import leegroup.module.sample.gituser.tracking.GitUserListScreenTracker
 import leegroup.module.sample.gituser.ui.screens.gituser.GitUserListAction
 import leegroup.module.sample.gituser.ui.screens.gituser.GitUserListViewModel

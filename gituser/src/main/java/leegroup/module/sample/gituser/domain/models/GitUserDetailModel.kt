@@ -1,4 +1,4 @@
-package leegroup.module.domain.models
+package leegroup.module.sample.gituser.domain.models
 
 data class GitUserDetailModel(
     val id: Long,

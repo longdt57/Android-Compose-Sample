@@ -1,7 +1,7 @@
 package leegroup.module.sample.gituser.ui.mapper
 
 import android.content.Context
-import leegroup.module.domain.models.GitUserDetailModel
+import leegroup.module.sample.gituser.domain.models.GitUserDetailModel
 import leegroup.module.sample.gituser.support.extensions.stringNotSet
 import leegroup.module.sample.gituser.ui.mapper.util.FollowerFormatter
 import leegroup.module.sample.gituser.ui.models.GitUserDetailUiModel

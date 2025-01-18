@@ -4,11 +4,11 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
-import leegroup.module.domain.repositories.AppPreferencesRepository
-import leegroup.module.domain.repositories.GitUserDetailRepository
-import leegroup.module.domain.repositories.GitUserRepository
 import leegroup.module.sample.gituser.data.repositories.AppPreferencesRepositoryImpl
 import leegroup.module.sample.gituser.data.repositories.GitUserDetailRepositoryImpl
+import leegroup.module.sample.gituser.domain.repositories.AppPreferencesRepository
+import leegroup.module.sample.gituser.domain.repositories.GitUserDetailRepository
+import leegroup.module.sample.gituser.domain.repositories.GitUserRepository
 
 @Module
 @InstallIn(ViewModelComponent::class)

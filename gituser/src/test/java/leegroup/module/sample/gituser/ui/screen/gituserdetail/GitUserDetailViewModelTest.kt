@@ -12,11 +12,11 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import leegroup.module.compose.ui.models.ErrorState
-import leegroup.module.domain.models.GitUserDetailModel
-import leegroup.module.domain.usecases.gituser.GetGitUserDetailLocalUseCase
-import leegroup.module.domain.usecases.gituser.GetGitUserDetailRemoteUseCase
 import leegroup.module.extension.JsonUtil
 import leegroup.module.sample.gituser.MockUtil
+import leegroup.module.sample.gituser.domain.models.GitUserDetailModel
+import leegroup.module.sample.gituser.domain.usecases.gituser.GetGitUserDetailLocalUseCase
+import leegroup.module.sample.gituser.domain.usecases.gituser.GetGitUserDetailRemoteUseCase
 import leegroup.module.sample.gituser.ui.mapper.GitUserDetailUiMapper
 import leegroup.module.sample.gituser.ui.models.GitUserDetailUiModel
 import leegroup.module.sample.gituser.ui.screens.GitUserDestination

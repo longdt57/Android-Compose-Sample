@@ -14,7 +14,7 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import leegroup.module.compose.ui.components.LoadMore
 import leegroup.module.compose.ui.theme.ComposeTheme
-import leegroup.module.domain.models.GitUserModel
+import leegroup.module.sample.gituser.domain.models.GitUserModel
 
 @Composable
 fun GitUserList(

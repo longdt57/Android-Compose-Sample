@@ -7,7 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import leegroup.module.compose.ui.theme.ComposeTheme
-import leegroup.module.domain.models.GitUserModel
+import leegroup.module.sample.gituser.domain.models.GitUserModel
 import leegroup.module.sample.gituser.ui.components.UserCard
 
 @Composable

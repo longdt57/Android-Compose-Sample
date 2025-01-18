@@ -3,7 +3,7 @@ package leegroup.module.sample.gituser.ui.models
 import androidx.compose.runtime.Immutable
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
-import leegroup.module.domain.models.GitUserModel
+import leegroup.module.sample.gituser.domain.models.GitUserModel
 
 @Immutable
 data class GitUserListUiModel(

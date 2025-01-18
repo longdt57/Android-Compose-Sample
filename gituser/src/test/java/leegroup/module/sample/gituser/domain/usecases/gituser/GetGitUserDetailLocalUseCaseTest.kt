@@ -1,4 +1,4 @@
-package leegroup.module.domain.usecases.gituser
+package leegroup.module.sample.gituser.domain.usecases.gituser
 
 import io.kotest.matchers.shouldBe
 import io.mockk.coEvery
@@ -8,8 +8,8 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.test.runTest
-import leegroup.module.domain.MockUtil
-import leegroup.module.domain.repositories.GitUserDetailRepository
+import leegroup.module.sample.gituser.domain.MockUtil
+import leegroup.module.sample.gituser.domain.repositories.GitUserDetailRepository
 import org.junit.Before
 import org.junit.Test
 

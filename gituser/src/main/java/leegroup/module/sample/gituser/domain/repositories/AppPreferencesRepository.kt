@@ -1,4 +1,4 @@
-package leegroup.module.domain.repositories
+package leegroup.module.sample.gituser.domain.repositories
 
 import kotlinx.coroutines.flow.Flow
 

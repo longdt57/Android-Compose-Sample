@@ -1,10 +1,10 @@
-package leegroup.module.domain.usecases.gituser
+package leegroup.module.sample.gituser.domain.usecases.gituser
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import leegroup.module.domain.models.GitUserModel
-import leegroup.module.domain.params.GetGitUserListParam
-import leegroup.module.domain.repositories.GitUserRepository
+import leegroup.module.sample.gituser.domain.models.GitUserModel
+import leegroup.module.sample.gituser.domain.params.GetGitUserListParam
+import leegroup.module.sample.gituser.domain.repositories.GitUserRepository
 import javax.inject.Inject
 
 class GetGitUserUseCase @Inject constructor(

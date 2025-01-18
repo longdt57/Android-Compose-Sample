@@ -14,9 +14,9 @@ import leegroup.module.compose.support.extensions.toNavModel
 import leegroup.module.compose.support.util.DispatchersProvider
 import leegroup.module.compose.ui.models.ErrorState
 import leegroup.module.compose.ui.viewmodel.BaseViewModel
-import leegroup.module.domain.models.GitUserDetailModel
-import leegroup.module.domain.usecases.gituser.GetGitUserDetailLocalUseCase
-import leegroup.module.domain.usecases.gituser.GetGitUserDetailRemoteUseCase
+import leegroup.module.sample.gituser.domain.models.GitUserDetailModel
+import leegroup.module.sample.gituser.domain.usecases.gituser.GetGitUserDetailLocalUseCase
+import leegroup.module.sample.gituser.domain.usecases.gituser.GetGitUserDetailRemoteUseCase
 import leegroup.module.sample.gituser.ui.mapper.GitUserDetailUiMapper
 import leegroup.module.sample.gituser.ui.models.GitUserDetailUiModel
 import leegroup.module.sample.gituser.ui.screens.GitUserDestination

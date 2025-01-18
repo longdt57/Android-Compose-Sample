@@ -1,10 +1,10 @@
 package leegroup.module.sample.gituser.data
 
-import leegroup.module.domain.models.GitUserDetailModel
-import leegroup.module.domain.models.GitUserModel
-import leegroup.module.domain.params.GetGitUserListParam
 import leegroup.module.sample.gituser.data.models.GitUser
 import leegroup.module.sample.gituser.data.models.GitUserDetail
+import leegroup.module.sample.gituser.domain.models.GitUserDetailModel
+import leegroup.module.sample.gituser.domain.models.GitUserModel
+import leegroup.module.sample.gituser.domain.params.GetGitUserListParam
 
 object MockUtil {
     const val GIT_USER_DETAIL_LOGIN = "longdt57"

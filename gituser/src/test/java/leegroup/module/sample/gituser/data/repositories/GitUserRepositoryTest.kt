@@ -6,10 +6,10 @@ import io.mockk.coVerify
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
-import leegroup.module.domain.repositories.GitUserRepository
 import leegroup.module.sample.gituser.data.MockUtil
 import leegroup.module.sample.gituser.data.local.room.GitUserDao
 import leegroup.module.sample.gituser.data.remote.services.ApiService
+import leegroup.module.sample.gituser.domain.repositories.GitUserRepository
 import org.junit.Before
 import org.junit.Test
 
