@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlinx.kover)
     alias(libs.plugins.google.devtools.ksp)
     alias(libs.plugins.serialization)
+    id("maven-publish")
 }
 
 android {
@@ -54,4 +55,18 @@ dependencies {
     testImplementation(libs.mockk)
     testImplementation(libs.turbine)
     testImplementation(libs.kotest.assertions.core)
+}
+
+publishing {
+    publications {
+        register<MavenPublication>("release") {
+            groupId = "leegroup.module"
+            artifactId = "extension"
+            version = "1.0"
+
+            afterEvaluate {
+                from(components["release"])
+            }
+        }
+    }
 }

@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.serialization)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlinx.kover)
+    id("maven-publish")
 }
 
 android {
@@ -81,4 +82,18 @@ dependencies {
     testImplementation(libs.bundles.test)
     testImplementation(libs.androidx.ui.test.junit4)
     testImplementation(platform(libs.androidx.compose.bom))
+}
+
+publishing {
+    publications {
+        register<MavenPublication>("release") {
+            groupId = "leegroup.module"
+            artifactId = "compose"
+            version = "1.0"
+
+            afterEvaluate {
+                from(components["release"])
+            }
+        }
+    }
 }
