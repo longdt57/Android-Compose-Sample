@@ -3,7 +3,8 @@ package com.app.androidcompose.ui
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import com.app.androidcompose.ui.screens.main.mainNavGraph
+import leegroup.module.sample.gituser.ui.screens.GitUserDestination
+import leegroup.module.sample.gituser.ui.screens.gitUserNavGraph
 
 @Composable
 fun AppNavGraph(
@@ -12,8 +13,8 @@ fun AppNavGraph(
     NavHost(
         navController = navController,
         route = AppDestination.RootNavGraph.route,
-        startDestination = AppDestination.MainNavGraph.destination
+        startDestination = GitUserDestination.GitUserRoot.route
     ) {
-        mainNavGraph(navController = navController)
+        gitUserNavGraph(navController = navController)
     }
 }

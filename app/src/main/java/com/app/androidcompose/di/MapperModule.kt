@@ -1,11 +1,11 @@
 package com.app.androidcompose.di
 
-import com.app.androidcompose.ui.mapper.GitUserDetailUiMapper
-import com.app.androidcompose.ui.mapper.GitUserDetailUiMapperImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
+import leegroup.module.sample.gituser.ui.mapper.GitUserDetailUiMapper
+import leegroup.module.sample.gituser.ui.mapper.GitUserDetailUiMapperImpl
 
 @Module
 @InstallIn(ViewModelComponent::class)
