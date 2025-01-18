@@ -7,7 +7,7 @@ import leegroup.module.photosample.domain.params.GetPhotoListParam
 import leegroup.module.photosample.domain.repositories.PhotoListRepository
 import javax.inject.Inject
 
-class GetPhotoListUseCase @Inject constructor(
+internal class GetPhotoListUseCase @Inject constructor(
     private val repository: PhotoListRepository
 ) {
 

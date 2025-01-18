@@ -5,7 +5,7 @@ import leegroup.module.photosample.domain.params.SaveFavoriteParam
 import leegroup.module.photosample.domain.repositories.PhotoFavoriteRepository
 import javax.inject.Inject
 
-class SaveFavoriteUseCase @Inject constructor(
+internal class SaveFavoriteUseCase @Inject constructor(
     private val photoFavoriteRepository: PhotoFavoriteRepository
 ) {
     suspend fun invoke(param: SaveFavoriteParam) {

@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Immutable
 @Serializable
-data class PhotoDetailUiModel(
+internal data class PhotoDetailUiModel(
     val id: Int = 0,
     val title: String = "",
     val url: String = "",

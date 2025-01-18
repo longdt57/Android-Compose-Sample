@@ -13,7 +13,7 @@ import javax.inject.Singleton
 private const val APP_DATASTORE = "photo-datastore"
 
 @Singleton
-class PhotoDataStore @Inject constructor(
+internal class PhotoDataStore @Inject constructor(
     context: Context,
 ) : BaseDataStore(context, APP_DATASTORE) {
 

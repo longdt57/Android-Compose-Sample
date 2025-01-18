@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 import leegroup.module.photosample.domain.models.PhotoModelD
 
 @Serializable
-data class PhotoModel(
+internal data class PhotoModel(
     @SerialName("id")
     val id: Int,
 
@@ -22,7 +22,7 @@ data class PhotoModel(
     val url: String
 )
 
-fun PhotoModel.mapToDomain() = PhotoModelD(
+internal fun PhotoModel.mapToDomain() = PhotoModelD(
     id = id,
     albumId = albumId,
     thumbnailUrl = thumbnailUrl,
@@ -30,4 +30,4 @@ fun PhotoModel.mapToDomain() = PhotoModelD(
     url = url,
 )
 
-fun List<PhotoModel>.mapToDomain() = map { it.mapToDomain() }
+internal fun List<PhotoModel>.mapToDomain() = map { it.mapToDomain() }

@@ -33,7 +33,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class PhotoListViewModel @Inject constructor(
+internal class PhotoListViewModel @Inject constructor(
     private val dispatchersProvider: DispatchersProvider,
     private val getPhotoListUseCase: GetPhotoListUseCase,
     private val observeFavoriteListUseCase: ObserveFavoriteListUseCase,

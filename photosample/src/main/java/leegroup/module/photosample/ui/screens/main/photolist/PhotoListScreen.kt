@@ -31,7 +31,7 @@ import leegroup.module.photosample.ui.screens.main.photolist.components.PhotoLis
 import leegroup.module.photosample.ui.screens.main.photolist.components.PhotoListEmpty
 
 @Composable
-fun PhotoListScreen(
+internal fun PhotoListScreen(
     viewModel: PhotoListViewModel = hiltViewModel(),
     navigator: (destination: Any) -> Unit,
 ) = BaseScreen(viewModel) {

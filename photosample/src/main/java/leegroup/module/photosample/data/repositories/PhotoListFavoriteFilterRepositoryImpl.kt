@@ -5,7 +5,7 @@ import leegroup.module.photosample.data.local.datastore.PhotoDataStore
 import leegroup.module.photosample.domain.repositories.PhotoListFavoriteFilterRepository
 import javax.inject.Inject
 
-class PhotoListFavoriteFilterRepositoryImpl @Inject constructor(
+internal class PhotoListFavoriteFilterRepositoryImpl @Inject constructor(
     private val dataStore: PhotoDataStore,
 ) : PhotoListFavoriteFilterRepository {
 

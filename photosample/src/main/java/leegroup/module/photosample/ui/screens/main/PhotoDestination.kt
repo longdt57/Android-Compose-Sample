@@ -8,4 +8,4 @@ sealed class PhotoDestination {
     object PhotoList : BaseDestination("photoList")
 }
 
-typealias PhotoDetailNav = PhotoUiModel
+internal typealias PhotoDetailNav = PhotoUiModel

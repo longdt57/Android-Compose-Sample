@@ -8,7 +8,7 @@ import leegroup.module.photosample.domain.models.PhotoModelD
 
 @Serializable
 @Entity
-data class PhotoEntity(
+internal data class PhotoEntity(
     @PrimaryKey
     val id: Int,
 
@@ -25,7 +25,7 @@ data class PhotoEntity(
     val url: String,
 )
 
-fun PhotoEntity.mapToDomain() = PhotoModelD(
+internal fun PhotoEntity.mapToDomain() = PhotoModelD(
     id = id,
     albumId = albumId,
     thumbnailUrl = thumbnailUrl,
@@ -33,9 +33,9 @@ fun PhotoEntity.mapToDomain() = PhotoModelD(
     url = url,
 )
 
-fun List<PhotoEntity>.mapToDomain() = map { it.mapToDomain() }
+internal fun List<PhotoEntity>.mapToDomain() = map { it.mapToDomain() }
 
-fun PhotoModelD.mapToEntity() = PhotoEntity(
+internal fun PhotoModelD.mapToEntity() = PhotoEntity(
     id = id,
     albumId = albumId,
     thumbnailUrl = thumbnailUrl,
@@ -43,5 +43,5 @@ fun PhotoModelD.mapToEntity() = PhotoEntity(
     url = url,
 )
 
-fun List<PhotoModelD>.mapToEntity() = map { it.mapToEntity() }
+internal fun List<PhotoModelD>.mapToEntity() = map { it.mapToEntity() }
 

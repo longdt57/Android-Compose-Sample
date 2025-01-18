@@ -4,7 +4,7 @@ import leegroup.module.photosample.data.models.PhotoModel
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface PhotoApiService {
+internal interface PhotoApiService {
 
     @GET("photos")
     suspend fun getPhotos(

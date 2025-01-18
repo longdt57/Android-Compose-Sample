@@ -6,7 +6,7 @@ import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
 
 @Immutable
-data class PhotoListUiModel(
+internal data class PhotoListUiModel(
     val query: String = "",
     val isFavoriteEnabled: Boolean = false,
     val delayQuery: Long = 0,

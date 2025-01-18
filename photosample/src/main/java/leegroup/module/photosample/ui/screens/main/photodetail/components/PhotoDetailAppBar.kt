@@ -22,7 +22,7 @@ import leegroup.module.photosample.ui.screens.components.FavoriteButton
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PhotoDetailAppBar(
+internal fun PhotoDetailAppBar(
     modifier: Modifier = Modifier,
     isFavorite: Boolean,
     onBack: () -> Unit = {},

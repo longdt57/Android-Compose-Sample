@@ -18,7 +18,7 @@ import leegroup.module.photosample.ui.screens.components.FavoriteButton
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PhotoListAppBar(
+internal fun PhotoListAppBar(
     modifier: Modifier = Modifier,
     isFavorite: Boolean,
     onFavoriteClick: () -> Unit

@@ -16,7 +16,7 @@ import leegroup.module.compose.ui.components.LoadMore
 import leegroup.module.photosample.ui.models.PhotoUiModel
 
 @Composable
-fun PhotoList(
+internal fun PhotoList(
     modifier: Modifier = Modifier,
     photos: ImmutableList<PhotoUiModel>,
     hasMore: Boolean,

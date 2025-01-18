@@ -6,7 +6,7 @@ import leegroup.module.photosample.data.local.datastore.PhotoDataStore
 import leegroup.module.photosample.domain.repositories.PhotoFavoriteRepository
 import javax.inject.Inject
 
-class PhotoFavoriteRepositoryImpl @Inject constructor(
+internal class PhotoFavoriteRepositoryImpl @Inject constructor(
     private val dataStore: PhotoDataStore,
 ) : PhotoFavoriteRepository {
     override fun getFavoriteList(): Flow<Set<Int>> {

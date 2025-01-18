@@ -6,7 +6,7 @@ import leegroup.module.photosample.domain.models.PhotoModelD
 
 @Immutable
 @Serializable
-data class PhotoUiModel(
+internal data class PhotoUiModel(
     val id: Int,
     val albumId: Int,
     val thumbnailUrl: String,
@@ -15,7 +15,7 @@ data class PhotoUiModel(
     val isFavorite: Boolean,
 )
 
-fun PhotoModelD.mapToUiModel() = PhotoUiModel(
+internal fun PhotoModelD.mapToUiModel() = PhotoUiModel(
     id = id,
     albumId = albumId,
     thumbnailUrl = thumbnailUrl,
@@ -24,9 +24,9 @@ fun PhotoModelD.mapToUiModel() = PhotoUiModel(
     isFavorite = false,
 )
 
-fun List<PhotoModelD>.mapToUiModels() = map { it.mapToUiModel() }
+internal fun List<PhotoModelD>.mapToUiModels() = map { it.mapToUiModel() }
 
-fun List<PhotoUiModel>.updateFavorites(favoriteList: Set<Int>): List<PhotoUiModel> {
+internal fun List<PhotoUiModel>.updateFavorites(favoriteList: Set<Int>): List<PhotoUiModel> {
     return map {
         it.copy(isFavorite = favoriteList.contains(it.id))
     }

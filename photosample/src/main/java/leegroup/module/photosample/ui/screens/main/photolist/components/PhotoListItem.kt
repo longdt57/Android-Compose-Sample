@@ -23,7 +23,7 @@ import leegroup.module.photosample.ui.screens.components.FavoriteButton
 import leegroup.module.photosample.ui.screens.components.ThumbnailImage
 
 @Composable
-fun PhotoListItem(
+internal fun PhotoListItem(
     modifier: Modifier = Modifier,
     thumbnailUrl: String,
     title: String,

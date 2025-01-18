@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import leegroup.module.compose.ui.theme.ComposeTheme
 
 @Composable
-fun QueryBox(
+internal fun QueryBox(
     query: String,
     onQueryChanged: (String) -> Unit,
     onClear: () -> Unit,

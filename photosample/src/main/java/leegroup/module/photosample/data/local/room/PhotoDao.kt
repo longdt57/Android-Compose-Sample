@@ -6,7 +6,7 @@ import androidx.room.Upsert
 import leegroup.module.photosample.data.local.room.entities.PhotoEntity
 
 @Dao
-interface PhotoDao {
+internal interface PhotoDao {
 
     @Upsert
     suspend fun upsert(users: PhotoEntity)

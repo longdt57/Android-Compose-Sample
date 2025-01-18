@@ -17,7 +17,7 @@ import leegroup.module.compose.ui.theme.YellowSoft300
 import leegroup.module.photosample.R
 
 @Composable
-fun FavoriteButton(
+internal fun FavoriteButton(
     modifier: Modifier = Modifier,
     isFavorite: Boolean,
     onFavoriteClick: () -> Unit = {}

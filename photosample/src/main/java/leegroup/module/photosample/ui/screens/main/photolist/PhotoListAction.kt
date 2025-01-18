@@ -2,7 +2,7 @@ package leegroup.module.photosample.ui.screens.main.photolist
 
 import leegroup.module.photosample.ui.models.PhotoUiModel
 
-sealed interface PhotoListAction {
+internal sealed interface PhotoListAction {
     data object LoadIfEmpty : PhotoListAction
     data object LoadMore : PhotoListAction
     data object FavoriteFilterClick : PhotoListAction

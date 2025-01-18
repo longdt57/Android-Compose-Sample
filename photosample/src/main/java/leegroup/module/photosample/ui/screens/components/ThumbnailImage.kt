@@ -17,7 +17,7 @@ import leegroup.module.photosample.R
 import leegroup.module.photosample.support.extensions.convertToDummyUrl
 
 @Composable
-fun ThumbnailImage(modifier: Modifier = Modifier, url: String) {
+internal fun ThumbnailImage(modifier: Modifier = Modifier, url: String) {
     AsyncImage(
         modifier = modifier,
         model = ImageRequest.Builder(LocalContext.current)

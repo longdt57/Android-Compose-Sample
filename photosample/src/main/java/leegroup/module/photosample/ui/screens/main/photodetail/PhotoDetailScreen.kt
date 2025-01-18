@@ -29,7 +29,7 @@ import leegroup.module.photosample.ui.screens.components.ThumbnailImage
 import leegroup.module.photosample.ui.screens.main.photodetail.components.PhotoDetailAppBar
 
 @Composable
-fun PhotoDetailScreen(
+internal fun PhotoDetailScreen(
     viewModel: PhotoDetailViewModel = hiltViewModel(),
     navigator: (destination: Any) -> Unit,
 ) = BaseScreen(viewModel) {

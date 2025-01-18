@@ -17,7 +17,7 @@ import leegroup.module.photosample.ui.screens.main.PhotoDetailNav
 import javax.inject.Inject
 
 @HiltViewModel
-class PhotoDetailViewModel @Inject constructor(
+internal class PhotoDetailViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
     private val dispatchersProvider: DispatchersProvider,
     private val saveFavoriteUseCase: SaveFavoriteUseCase,
