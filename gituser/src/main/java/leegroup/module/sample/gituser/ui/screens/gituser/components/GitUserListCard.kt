@@ -11,7 +11,7 @@ import leegroup.module.sample.gituser.domain.models.GitUserModel
 import leegroup.module.sample.gituser.ui.components.UserCard
 
 @Composable
-fun GitUserListCard(user: GitUserModel, onClick: (GitUserModel) -> Unit) {
+internal fun GitUserListCard(user: GitUserModel, onClick: (GitUserModel) -> Unit) {
     UserCard(modifier = Modifier.clickable { onClick(user) }) {
         GitUserListItem(
             modifier = Modifier.padding(12.dp),

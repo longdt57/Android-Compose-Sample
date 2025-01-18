@@ -2,7 +2,7 @@ package leegroup.module.sample.gituser.domain.repositories
 
 import kotlinx.coroutines.flow.Flow
 
-interface GitUserPreferencesRepository {
+internal interface GitUserPreferencesRepository {
 
     fun getAppPreference(): Flow<Boolean>
 

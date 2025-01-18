@@ -13,7 +13,7 @@ import leegroup.module.compose.ui.theme.ComposeTheme
 import leegroup.module.sample.gituser.support.extensions.formatAndOpenUrl
 
 @Composable
-fun LinkText(modifier: Modifier = Modifier, url: String) {
+internal fun LinkText(modifier: Modifier = Modifier, url: String) {
     val context = LocalContext.current
     Text(
         modifier = modifier

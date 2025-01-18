@@ -6,7 +6,7 @@ import leegroup.module.analytics.Tracking
 import leegroup.module.analytics.event.AnalyticsEvent
 import javax.inject.Inject
 
-class GitUserListScreenTracker @Inject constructor(
+internal class GitUserListScreenTracker @Inject constructor(
     private val defaultTracking: DefaultTracking
 ) : Tracking by defaultTracking,
     Tracking.Launch {

@@ -8,7 +8,7 @@ import leegroup.module.sample.gituser.domain.models.GitUserDetailModel
 import leegroup.module.sample.gituser.domain.repositories.GitUserDetailRepository
 import javax.inject.Inject
 
-class GitUserDetailRepositoryImpl @Inject constructor(
+internal class GitUserDetailRepositoryImpl @Inject constructor(
     private val appService: GitUserApiService,
     private val userDao: GitUserDetailDao,
 ) : GitUserDetailRepository {

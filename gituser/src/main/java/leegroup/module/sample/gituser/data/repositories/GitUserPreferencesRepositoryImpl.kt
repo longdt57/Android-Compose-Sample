@@ -6,7 +6,7 @@ import leegroup.module.sample.gituser.data.local.datastore.GitUserDataStore
 import leegroup.module.sample.gituser.domain.repositories.GitUserPreferencesRepository
 import javax.inject.Inject
 
-class GitUserPreferencesRepositoryImpl @Inject internal constructor(
+internal class GitUserPreferencesRepositoryImpl @Inject internal constructor(
     private val appDataStore: GitUserDataStore
 ) : GitUserPreferencesRepository {
 

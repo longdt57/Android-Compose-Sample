@@ -14,7 +14,7 @@ import leegroup.module.compose.R
 import leegroup.module.compose.ui.theme.ComposeTheme
 
 @Composable
-fun GitUserListEmpty(modifier: Modifier = Modifier, onRefresh: () -> Unit) {
+internal fun GitUserListEmpty(modifier: Modifier = Modifier, onRefresh: () -> Unit) {
     Box(modifier, contentAlignment = Alignment.Center) {
         Button(onClick = onRefresh) {
             Text(

@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import leegroup.module.compose.ui.theme.ComposeTheme
 
 @Composable
-fun UserCard(
+internal fun UserCard(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit
 ) {

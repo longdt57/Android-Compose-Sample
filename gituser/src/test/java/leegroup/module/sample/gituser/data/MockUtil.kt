@@ -6,7 +6,7 @@ import leegroup.module.sample.gituser.domain.models.GitUserDetailModel
 import leegroup.module.sample.gituser.domain.models.GitUserModel
 import leegroup.module.sample.gituser.domain.params.GetGitUserListParam
 
-object MockUtil {
+internal object MockUtil {
     const val GIT_USER_DETAIL_LOGIN = "longdt57"
     const val GIT_USER_SINCE = 0L
     const val GIT_USER_PER_PAGE = 3

@@ -17,7 +17,7 @@ import leegroup.module.compose.ui.theme.ComposeTheme
 import leegroup.module.sample.gituser.domain.models.GitUserModel
 
 @Composable
-fun GitUserList(
+internal fun GitUserList(
     modifier: Modifier = Modifier,
     users: ImmutableList<GitUserModel>,
     onClick: (GitUserModel) -> Unit,

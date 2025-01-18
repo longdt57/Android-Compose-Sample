@@ -22,7 +22,7 @@ import leegroup.module.sample.gituser.ui.models.GitUserListUiModel
 import javax.inject.Inject
 
 @HiltViewModel
-class GitUserListViewModel @Inject constructor(
+internal class GitUserListViewModel @Inject constructor(
     private val dispatchersProvider: DispatchersProvider,
     private val useCase: GetGitUserUseCase,
     private val gitUserListScreenTracker: GitUserListScreenTracker,

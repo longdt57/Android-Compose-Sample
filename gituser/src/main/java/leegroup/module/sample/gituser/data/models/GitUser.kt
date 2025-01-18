@@ -9,7 +9,7 @@ import leegroup.module.sample.gituser.domain.models.GitUserModel
 
 @Entity
 @Serializable
-data class GitUser(
+internal data class GitUser(
 
     @PrimaryKey
     @SerialName("id")
@@ -28,11 +28,11 @@ data class GitUser(
     val htmlUrl: String?,
 )
 
-fun GitUser.mapToDomain() = GitUserModel(
+internal fun GitUser.mapToDomain() = GitUserModel(
     id = id,
     login = login,
     avatarUrl = avatarUrl,
     htmlUrl = htmlUrl,
 )
 
-fun List<GitUser>.mapToDomain() = map { it.mapToDomain() }
+internal fun List<GitUser>.mapToDomain() = map { it.mapToDomain() }

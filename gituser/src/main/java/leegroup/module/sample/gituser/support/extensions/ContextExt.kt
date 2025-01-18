@@ -7,9 +7,9 @@ import android.util.Patterns
 import leegroup.module.sample.gituser.R
 import timber.log.Timber
 
-fun Context.stringNotSet() = getString(R.string.not_set)
+internal fun Context.stringNotSet() = getString(R.string.not_set)
 
-fun Context.formatAndOpenUrl(url: String) {
+internal fun Context.formatAndOpenUrl(url: String) {
     val formattedUrl = url.formattedUrl()
     if (formattedUrl.isNotBlank() && Patterns.WEB_URL.matcher(formattedUrl).matches()) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(formattedUrl))

@@ -22,7 +22,7 @@ import leegroup.module.compose.ui.theme.GreySoft950
 import leegroup.module.sample.gituser.R
 
 @Composable
-fun UserAvatar(modifier: Modifier = Modifier, avatarUrl: String?) {
+internal fun UserAvatar(modifier: Modifier = Modifier, avatarUrl: String?) {
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(8.dp))

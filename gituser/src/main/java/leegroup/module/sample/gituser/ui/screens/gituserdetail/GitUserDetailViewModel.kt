@@ -24,7 +24,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class GitUserDetailViewModel @Inject constructor(
+internal class GitUserDetailViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
     private val dispatchersProvider: DispatchersProvider,
     private val getGitUserDetailLocalUseCase: GetGitUserDetailLocalUseCase,

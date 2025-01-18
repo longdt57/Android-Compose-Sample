@@ -31,7 +31,7 @@ import leegroup.module.sample.gituser.ui.screens.gituser.components.GitUserListA
 import leegroup.module.sample.gituser.ui.screens.gituser.components.GitUserListEmpty
 
 @Composable
-fun GitUserListScreen(
+internal fun GitUserListScreen(
     viewModel: GitUserListViewModel = hiltViewModel(),
     navigator: (destination: Any) -> Unit,
 ) = BaseScreen(viewModel) {

@@ -20,7 +20,7 @@ import leegroup.module.sample.gituser.ui.components.LinkText
 import leegroup.module.sample.gituser.ui.components.UserAvatar
 
 @Composable
-fun GitUserListItem(
+internal fun GitUserListItem(
     modifier: Modifier = Modifier,
     title: String,
     avatarUrl: String?,

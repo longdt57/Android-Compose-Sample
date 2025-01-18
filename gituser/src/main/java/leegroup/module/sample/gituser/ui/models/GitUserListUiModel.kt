@@ -6,6 +6,6 @@ import kotlinx.collections.immutable.persistentListOf
 import leegroup.module.sample.gituser.domain.models.GitUserModel
 
 @Immutable
-data class GitUserListUiModel(
+internal data class GitUserListUiModel(
     val users: ImmutableList<GitUserModel> = persistentListOf(),
 )

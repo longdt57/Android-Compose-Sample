@@ -26,7 +26,7 @@ import leegroup.module.sample.gituser.ui.screens.gituserdetail.components.GitUse
 import leegroup.module.sample.gituser.ui.screens.gituserdetail.components.GitUserDetailFollows
 
 @Composable
-fun GitUserDetailScreen(
+internal fun GitUserDetailScreen(
     viewModel: GitUserDetailViewModel = hiltViewModel(),
     navigator: (destination: Any) -> Unit,
 ) = BaseScreen(viewModel) {

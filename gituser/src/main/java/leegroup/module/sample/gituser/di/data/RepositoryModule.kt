@@ -13,7 +13,7 @@ import leegroup.module.sample.gituser.domain.repositories.GitUserRepository
 
 @Module
 @InstallIn(ViewModelComponent::class)
-interface RepositoryModule {
+internal interface RepositoryModule {
 
     @Binds
     fun bindGitUserRepository(repository: GitUserRepositoryImpl): GitUserRepository

@@ -26,7 +26,7 @@ import leegroup.module.compose.ui.theme.GreySoft200
 import leegroup.module.sample.gituser.R
 
 @Composable
-fun GitUserDetailFollows(
+internal fun GitUserDetailFollows(
     modifier: Modifier = Modifier,
     followers: String,
     following: String

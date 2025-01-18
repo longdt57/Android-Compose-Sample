@@ -20,7 +20,7 @@ import leegroup.module.compose.ui.theme.ComposeTheme
 import leegroup.module.sample.gituser.R
 
 @Composable
-fun GitUserDetailLocation(modifier: Modifier = Modifier, location: String) {
+internal fun GitUserDetailLocation(modifier: Modifier = Modifier, location: String) {
     Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically) {
         Icon(
             modifier = Modifier.size(16.dp),

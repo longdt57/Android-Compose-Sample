@@ -6,7 +6,7 @@ import androidx.room.Upsert
 import leegroup.module.sample.gituser.data.models.GitUser
 
 @Dao
-interface GitUserDao {
+internal interface GitUserDao {
     @Upsert
     suspend fun upsert(users: List<GitUser>)
 

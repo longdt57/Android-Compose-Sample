@@ -6,25 +6,8 @@
 |-------------------------------------------------------|---------------------------------------------------------|
 | <img src="screenshots/git_user_list.png" width=300 /> | <img src="screenshots/git_user_detail.png" width=300 /> |
 
-## Linter and static code analysis
-
-- Lint:
-
-```
-$ ./gradlew lint
-```
-
-Report is located at: `./app/build/reports/lint/`
 
 ## Testing
-
-- Run unit testing:
-
-```
-$ ./gradlew app:testStagingDebugUnitTest
-$ ./gradlew data:testDebugUnitTest
-$ ./gradlew domain:test
-```
 
 - Run unit testing with coverage:
 

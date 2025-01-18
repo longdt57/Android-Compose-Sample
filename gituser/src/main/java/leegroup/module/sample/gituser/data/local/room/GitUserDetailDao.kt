@@ -6,7 +6,7 @@ import androidx.room.Upsert
 import leegroup.module.sample.gituser.data.models.GitUserDetail
 
 @Dao
-interface GitUserDetailDao {
+internal interface GitUserDetailDao {
 
     @Query("SELECT * FROM gituserdetail WHERE login = :login")
     suspend fun getUserDetail(login: String): GitUserDetail?

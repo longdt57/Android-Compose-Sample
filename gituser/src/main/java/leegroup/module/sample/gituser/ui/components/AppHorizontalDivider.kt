@@ -9,7 +9,7 @@ import androidx.compose.ui.unit.Dp
 import leegroup.module.compose.ui.theme.GreySoft800
 
 @Composable
-fun AppHorizontalDivider(
+internal fun AppHorizontalDivider(
     modifier: Modifier = Modifier,
     thickness: Dp = DividerDefaults.Thickness,
     color: Color = GreySoft800,

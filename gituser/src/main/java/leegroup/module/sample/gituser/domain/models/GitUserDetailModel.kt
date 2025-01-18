@@ -1,6 +1,6 @@
 package leegroup.module.sample.gituser.domain.models
 
-data class GitUserDetailModel(
+internal data class GitUserDetailModel(
     val id: Long,
     val login: String,
     val name: String?,

@@ -7,14 +7,14 @@ import leegroup.module.sample.gituser.ui.mapper.util.FollowerFormatter
 import leegroup.module.sample.gituser.ui.models.GitUserDetailUiModel
 import javax.inject.Inject
 
-interface GitUserDetailUiMapper {
+internal interface GitUserDetailUiMapper {
     fun mapToUiModel(
         oldUiModel: GitUserDetailUiModel,
         model: GitUserDetailModel
     ): GitUserDetailUiModel
 }
 
-class GitUserDetailUiMapperImpl @Inject constructor(
+internal class GitUserDetailUiMapperImpl @Inject constructor(
     private val context: Context
 ) : GitUserDetailUiMapper {
 

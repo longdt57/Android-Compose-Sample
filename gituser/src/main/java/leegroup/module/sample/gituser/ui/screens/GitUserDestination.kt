@@ -5,11 +5,11 @@ import leegroup.module.compose.ui.models.BaseDestination
 
 sealed class GitUserDestination {
     object GitUserRoot : BaseDestination("gitUserRoot")
-    object GitUserList : BaseDestination("gitUserList")
-    object GitUserDetail : BaseDestination("") {
+    internal object GitUserList : BaseDestination("gitUserList")
+    internal object GitUserDetail : BaseDestination("") {
 
         @Serializable
-        data class GitUserDetailNav(
+        internal data class GitUserDetailNav(
             val login: String
         )
     }

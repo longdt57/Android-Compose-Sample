@@ -20,7 +20,7 @@ import leegroup.module.sample.gituser.ui.components.UserAvatar
 import leegroup.module.sample.gituser.ui.components.UserCard
 
 @Composable
-fun GitUserDetailCard(
+internal fun GitUserDetailCard(
     modifier: Modifier = Modifier,
     name: String,
     avatarUrl: String,

@@ -11,7 +11,7 @@ import javax.inject.Singleton
 private const val APP_DATASTORE = "git-user-datastore"
 
 @Singleton
-class GitUserDataStore @Inject constructor(
+internal class GitUserDataStore @Inject constructor(
     @ApplicationContext context: Context,
 ) : BaseDataStore(context, APP_DATASTORE) {
 

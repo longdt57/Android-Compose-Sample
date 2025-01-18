@@ -14,7 +14,7 @@ import leegroup.module.sample.gituser.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun GitUserListAppBar(modifier: Modifier = Modifier) {
+internal fun GitUserListAppBar(modifier: Modifier = Modifier) {
     CenterAlignedTopAppBar(
         modifier = modifier,
         title = {

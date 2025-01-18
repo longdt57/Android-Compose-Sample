@@ -7,7 +7,7 @@ import leegroup.module.sample.gituser.domain.params.GetGitUserListParam
 import leegroup.module.sample.gituser.domain.repositories.GitUserRepository
 import javax.inject.Inject
 
-class GetGitUserUseCase @Inject constructor(
+internal class GetGitUserUseCase @Inject constructor(
     private val repository: GitUserRepository
 ) {
 

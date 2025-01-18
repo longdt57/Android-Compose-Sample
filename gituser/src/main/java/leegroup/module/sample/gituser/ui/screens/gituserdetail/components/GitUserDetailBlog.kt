@@ -17,7 +17,7 @@ import leegroup.module.sample.gituser.R
 import leegroup.module.sample.gituser.support.extensions.formatAndOpenUrl
 
 @Composable
-fun GitUserDetailBlog(modifier: Modifier = Modifier, blog: String) {
+internal fun GitUserDetailBlog(modifier: Modifier = Modifier, blog: String) {
     if (blog.isBlank()) return
     Column(modifier) {
         Text(
