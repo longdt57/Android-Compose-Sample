@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onStart
 import leegroup.module.compose.support.extensions.mapApiError
-import leegroup.module.compose.ui.models.BaseDestination
 import leegroup.module.compose.ui.models.ErrorModel
 import leegroup.module.compose.ui.models.ErrorState
 import leegroup.module.compose.ui.models.LoadingState
@@ -24,7 +23,7 @@ abstract class BaseViewModel : ViewModel() {
     protected val _error = MutableStateFlow<ErrorState>(ErrorState.None)
     val error = _error.asStateFlow()
 
-    protected val _navigator = MutableSharedFlow<BaseDestination>(
+    protected val _navigator = MutableSharedFlow<Any>(
         extraBufferCapacity = 1,
         onBufferOverflow = BufferOverflow.DROP_OLDEST
     )

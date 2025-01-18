@@ -28,7 +28,7 @@ import leegroup.module.sample.gituser.ui.screens.gituserdetail.components.GitUse
 @Composable
 fun GitUserDetailScreen(
     viewModel: GitUserDetailViewModel = hiltViewModel(),
-    navigator: (destination: BaseDestination) -> Unit,
+    navigator: (destination: Any) -> Unit,
 ) = BaseScreen(viewModel) {
     viewModel.navigator.collectAsEffect { destination -> navigator(destination) }
     val uiModel by viewModel.uiModel.collectAsStateWithLifecycle()

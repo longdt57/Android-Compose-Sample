@@ -15,10 +15,10 @@ private const val APP_DATABASE = "app-database"
 
 @Module
 @InstallIn(SingletonComponent::class)
-class RoomModule {
+internal class RoomModule {
 
     @Provides
-    fun provideAppRoom(@ApplicationContext applicationContext: Context): GitUserDatabase {
+    fun provideGitUserRoom(@ApplicationContext applicationContext: Context): GitUserDatabase {
         return Room.databaseBuilder(
             applicationContext,
             GitUserDatabase::class.java, APP_DATABASE
