@@ -19,3 +19,6 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+-keep class leegroup.module.sample.gituser.data.models.** { *; }
+-keep class leegroup.module.sample.gituser.data.remote.models.requests.** { *; }
+-keep class leegroup.module.sample.gituser.data.remote.models.responses.** { *; }

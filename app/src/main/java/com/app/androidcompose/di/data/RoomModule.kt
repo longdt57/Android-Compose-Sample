@@ -7,9 +7,9 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import leegroup.module.data.local.room.AppDatabase
-import leegroup.module.data.local.room.GitUserDao
-import leegroup.module.data.local.room.GitUserDetailDao
+import leegroup.module.sample.gituser.data.local.room.AppDatabase
+import leegroup.module.sample.gituser.data.local.room.GitUserDao
+import leegroup.module.sample.gituser.data.local.room.GitUserDetailDao
 
 private const val APP_DATABASE = "app-database"
 

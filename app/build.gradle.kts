@@ -127,7 +127,6 @@ android {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
-    implementation(project(":data"))
     implementation(project(":domain"))
     implementation(project(":compose"))
     implementation(project(":extension"))
@@ -207,7 +206,6 @@ dependencies {
 }
 
 dependencies {
-    kover(project(":data"))
     kover(project(":domain"))
     kover(project(":compose"))
     kover(project(":extension"))

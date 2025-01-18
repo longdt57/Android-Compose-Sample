@@ -56,7 +56,6 @@ android {
 
 dependencies {
 
-    implementation(project(":data"))
     implementation(project(":domain"))
     implementation(project(":compose"))
     implementation(project(":extension"))
@@ -81,6 +80,10 @@ dependencies {
     implementation(libs.kotlin.coroutines.core)
     implementation(libs.kotlin.coroutines.android)
 
+    // Preferences
+    implementation(libs.androidx.datastore.preferences)
+    implementation(libs.androidx.security.crypto)
+
     // ImmutableList
     implementation(libs.kotlinx.collections.immutable)
 
@@ -93,6 +96,16 @@ dependencies {
 
     // Coil
     implementation(libs.bundles.coil)
+
+    // Retrofit
+    implementation(libs.bundles.networking)
+    implementation(libs.kotlinx.serialization.json)
+
+    // Room
+    implementation(libs.room.runtime)
+    annotationProcessor(libs.room.compiler)
+    ksp(libs.room.compiler)
+    implementation(libs.room.ktx)
 
     // Logging
     implementation(libs.timber)
