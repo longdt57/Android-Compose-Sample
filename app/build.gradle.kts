@@ -128,6 +128,7 @@ dependencies {
     implementation(project(":compose"))
     implementation(project(":extension"))
     implementation(project(":gituser"))
+    implementation(project(":photosample"))
 
     // Lifecycle
     implementation(libs.bundles.androidx.lifecycle)
@@ -206,6 +207,7 @@ dependencies {
     kover(project(":compose"))
     kover(project(":extension"))
     kover(project(":gituser"))
+    kover(project(":photosample"))
 }
 
 kover {

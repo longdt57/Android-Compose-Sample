@@ -5,5 +5,6 @@ import leegroup.module.compose.ui.models.BaseDestination
 sealed class AppDestination {
 
     object RootNavGraph : BaseDestination("rootNavGraph")
+    object MainScreen : BaseDestination("mainScreen")
 
 }
