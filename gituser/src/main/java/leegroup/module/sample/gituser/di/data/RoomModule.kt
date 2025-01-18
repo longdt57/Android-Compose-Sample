@@ -7,8 +7,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import leegroup.module.sample.gituser.data.local.room.AppDatabase
 import leegroup.module.sample.gituser.data.local.room.GitUserDao
+import leegroup.module.sample.gituser.data.local.room.GitUserDatabase
 import leegroup.module.sample.gituser.data.local.room.GitUserDetailDao
 
 private const val APP_DATABASE = "app-database"
@@ -18,19 +18,19 @@ private const val APP_DATABASE = "app-database"
 class RoomModule {
 
     @Provides
-    fun provideAppRoom(@ApplicationContext applicationContext: Context): AppDatabase {
+    fun provideAppRoom(@ApplicationContext applicationContext: Context): GitUserDatabase {
         return Room.databaseBuilder(
             applicationContext,
-            AppDatabase::class.java, APP_DATABASE
+            GitUserDatabase::class.java, APP_DATABASE
         )
             .fallbackToDestructiveMigration()
             .build()
     }
 
     @Provides
-    fun provideGitUserDao(database: AppDatabase): GitUserDao = database.gitUserDao()
+    fun provideGitUserDao(database: GitUserDatabase): GitUserDao = database.gitUserDao()
 
     @Provides
-    fun provideGitUserDetailDao(database: AppDatabase): GitUserDetailDao =
+    fun provideGitUserDetailDao(database: GitUserDatabase): GitUserDetailDao =
         database.gitUserDetailDao()
 }

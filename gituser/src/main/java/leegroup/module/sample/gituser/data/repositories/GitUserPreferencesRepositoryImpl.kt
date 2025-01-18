@@ -2,13 +2,13 @@ package leegroup.module.sample.gituser.data.repositories
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import leegroup.module.sample.gituser.data.local.datastore.AppDataStore
-import leegroup.module.sample.gituser.domain.repositories.AppPreferencesRepository
+import leegroup.module.sample.gituser.data.local.datastore.GitUserDataStore
+import leegroup.module.sample.gituser.domain.repositories.GitUserPreferencesRepository
 import javax.inject.Inject
 
-class AppPreferencesRepositoryImpl @Inject internal constructor(
-    private val appDataStore: AppDataStore
-) : AppPreferencesRepository {
+class GitUserPreferencesRepositoryImpl @Inject internal constructor(
+    private val appDataStore: GitUserDataStore
+) : GitUserPreferencesRepository {
 
     override fun getAppPreference(): Flow<Boolean> {
         return appDataStore.getAppPreference()

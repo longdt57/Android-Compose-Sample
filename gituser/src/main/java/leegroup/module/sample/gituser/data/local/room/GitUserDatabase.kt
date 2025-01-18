@@ -6,7 +6,7 @@ import leegroup.module.sample.gituser.data.models.GitUser
 import leegroup.module.sample.gituser.data.models.GitUserDetail
 
 @Database(entities = [GitUser::class, GitUserDetail::class], version = 1)
-abstract class AppDatabase : RoomDatabase() {
+abstract class GitUserDatabase : RoomDatabase() {
     abstract fun gitUserDao(): GitUserDao
     abstract fun gitUserDetailDao(): GitUserDetailDao
 }

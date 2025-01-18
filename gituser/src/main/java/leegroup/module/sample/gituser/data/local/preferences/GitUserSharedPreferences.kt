@@ -9,7 +9,7 @@ import javax.inject.Singleton
 private const val APP_SHARED_PREFERENCES_NAME = "app_preferences"
 
 @Singleton
-class AppSharedPreferences @Inject constructor(
+class GitUserSharedPreferences @Inject constructor(
     @ApplicationContext context: Context,
 ) : BaseSharedPreferences(context, APP_SHARED_PREFERENCES_NAME) {
 

@@ -3,14 +3,14 @@ package leegroup.module.sample.gituser.data.repositories
 import leegroup.module.sample.gituser.data.local.room.GitUserDao
 import leegroup.module.sample.gituser.data.models.GitUser
 import leegroup.module.sample.gituser.data.models.mapToDomain
-import leegroup.module.sample.gituser.data.remote.services.ApiService
+import leegroup.module.sample.gituser.data.remote.services.GitUserApiService
 import leegroup.module.sample.gituser.domain.models.GitUserModel
 import leegroup.module.sample.gituser.domain.params.GetGitUserListParam
 import leegroup.module.sample.gituser.domain.repositories.GitUserRepository
 import javax.inject.Inject
 
 class GitUserRepositoryImpl @Inject constructor(
-    private val appService: ApiService,
+    private val appService: GitUserApiService,
     private val userDao: GitUserDao,
 ) : GitUserRepository {
 

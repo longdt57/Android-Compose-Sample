@@ -9,7 +9,7 @@ import javax.inject.Singleton
 private const val APP_SECRET_SHARED_PREFS = "app_secret_shared_prefs"
 
 @Singleton
-class EncryptedSharedPreferences @Inject constructor(
+class GitUserEncryptedSharedPreferences @Inject constructor(
     @ApplicationContext applicationContext: Context,
 ) :
     BaseEncryptedSharedPreferences(applicationContext, prefName = APP_SECRET_SHARED_PREFS) {

@@ -9,20 +9,20 @@ import io.mockk.just
 import io.mockk.mockk
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
-import leegroup.module.sample.gituser.data.local.datastore.AppDataStore
+import leegroup.module.sample.gituser.data.local.datastore.GitUserDataStore
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 
-class AppPreferencesRepositoryImplTest {
+class GitUserPreferencesRepositoryImplTest {
 
-    private lateinit var appPreferencesRepository: AppPreferencesRepositoryImpl
-    private lateinit var mockAppDataStore: AppDataStore
+    private lateinit var appPreferencesRepository: GitUserPreferencesRepositoryImpl
+    private lateinit var mockAppDataStore: GitUserDataStore
 
     @Before
     fun setUp() {
         mockAppDataStore = mockk()
-        appPreferencesRepository = AppPreferencesRepositoryImpl(mockAppDataStore)
+        appPreferencesRepository = GitUserPreferencesRepositoryImpl(mockAppDataStore)
     }
 
     @Test

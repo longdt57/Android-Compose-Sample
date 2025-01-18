@@ -8,7 +8,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import leegroup.module.sample.gituser.data.MockUtil
 import leegroup.module.sample.gituser.data.local.room.GitUserDetailDao
-import leegroup.module.sample.gituser.data.remote.services.ApiService
+import leegroup.module.sample.gituser.data.remote.services.GitUserApiService
 import leegroup.module.sample.gituser.domain.repositories.GitUserDetailRepository
 import org.junit.Before
 import org.junit.Test
@@ -16,7 +16,7 @@ import org.junit.Test
 @ExperimentalCoroutinesApi
 class GitUserDetailRepositoryTest {
 
-    private lateinit var mockService: ApiService
+    private lateinit var mockService: GitUserApiService
     private lateinit var mockUserDao: GitUserDetailDao
     private lateinit var repository: GitUserDetailRepository
 

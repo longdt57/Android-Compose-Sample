@@ -8,7 +8,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import leegroup.module.di.RetrofitProvider
 import leegroup.module.sample.gituser.BuildConfig
-import leegroup.module.sample.gituser.data.remote.services.ApiService
+import leegroup.module.sample.gituser.data.remote.services.GitUserApiService
 import retrofit2.Retrofit
 import javax.inject.Qualifier
 
@@ -33,7 +33,7 @@ internal class RetrofitModule {
     }
 
     @Provides
-    fun provideService(@GitUserRetrofit retrofit: Retrofit): ApiService {
-        return retrofit.create(ApiService::class.java)
+    fun provideService(@GitUserRetrofit retrofit: Retrofit): GitUserApiService {
+        return retrofit.create(GitUserApiService::class.java)
     }
 }
