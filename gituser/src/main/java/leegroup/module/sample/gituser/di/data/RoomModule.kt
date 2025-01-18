@@ -1,4 +1,4 @@
-package leegroup.module.sample.gituser.di
+package leegroup.module.sample.gituser.di.data
 
 import android.content.Context
 import androidx.room.Room

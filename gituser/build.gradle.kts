@@ -17,6 +17,8 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+
+        buildConfigField("String", "BASE_API_URL", "\"https://api.github.com/\"")
     }
 
     buildTypes {
@@ -58,6 +60,7 @@ dependencies {
 
     implementation(project(":compose"))
     implementation(project(":extension"))
+    implementation(project(":di"))
     implementation(libs.android.tracking)
 
     // Lifecycle

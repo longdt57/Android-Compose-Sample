@@ -1,33 +1,24 @@
-package com.app.androidcompose.di.data
+package leegroup.module.di
 
 import android.content.Context
-import com.app.androidcompose.BuildConfig
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.chuckerteam.chucker.api.RetentionManager
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import java.util.concurrent.TimeUnit
 
 private const val NETWORK_TIMEOUT = 30L
 
-@Module
-@InstallIn(SingletonComponent::class)
-class OkHttpClientModule {
+object OkHttpClientProvider {
 
-    @Provides
     fun provideOkHttpClientWithInterceptor(
-        loggingInterceptor: HttpLoggingInterceptor,
-        chuckerInterceptor: ChuckerInterceptor,
+        context: Context,
+        isLoggingEnable: Boolean,
     ): OkHttpClient {
         return OkHttpClient.Builder().apply {
-            addInterceptor(loggingInterceptor)
-            addInterceptor(chuckerInterceptor)
+            addInterceptor(provideChuckerInterceptor(context))
+            addInterceptor(provideLoggingInterceptor(isLoggingEnable))
 
             readTimeout(NETWORK_TIMEOUT, TimeUnit.SECONDS)
             callTimeout(NETWORK_TIMEOUT, TimeUnit.SECONDS)
@@ -36,9 +27,8 @@ class OkHttpClientModule {
         }.build()
     }
 
-    @Provides
-    fun provideChuckerInterceptor(
-        @ApplicationContext context: Context
+    private fun provideChuckerInterceptor(
+        context: Context
     ): ChuckerInterceptor {
         val chuckerCollector = ChuckerCollector(
             context = context,
@@ -52,10 +42,9 @@ class OkHttpClientModule {
             .build()
     }
 
-    @Provides
-    fun provideLoggingInterceptor(): HttpLoggingInterceptor {
+    private fun provideLoggingInterceptor(isDebug: Boolean): HttpLoggingInterceptor {
         return HttpLoggingInterceptor().apply {
-            level = when (BuildConfig.DEBUG) {
+            level = when (isDebug) {
                 true -> HttpLoggingInterceptor.Level.BODY
                 else -> HttpLoggingInterceptor.Level.NONE
             }

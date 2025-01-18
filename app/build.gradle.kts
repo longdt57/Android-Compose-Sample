@@ -35,8 +35,6 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
-
-        buildConfigField("String", "BASE_API_URL", "\"https://api.github.com/\"")
     }
 
     signingConfigs {

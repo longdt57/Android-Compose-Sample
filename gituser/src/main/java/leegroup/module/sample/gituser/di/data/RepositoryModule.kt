@@ -1,4 +1,4 @@
-package leegroup.module.sample.gituser.di
+package leegroup.module.sample.gituser.di.data
 
 import dagger.Binds
 import dagger.Module
