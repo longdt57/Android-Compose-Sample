@@ -29,6 +29,7 @@ import leegroup.module.photosample.domain.usecases.photolist.SavePhotoListFavori
 import leegroup.module.photosample.ui.models.PhotoListUiModel
 import leegroup.module.photosample.ui.models.PhotoUiModel
 import leegroup.module.photosample.ui.models.mapToUiModels
+import leegroup.module.photosample.ui.screens.main.photolist.PhotoListViewModel.Companion.PER_PAGE
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -133,14 +134,20 @@ internal class PhotoListViewModel @Inject constructor(
         }
     }
 
+    private fun isLoadingJobActive() = loadDataJob?.isActive.orFalse
+
+    private fun canLoadMore(): Boolean {
+        return _uiModel.value.canLoadMore() && isLoadingJobActive().not()
+    }
+
     private fun loadMore() {
-        if (loadDataJob?.isActive.orFalse) return
+        if (canLoadMore().not()) return
 
         val currentState = _uiModel.value
         loadDataJob = viewModelScope.launch(dispatchersProvider.io) {
             showLoading()
             delayQuery(currentState)
-            getPhotoListUseCase(createRequestParam())
+            getPhotoListUseCase(currentState.createLoadMoreQueryParam())
                 .injectLoading()
                 .onEach { result ->
                     handleSuccess(result)
@@ -200,21 +207,6 @@ internal class PhotoListViewModel @Inject constructor(
         }
     }
 
-    private fun createRequestParam(): GetPhotoListParam {
-        return GetPhotoListParam(
-            ids = getParamQueryIds(),
-            titleLike = _uiModel.value.query,
-            since = getParamQueryIdSince(),
-            limit = PER_PAGE,
-        )
-    }
-
-    private fun getParamQueryIds() = with(_uiModel.value) {
-        if (isFavoriteEnabled) favoriteList.toList() else null
-    }
-
-    private fun getParamQueryIdSince() = _uiModel.value.photos.lastOrNull()?.id ?: 0
-
     private suspend fun delayQuery(state: PhotoListUiModel) {
         if (state.delayQuery > 0) {
             delay(state.delayQuery)
@@ -225,3 +217,10 @@ internal class PhotoListViewModel @Inject constructor(
         const val PER_PAGE = 30
     }
 }
+
+internal fun PhotoListUiModel.createLoadMoreQueryParam() = GetPhotoListParam(
+    ids = if (isFavoriteEnabled) favoriteList.toList() else null,
+    titleLike = query,
+    since = photos.lastOrNull()?.id ?: 0,
+    limit = PER_PAGE,
+)

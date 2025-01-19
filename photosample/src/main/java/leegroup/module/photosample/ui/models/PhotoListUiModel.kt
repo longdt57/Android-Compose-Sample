@@ -14,6 +14,13 @@ internal data class PhotoListUiModel(
     val hasMore: Boolean = true,
     val favoriteList: Set<Int> = setOf(),
 ) {
+
+    fun canLoadMore(): Boolean {
+        return hasMore && isFavoriteAndAllLoaded().not()
+    }
+
+    private fun isFavoriteAndAllLoaded() = isFavoriteEnabled && photos.size == favoriteList.size
+
     fun updateFavorites(favoriteList: Set<Int>): PhotoListUiModel {
         val newPhotos = photos.updateFavorites(favoriteList)
             .filterFavoriteOnly()
