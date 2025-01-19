@@ -22,20 +22,16 @@ import leegroup.module.photosample.domain.usecases.photolist.SavePhotoListFavori
 import leegroup.module.photosample.ui.screens.PhotoMockUtil
 import leegroup.module.photosample.ui.screens.main.photolist.PhotoListAction
 import leegroup.module.photosample.ui.screens.main.photolist.PhotoListViewModel
-import leegroup.module.test.CoroutineTestRule
+import leegroup.module.test.BaseUnitTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
-class PhotoListViewModelTest {
-
-    @get:Rule
-    val coroutinesRule = CoroutineTestRule()
+class PhotoListViewModelTest : BaseUnitTest() {
 
     private lateinit var photoListViewModel: PhotoListViewModel
     private lateinit var getPhotoListUseCase: GetPhotoListUseCase
@@ -63,7 +59,7 @@ class PhotoListViewModelTest {
     private fun initViewModel() {
         // Initialize ViewModel with mocked dependencies
         photoListViewModel = PhotoListViewModel(
-            dispatchersProvider = coroutinesRule.testDispatcherProvider,
+            dispatchersProvider = testDispatcherProvider,
             getPhotoListUseCase = getPhotoListUseCase,
             observeFavoriteListUseCase = observeFavoriteListUseCase,
             saveFavoriteUseCase = saveFavoriteUseCase,

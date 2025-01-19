@@ -3,7 +3,7 @@ package leegroup.module.photosample.ui.screens
 import leegroup.module.photosample.domain.models.PhotoModelD
 import leegroup.module.photosample.ui.models.PhotoUiModel
 
-object PhotoMockUtil {
+internal object PhotoMockUtil {
     val photoModel = PhotoModelD(
         id = 1,
         albumId = 1,

@@ -11,18 +11,14 @@ import leegroup.module.photosample.domain.usecases.photofavorite.SaveFavoriteUse
 import leegroup.module.photosample.ui.screens.main.PhotoDetailNav
 import leegroup.module.photosample.ui.screens.main.photodetail.PhotoDetailAction
 import leegroup.module.photosample.ui.screens.main.photodetail.PhotoDetailViewModel
-import leegroup.module.test.CoroutineTestRule
+import leegroup.module.test.BaseUnitTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 
-class PhotoDetailViewModelTest {
-
-    @get:Rule
-    val coroutinesRule = CoroutineTestRule()
+class PhotoDetailViewModelTest : BaseUnitTest() {
 
     private lateinit var viewModel: PhotoDetailViewModel
     private lateinit var savedStateHandle: SavedStateHandle
@@ -45,7 +41,7 @@ class PhotoDetailViewModelTest {
 
         viewModel = PhotoDetailViewModel(
             savedStateHandle = savedStateHandle,
-            dispatchersProvider = coroutinesRule.testDispatcherProvider,
+            dispatchersProvider = testDispatcherProvider,
             saveFavoriteUseCase = saveFavoriteUseCase
         )
     }

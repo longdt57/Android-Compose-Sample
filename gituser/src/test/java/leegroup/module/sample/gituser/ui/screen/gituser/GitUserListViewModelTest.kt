@@ -4,7 +4,6 @@ import app.cash.turbine.test
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
@@ -19,17 +18,12 @@ import leegroup.module.sample.gituser.tracking.GitUserListScreenTracker
 import leegroup.module.sample.gituser.ui.screens.gituser.GitUserListAction
 import leegroup.module.sample.gituser.ui.screens.gituser.GitUserListViewModel
 import leegroup.module.sample.gituser.ui.screens.gituser.GitUserListViewModel.Companion.PER_PAGE
-import leegroup.module.test.CoroutineTestRule
+import leegroup.module.test.BaseUnitTest
 import org.junit.Assert.assertEquals
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 
-@OptIn(ExperimentalCoroutinesApi::class)
-class GitUserListViewModelTest {
-
-    @get:Rule
-    val coroutinesRule = CoroutineTestRule()
+class GitUserListViewModelTest : BaseUnitTest() {
 
     private val mockUseCase: GetGitUserUseCase = mockk()
     private val mockTracker: GitUserListScreenTracker = mockk()
@@ -65,7 +59,7 @@ class GitUserListViewModelTest {
         every { mockTracker.launch() } returns Unit
         every { mockTracker.openUserDetail(any()) } returns Unit
         viewModel = GitUserListViewModel(
-            coroutinesRule.testDispatcherProvider,
+            testDispatcherProvider,
             useCase = mockUseCase,
             gitUserListScreenTracker = mockTracker
         )

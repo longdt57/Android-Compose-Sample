@@ -21,15 +21,11 @@ import leegroup.module.sample.gituser.ui.mapper.GitUserDetailUiMapper
 import leegroup.module.sample.gituser.ui.models.GitUserDetailUiModel
 import leegroup.module.sample.gituser.ui.screens.GitUserDestination
 import leegroup.module.sample.gituser.ui.screens.gituserdetail.GitUserDetailViewModel
-import leegroup.module.test.CoroutineTestRule
+import leegroup.module.test.BaseUnitTest
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 
-class GitUserDetailViewModelTest {
-
-    @get:Rule
-    val coroutinesRule = CoroutineTestRule()
+class GitUserDetailViewModelTest : BaseUnitTest() {
 
     private lateinit var mockSavedStateHandle: SavedStateHandle
     private val mockLocalUseCase: GetGitUserDetailLocalUseCase = mockk()
@@ -71,7 +67,7 @@ class GitUserDetailViewModelTest {
     private fun initViewModel() {
         viewModel = GitUserDetailViewModel(
             savedStateHandle = mockSavedStateHandle,
-            coroutinesRule.testDispatcherProvider,
+            testDispatcherProvider,
             mockLocalUseCase,
             mockRemoteUseCase,
             mockUiMapper
