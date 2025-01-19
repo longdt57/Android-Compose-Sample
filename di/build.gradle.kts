@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.serialization)
     alias(libs.plugins.kotlinx.kover)
+    id("maven-publish")
 }
 
 android {
@@ -48,4 +49,18 @@ dependencies {
     // Inspect
     debugImplementation(libs.library.chucker)
     releaseImplementation(libs.library.chucker.no.op)
+}
+
+publishing {
+    publications {
+        register<MavenPublication>("release") {
+            groupId = "leegroup.module"
+            artifactId = "di"
+            version = "1.0"
+
+            afterEvaluate {
+                from(components["release"])
+            }
+        }
+    }
 }
