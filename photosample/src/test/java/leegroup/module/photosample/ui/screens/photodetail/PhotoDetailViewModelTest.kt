@@ -9,7 +9,6 @@ import leegroup.module.extension.JsonUtil
 import leegroup.module.photosample.domain.params.SaveFavoriteParam
 import leegroup.module.photosample.domain.usecases.photofavorite.SaveFavoriteUseCase
 import leegroup.module.photosample.ui.screens.main.PhotoDetailNav
-import leegroup.module.photosample.ui.screens.main.photodetail.PhotoDetailAction
 import leegroup.module.photosample.ui.screens.main.photodetail.PhotoDetailViewModel
 import leegroup.module.test.BaseUnitTest
 import org.junit.Assert.assertEquals
@@ -48,7 +47,7 @@ class PhotoDetailViewModelTest : BaseUnitTest() {
 
     @Test
     fun `loadFromSavedStateHandle should populate uiModel correctly`() = runTest {
-        viewModel.uiModel.test {
+        viewModel.uiState.test {
             val detailUiModel = expectMostRecentItem()
             assertEquals(photoDetailNav.id, detailUiModel.id)
             assertEquals(photoDetailNav.title, detailUiModel.title)
@@ -61,14 +60,14 @@ class PhotoDetailViewModelTest : BaseUnitTest() {
     @Test
     fun `handleAction with SwitchFavorite should toggle favorite state`() = runTest {
         // Arrange
-        val initialUiModel = viewModel.uiModel.value
+        val initialUiModel = viewModel.uiState.value
         assertFalse(initialUiModel.isFavorite)
 
         // Act
-        viewModel.handleAction(PhotoDetailAction.SwitchFavorite)
+        viewModel.switchFavorite()
 
         // Assert
-        val updatedUiModel = viewModel.uiModel.value
+        val updatedUiModel = viewModel.uiState.value
         assertTrue(updatedUiModel.isFavorite)
         coVerify { saveFavoriteUseCase.invoke(SaveFavoriteParam(1, true)) }
     }
@@ -76,15 +75,15 @@ class PhotoDetailViewModelTest : BaseUnitTest() {
     @Test
     fun `handleAction with SwitchFavorite toggles back to non-favorite state`() = runTest {
         // Arrange
-        viewModel.handleAction(PhotoDetailAction.SwitchFavorite)
-        val updatedUiModel = viewModel.uiModel.value
+        viewModel.switchFavorite()
+        val updatedUiModel = viewModel.uiState.value
         assertTrue(updatedUiModel.isFavorite)
 
         // Act
-        viewModel.handleAction(PhotoDetailAction.SwitchFavorite)
+        viewModel.switchFavorite()
 
         // Assert
-        val toggledBackUiModel = viewModel.uiModel.value
+        val toggledBackUiModel = viewModel.uiState.value
         assertFalse(toggledBackUiModel.isFavorite)
         coVerify { saveFavoriteUseCase.invoke(SaveFavoriteParam(1, false)) }
     }

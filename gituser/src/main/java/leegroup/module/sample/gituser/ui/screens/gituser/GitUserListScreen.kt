@@ -36,7 +36,7 @@ internal fun GitUserListScreen(
     navigator: (destination: Any) -> Unit,
 ) = BaseScreen(viewModel) {
     viewModel.navigator.collectAsEffect { destination -> navigator(destination) }
-    val uiModel by viewModel.uiModel.collectAsStateWithLifecycle()
+    val uiModel by viewModel.uiState.collectAsStateWithLifecycle()
     val loading by viewModel.loading.collectAsStateWithLifecycle()
     val showRefresh by remember {
         derivedStateOf {

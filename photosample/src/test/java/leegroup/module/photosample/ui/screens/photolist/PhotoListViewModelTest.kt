@@ -18,9 +18,9 @@ import leegroup.module.photosample.domain.usecases.photofavorite.ObserveFavorite
 import leegroup.module.photosample.domain.usecases.photofavorite.SaveFavoriteUseCase
 import leegroup.module.photosample.domain.usecases.photolist.GetPhotoListFavoriteFilterUseCase
 import leegroup.module.photosample.domain.usecases.photolist.GetPhotoListUseCase
+import leegroup.module.photosample.domain.usecases.photolist.PhotoListQueryDelayUseCase
 import leegroup.module.photosample.domain.usecases.photolist.SavePhotoListFavoriteFilterUseCase
 import leegroup.module.photosample.ui.screens.PhotoMockUtil
-import leegroup.module.photosample.ui.screens.main.photolist.PhotoListAction
 import leegroup.module.photosample.ui.screens.main.photolist.PhotoListViewModel
 import leegroup.module.test.BaseUnitTest
 import org.junit.Assert.assertEquals
@@ -34,6 +34,7 @@ import org.junit.Test
 class PhotoListViewModelTest : BaseUnitTest() {
 
     private lateinit var photoListViewModel: PhotoListViewModel
+    private lateinit var photoListQueryDelayUseCase: PhotoListQueryDelayUseCase
     private lateinit var getPhotoListUseCase: GetPhotoListUseCase
     private lateinit var observeFavoriteListUseCase: ObserveFavoriteListUseCase
     private lateinit var saveFavoriteUseCase: SaveFavoriteUseCase
@@ -43,6 +44,7 @@ class PhotoListViewModelTest : BaseUnitTest() {
     @Before
     fun setUp() {
         // Mock dependencies
+        photoListQueryDelayUseCase = mockk(relaxed = true)
         getPhotoListUseCase = mockk(relaxed = true)
         observeFavoriteListUseCase = mockk(relaxed = true)
         saveFavoriteUseCase = mockk(relaxed = true)
@@ -52,6 +54,7 @@ class PhotoListViewModelTest : BaseUnitTest() {
         every { getPhotoListUseCase.invoke(any()) } returns flowOf(listOf(PhotoMockUtil.photoModel))
         every { observeFavoriteListUseCase.invoke() } returns flowOf()
         coEvery { saveFavoriteUseCase.invoke(any()) } returns Unit
+        coEvery { photoListQueryDelayUseCase.invoke(any()) } returns Unit
 
         initViewModel()
     }
@@ -60,6 +63,7 @@ class PhotoListViewModelTest : BaseUnitTest() {
         // Initialize ViewModel with mocked dependencies
         photoListViewModel = PhotoListViewModel(
             dispatchersProvider = testDispatcherProvider,
+            photoListQueryDelayUseCase = photoListQueryDelayUseCase,
             getPhotoListUseCase = getPhotoListUseCase,
             observeFavoriteListUseCase = observeFavoriteListUseCase,
             saveFavoriteUseCase = saveFavoriteUseCase,
@@ -70,7 +74,7 @@ class PhotoListViewModelTest : BaseUnitTest() {
 
     @Test
     fun `test handle LoadIfEmpty action triggers loadMore when empty`() = runTest {
-        photoListViewModel.handleAction(PhotoListAction.LoadIfEmpty)
+        photoListViewModel.handleActionLoadIfEmpty()
 
         // Verify that loadMore is called if the list is empty
         coVerify { getPhotoListUseCase.invoke(any()) }
@@ -80,7 +84,7 @@ class PhotoListViewModelTest : BaseUnitTest() {
     fun `test handle LoadIfEmpty action, handle error`() = runTest {
         every { getPhotoListUseCase.invoke(any()) } returns flow { throw RuntimeException() }
 
-        photoListViewModel.handleAction(PhotoListAction.LoadIfEmpty)
+        photoListViewModel.handleActionLoadIfEmpty()
 
         // Verify that loadMore is called if the list is empty
         photoListViewModel.error.test {
@@ -96,8 +100,8 @@ class PhotoListViewModelTest : BaseUnitTest() {
             every { observeFavoriteListUseCase.invoke() } returns flowOf(setOf(updatedPhoto.id))
             initViewModel()
 
-            photoListViewModel.handleAction(PhotoListAction.LoadIfEmpty)
-            photoListViewModel.handleAction(PhotoListAction.FavoriteItemClick(PhotoMockUtil.photoUiModel))
+            photoListViewModel.handleActionLoadIfEmpty()
+            photoListViewModel.handleFavoriteClick(PhotoMockUtil.photoUiModel)
 
             // Verify savePhotoUseCase is called with updated photo
             coVerify {
@@ -110,7 +114,7 @@ class PhotoListViewModelTest : BaseUnitTest() {
             }
 
             // Assert the favorite status is updated in the UI
-            photoListViewModel.uiModel.test {
+            photoListViewModel.uiState.test {
                 val state = expectMostRecentItem()
                 assertTrue(state.photos.any { it.id == updatedPhoto.id && it.isFavorite })
             }
@@ -123,7 +127,7 @@ class PhotoListViewModelTest : BaseUnitTest() {
             initViewModel()
 
             // Assert the favorite status is updated in the UI
-            photoListViewModel.uiModel.test {
+            photoListViewModel.uiState.test {
                 val state = expectMostRecentItem()
                 assertTrue(state.isFavoriteEnabled)
             }
@@ -136,7 +140,7 @@ class PhotoListViewModelTest : BaseUnitTest() {
             initViewModel()
 
             // Assert the favorite status is updated in the UI
-            photoListViewModel.uiModel.test {
+            photoListViewModel.uiState.test {
                 val state = expectMostRecentItem()
                 assertFalse(state.isFavoriteEnabled)
             }
@@ -148,10 +152,10 @@ class PhotoListViewModelTest : BaseUnitTest() {
             every { observeFavoriteListUseCase.invoke() } returns flow { throw RuntimeException() }
             initViewModel()
 
-            photoListViewModel.handleAction(PhotoListAction.LoadIfEmpty)
+            photoListViewModel.handleActionLoadIfEmpty()
 
             // Assert the favorite status is updated in the UI
-            photoListViewModel.uiModel.test {
+            photoListViewModel.uiState.test {
                 val state = expectMostRecentItem()
                 assertFalse(state.photos.any { it.isFavorite })
             }
@@ -160,10 +164,10 @@ class PhotoListViewModelTest : BaseUnitTest() {
     @Test
     fun `test handle Query action updates query and triggers loadMore`() = runTest {
         val newQuery = "new query"
-        photoListViewModel.handleAction(PhotoListAction.Query(newQuery, 0))
+        photoListViewModel.handleQueryChanged(newQuery)
 
         // Verify the query is updated in the UI model
-        photoListViewModel.uiModel.test {
+        photoListViewModel.uiState.test {
             val state = expectMostRecentItem()
             assertEquals(newQuery, state.query)
         }
@@ -174,7 +178,7 @@ class PhotoListViewModelTest : BaseUnitTest() {
 
     @Test
     fun `test handle LoadMore action triggers getPhotoListUseCase`() = runTest {
-        photoListViewModel.handleAction(PhotoListAction.LoadMore)
+        photoListViewModel.loadMore()
 
         // Verify that loadMore is called when state is not loading and hasMore is true
         coVerify { getPhotoListUseCase.invoke(any()) }
@@ -187,9 +191,9 @@ class PhotoListViewModelTest : BaseUnitTest() {
         }
 
         // Try to load more
-        photoListViewModel.handleAction(PhotoListAction.LoadIfEmpty)
+        photoListViewModel.handleActionLoadIfEmpty()
         delay(20)
-        photoListViewModel.handleAction(PhotoListAction.LoadMore)
+        photoListViewModel.loadMore()
 
         // Verify that getPhotoListUseCase.invoke is not called while loading
         coVerify(exactly = 1) { getPhotoListUseCase.invoke(any()) }
@@ -216,10 +220,10 @@ class PhotoListViewModelTest : BaseUnitTest() {
 
         every { getPhotoListUseCase.invoke(any()) } returns flow { emit(result) }
         // Call handleSuccess directly
-        photoListViewModel.handleAction(PhotoListAction.LoadIfEmpty)
+        photoListViewModel.handleActionLoadIfEmpty()
 
         // Verify that UI state is updated with new photos
-        photoListViewModel.uiModel.test {
+        photoListViewModel.uiState.test {
             val state = expectMostRecentItem()
             assertEquals(2, state.photos.size)  // Two new photos should be added
             assertTrue(state.photos.any { it.id == 1 })
@@ -252,7 +256,7 @@ class PhotoListViewModelTest : BaseUnitTest() {
     @Test
     fun `test loadIfEmpty triggers loadMore when list is empty`() = runTest {
         // Set the state with an empty list
-        photoListViewModel.handleAction(PhotoListAction.LoadIfEmpty)
+        photoListViewModel.handleActionLoadIfEmpty()
 
         // Verify that loadMore is called
         coVerify { getPhotoListUseCase.invoke(any()) }
@@ -264,8 +268,8 @@ class PhotoListViewModelTest : BaseUnitTest() {
         every { getPhotoListUseCase.invoke(any()) } returns flowOf(listOf(PhotoMockUtil.photoModel))
 
         // Call loadIfEmpty
-        photoListViewModel.handleAction(PhotoListAction.LoadIfEmpty)
-        photoListViewModel.handleAction(PhotoListAction.LoadIfEmpty)
+        photoListViewModel.handleActionLoadIfEmpty()
+        photoListViewModel.handleActionLoadIfEmpty()
 
         // Verify loadMore is not called because the list is not empty
         coVerify(exactly = 1) { getPhotoListUseCase.invoke(any()) }
@@ -294,10 +298,10 @@ class PhotoListViewModelTest : BaseUnitTest() {
         every { getPhotoListUseCase.invoke(any()) } returns flowOf(newPhotos)
 
         // Call loadMore action to trigger photo loading
-        photoListViewModel.handleAction(PhotoListAction.LoadIfEmpty)
+        photoListViewModel.handleActionLoadIfEmpty()
 
         // Verify that the UI state is updated with the new photos and hasMore flag
-        photoListViewModel.uiModel.test {
+        photoListViewModel.uiState.test {
             val state = expectMostRecentItem()
             assertEquals(2, state.photos.size)  // Check two new photos are added
             assertTrue(state.photos.any { it.id == 3 })  // Check new photo exists
@@ -312,9 +316,8 @@ class PhotoListViewModelTest : BaseUnitTest() {
             val currentQuery = "current query"
 
             // Trigger Query action with the same query
-            photoListViewModel.handleAction(PhotoListAction.Query(currentQuery, 0))
-            photoListViewModel.handleAction(PhotoListAction.Query(currentQuery, 20))
-            delay(20)
+            photoListViewModel.handleQueryChanged(currentQuery)
+            photoListViewModel.handleQueryChanged(currentQuery)
 
             // Verify that loadMore is not triggered because query is not changed
             coVerify(exactly = 1) { getPhotoListUseCase.invoke(any()) }
@@ -322,44 +325,35 @@ class PhotoListViewModelTest : BaseUnitTest() {
 
     @Test
     fun `test handleQuery action triggers loadMore if query is updated`() = runTest {
-        photoListViewModel.handleAction(PhotoListAction.LoadIfEmpty)
+        photoListViewModel.handleActionLoadIfEmpty()
 
         val newQuery = "new query"
-        photoListViewModel.handleAction(PhotoListAction.Query(newQuery, 10))
-        delay(10)
+        photoListViewModel.handleQueryChanged(newQuery)
 
         // Verify that loadMore is triggered after query update
         coVerify(exactly = 2) { getPhotoListUseCase.invoke(any()) }
     }
 
     @Test
-    fun `test handle photo click action triggers navigation is updated`() = runTest {
-        photoListViewModel.navigator.test {
-            photoListViewModel.handleAction(PhotoListAction.PhotoClick(PhotoMockUtil.photoUiModel))
-            expectMostRecentItem() shouldBe PhotoMockUtil.photoUiModel
-        }
-    }
-
-    @Test
     fun `test onFavoriteFilterClick updates filter and calls saveFavoriteFilterToLocal`() =
         runTest {
             // Setup initial state
-            val initialState = photoListViewModel.uiModel.value
+            val initialState = photoListViewModel.uiState.value
 
             // Trigger the FavoriteFilterClick action
-            photoListViewModel.handleAction(PhotoListAction.FavoriteFilterClick)
+            photoListViewModel.handleFavoriteFilterClick()
 
             // Verify that updateFavoriteFilter is called with the new filter status
             assertNotEquals(
                 initialState.isFavoriteEnabled,
-                photoListViewModel.uiModel.value.isFavoriteEnabled
+                photoListViewModel.uiState.value.isFavoriteEnabled
             )
 
             // Verify that saveFavoriteFilterToLocal is called with the new filter status
             coVerify { saveFavoriteFilterUseCase.invoke(any()) }
 
             // Verify that the filter status is updated in the UI
-            photoListViewModel.uiModel.test {
+            photoListViewModel.uiState.test {
                 val state = expectMostRecentItem()
                 assertNotEquals(initialState.isFavoriteEnabled, state.isFavoriteEnabled)
             }
@@ -368,7 +362,7 @@ class PhotoListViewModelTest : BaseUnitTest() {
     @Test
     fun `test saveFavoriteFilterToLocal is called on FavoriteFilterClick`() = runTest {
         // Trigger the FavoriteFilterClick action
-        photoListViewModel.handleAction(PhotoListAction.FavoriteFilterClick)
+        photoListViewModel.handleFavoriteFilterClick()
 
         // Verify that saveFavoriteFilterToLocal is called with the new filter status
         coVerify { saveFavoriteFilterUseCase.invoke(any()) }

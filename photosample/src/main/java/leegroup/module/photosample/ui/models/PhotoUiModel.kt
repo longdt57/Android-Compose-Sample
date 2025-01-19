@@ -3,7 +3,6 @@ package leegroup.module.photosample.ui.models
 import androidx.compose.runtime.Immutable
 import kotlinx.serialization.Serializable
 import leegroup.module.photosample.domain.models.PhotoModelD
-import leegroup.module.photosample.domain.params.SaveFavoriteParam
 
 @Immutable
 @Serializable
@@ -17,11 +16,6 @@ internal data class PhotoUiModel(
 ) {
     fun switchFavorite() = copy(isFavorite = isFavorite.not())
 }
-
-internal fun PhotoUiModel.createSaveParam() = SaveFavoriteParam(
-    id = id,
-    isFavorite = isFavorite
-)
 
 internal fun PhotoModelD.mapToUiModel() = PhotoUiModel(
     id = id,

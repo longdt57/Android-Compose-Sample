@@ -3,17 +3,14 @@ package leegroup.module.sample.gituser.ui.screens.gituser
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.toImmutableList
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import leegroup.module.compose.support.util.DispatchersProvider
 import leegroup.module.compose.ui.models.ErrorState
-import leegroup.module.compose.ui.viewmodel.BaseViewModel
+import leegroup.module.compose.ui.viewmodel.StateViewModel
 import leegroup.module.sample.gituser.domain.models.GitUserModel
 import leegroup.module.sample.gituser.domain.params.GetGitUserListParam
 import leegroup.module.sample.gituser.domain.usecases.gituser.GetGitUserUseCase
@@ -26,10 +23,7 @@ internal class GitUserListViewModel @Inject constructor(
     private val dispatchersProvider: DispatchersProvider,
     private val useCase: GetGitUserUseCase,
     private val gitUserListScreenTracker: GitUserListScreenTracker,
-) : BaseViewModel() {
-
-    private val _uiModel = MutableStateFlow(GitUserListUiModel())
-    val uiModel = _uiModel.asStateFlow()
+) : StateViewModel<GitUserListUiModel>(GitUserListUiModel()) {
 
     fun handleAction(action: GitUserListAction) {
         when (action) {
@@ -70,15 +64,15 @@ internal class GitUserListViewModel @Inject constructor(
     }
 
     private fun handleSuccess(result: List<GitUserModel>) {
-        _uiModel.update { oldValue ->
+        update { oldValue ->
             val users = oldValue.users.plus(result).toSet().toImmutableList()
             oldValue.copy(users = users)
         }
     }
 
-    private fun isEmpty() = _uiModel.value.users.isEmpty()
+    private fun isEmpty() = getUiState().users.isEmpty()
 
-    private fun getSince() = _uiModel.value.users.lastOrNull()?.id ?: 0L
+    private fun getSince() = getUiState().users.lastOrNull()?.id ?: 0L
 
     private fun trackLaunch() {
         viewModelScope.launch(dispatchersProvider.io) {

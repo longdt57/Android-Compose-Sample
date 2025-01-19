@@ -81,7 +81,7 @@ class GitUserDetailViewModelTest : BaseUnitTest() {
 
         initViewModel()
 
-        viewModel.uiModel.test {
+        viewModel.uiState.test {
             val updatedModel = expectMostRecentItem()
             assertEquals(
                 "Expected UI model to match mapped UI model",
@@ -133,7 +133,7 @@ class GitUserDetailViewModelTest : BaseUnitTest() {
 
         initViewModel()
 
-        viewModel.uiModel.test {
+        viewModel.uiState.test {
             val updatedModel = expectMostRecentItem()
             assertEquals(
                 "Expected UI model to match mapped UI model",
@@ -156,7 +156,7 @@ class GitUserDetailViewModelTest : BaseUnitTest() {
 
         initViewModel()
 
-        viewModel.uiModel.test {
+        viewModel.uiState.test {
             val updatedModel = expectMostRecentItem()
             assertEquals("Expected UI model to use remote data", remoteUiModel, updatedModel)
         }

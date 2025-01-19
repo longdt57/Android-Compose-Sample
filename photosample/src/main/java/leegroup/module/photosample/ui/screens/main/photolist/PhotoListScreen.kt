@@ -37,7 +37,7 @@ internal fun PhotoListScreen(
 ) = BaseScreen(viewModel) {
     viewModel.navigator.collectAsEffect { destination -> navigator(destination) }
 
-    val uiModel by viewModel.uiModel.collectAsStateWithLifecycle()
+    val uiModel by viewModel.uiState.collectAsStateWithLifecycle()
     val loading by viewModel.loading.collectAsStateWithLifecycle()
 
     val showRefresh by remember {
@@ -47,7 +47,7 @@ internal fun PhotoListScreen(
     }
 
     LaunchedEffect(Unit) {
-        viewModel.handleAction(PhotoListAction.LoadIfEmpty)
+        viewModel.handleActionLoadIfEmpty()
     }
 
     PhotoListContent(
@@ -57,12 +57,12 @@ internal fun PhotoListScreen(
             .navigationBarsPadding()
             .statusBarsPadding(),
         uiModel = uiModel,
-        onQueryChange = { viewModel.handleAction(PhotoListAction.Query(it)) },
-        onPhotoClick = { viewModel.handleAction(PhotoListAction.PhotoClick(it)) },
-        onFavoriteFilterClick = { viewModel.handleAction(PhotoListAction.FavoriteFilterClick) },
-        onFavoriteClick = { viewModel.handleAction(PhotoListAction.FavoriteItemClick(it)) },
-        onLoadMore = { viewModel.handleAction(PhotoListAction.LoadMore) },
-        onRefresh = { viewModel.handleAction(PhotoListAction.LoadIfEmpty) },
+        onQueryChange = { query -> viewModel.handleQueryChanged(query) },
+        onPhotoClick = { navigator(it) },
+        onFavoriteFilterClick = { viewModel.handleFavoriteFilterClick() },
+        onFavoriteClick = { viewModel.handleFavoriteClick(it) },
+        onLoadMore = { viewModel.loadMore() },
+        onRefresh = { viewModel.handleActionLoadIfEmpty() },
         showRefresh = showRefresh
     )
 }

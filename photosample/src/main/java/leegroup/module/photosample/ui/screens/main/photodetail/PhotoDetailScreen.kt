@@ -34,7 +34,7 @@ internal fun PhotoDetailScreen(
     navigator: (destination: Any) -> Unit,
 ) = BaseScreen(viewModel) {
     viewModel.navigator.collectAsEffect { destination -> navigator(destination) }
-    val uiModel by viewModel.uiModel.collectAsStateWithLifecycle()
+    val uiModel by viewModel.uiState.collectAsStateWithLifecycle()
 
     PhotoDetailContent(
         modifier = Modifier
@@ -44,7 +44,7 @@ internal fun PhotoDetailScreen(
             .statusBarsPadding(),
         uiModel = uiModel,
         onBack = { navigator.invoke(BaseDestination.Up()) },
-        onFavoriteClick = { viewModel.handleAction(PhotoDetailAction.SwitchFavorite) }
+        onFavoriteClick = { viewModel.switchFavorite() }
     )
 }
 

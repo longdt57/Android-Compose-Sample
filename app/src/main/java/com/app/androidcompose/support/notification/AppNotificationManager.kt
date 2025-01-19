@@ -57,7 +57,7 @@ object AppNotificationManager {
         NotificationManagerCompat.from(context).cancel(notificationId)
     }
 
-    @Suppress("NestedBlockDepth")
+    @Suppress("NestedBlockDepth", "LongParameterList")
     private fun createNotificationChannel(
         context: Context,
         channelId: String,

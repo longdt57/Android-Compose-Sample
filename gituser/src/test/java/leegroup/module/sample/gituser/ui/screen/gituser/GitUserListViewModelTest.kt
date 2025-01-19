@@ -94,7 +94,7 @@ class GitUserListViewModelTest : BaseUnitTest() {
     @Test
     fun `When loading users successfully, it shows the user list`() = runTest {
         viewModel.handleAction(GitUserListAction.LoadMore)
-        viewModel.uiModel.test {
+        viewModel.uiState.test {
             val updated = expectMostRecentItem()
             assertEquals(
                 "Expected updated users to match gitUserModels",

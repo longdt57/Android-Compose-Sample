@@ -16,14 +16,14 @@ fun LoadMore(listState: LazyListState, onLoadMore: () -> Unit) {
     LaunchedEffect(listState) {
         snapshotFlow { listState.firstVisibleItemScrollOffset }
             .collect { currentOffset ->
-                val totalItemsCount = listState.layoutInfo.totalItemsCount
+                val totalItemsCount =
+                    listState.layoutInfo.totalItemsCount.takeIf { it > 0 } ?: return@collect
                 val lastVisibleItemIndex =
                     listState.layoutInfo.visibleItemsInfo.lastOrNull()?.index ?: 0
 
                 // Check if scrolling down and near the end of the list
                 if (currentOffset > previousScrollOffset &&
-                    lastVisibleItemIndex >= totalItemsCount - 2 &&
-                    totalItemsCount > 0
+                    lastVisibleItemIndex >= totalItemsCount - 2
                 ) {
                     onLoadMore()
                 }

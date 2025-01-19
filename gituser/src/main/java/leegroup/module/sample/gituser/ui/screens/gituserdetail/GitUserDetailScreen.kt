@@ -31,7 +31,7 @@ internal fun GitUserDetailScreen(
     navigator: (destination: Any) -> Unit,
 ) = BaseScreen(viewModel) {
     viewModel.navigator.collectAsEffect { destination -> navigator(destination) }
-    val uiModel by viewModel.uiModel.collectAsStateWithLifecycle()
+    val uiModel by viewModel.uiState.collectAsStateWithLifecycle()
 
     GitUserDetailScreenContent(
         modifier = Modifier

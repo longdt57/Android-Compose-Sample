@@ -2,7 +2,6 @@ package leegroup.module.photosample.ui.models
 
 import androidx.compose.runtime.Immutable
 import kotlinx.serialization.Serializable
-import leegroup.module.photosample.domain.params.SaveFavoriteParam
 import leegroup.module.photosample.ui.screens.main.PhotoDetailNav
 
 @Immutable
@@ -23,8 +22,3 @@ internal data class PhotoDetailUiModel(
 
     fun reverseFavorite() = copy(isFavorite = isFavorite.not())
 }
-
-internal fun PhotoDetailUiModel.createSaveParam() = SaveFavoriteParam(
-    id = id,
-    isFavorite = isFavorite
-)
