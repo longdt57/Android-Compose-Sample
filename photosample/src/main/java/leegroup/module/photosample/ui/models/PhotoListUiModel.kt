@@ -9,17 +9,18 @@ import kotlinx.collections.immutable.toImmutableList
 internal data class PhotoListUiModel(
     val query: String = "",
     val isFavoriteEnabled: Boolean = false,
-    val delayQuery: Long = 0,
     val photos: ImmutableList<PhotoUiModel> = persistentListOf(),
     val hasMore: Boolean = true,
     val favoriteList: Set<Int> = setOf(),
 ) {
 
-    fun canLoadMore(): Boolean {
-        return hasMore && isFavoriteAndAllLoaded().not()
-    }
+    fun switchFavoriteFilter() = copy(isFavoriteEnabled = isFavoriteEnabled.not())
 
-    private fun isFavoriteAndAllLoaded() = isFavoriteEnabled && photos.size == favoriteList.size
+    fun resetData() = copy(
+        photos = persistentListOf(), hasMore = true
+    )
+
+    fun updateQuery(query: String) = copy(query = query)
 
     fun updateFavorites(favoriteList: Set<Int>): PhotoListUiModel {
         val newPhotos = photos.updateFavorites(favoriteList)

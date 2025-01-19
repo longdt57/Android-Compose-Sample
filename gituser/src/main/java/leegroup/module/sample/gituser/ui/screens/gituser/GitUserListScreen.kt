@@ -73,6 +73,7 @@ internal fun GitUserListScreen(
 }
 
 @Composable
+@Suppress("LongParameterList")
 private fun GitUserListScreenContent(
     modifier: Modifier = Modifier,
     showRefresh: Boolean,

@@ -10,10 +10,11 @@ import kotlinx.coroutines.launch
 import leegroup.module.compose.support.extensions.toNavModel
 import leegroup.module.compose.support.util.DispatchersProvider
 import leegroup.module.compose.ui.viewmodel.BaseViewModel
-import leegroup.module.photosample.domain.params.SaveFavoriteParam
 import leegroup.module.photosample.domain.usecases.photofavorite.SaveFavoriteUseCase
 import leegroup.module.photosample.ui.models.PhotoDetailUiModel
+import leegroup.module.photosample.ui.models.createSaveParam
 import leegroup.module.photosample.ui.screens.main.PhotoDetailNav
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -38,34 +39,20 @@ internal class PhotoDetailViewModel @Inject constructor(
 
     private fun switchFavorite() {
         viewModelScope.launch(dispatchersProvider.io) {
-            val newFavorite = _uiModel.value.isFavorite.not()
-            saveFavoriteUseCase.invoke(
-                SaveFavoriteParam(
-                    id = _uiModel.value.id,
-                    isFavorite = newFavorite
-                )
-            )
-            _uiModel.update {
-                it.copy(isFavorite = newFavorite)
+            runCatching {
+                val newModel = _uiModel.value.reverseFavorite()
+                saveFavoriteUseCase.invoke(newModel.createSaveParam())
+                _uiModel.update { newModel }
+            }.onFailure {
+                Timber.e(it)
             }
         }
     }
 
     private fun loadFromSavedStateHandle() {
         val navModel = savedStateHandle.toNavModel<PhotoDetailNav>()
-        setInputPhoto(navModel)
-    }
-
-    private fun setInputPhoto(navModel: PhotoDetailNav) {
-        with(navModel) {
-            _uiModel.update { oldValue ->
-                oldValue.copy(
-                    id = id,
-                    title = title,
-                    url = url,
-                    isFavorite = isFavorite
-                )
-            }
+        _uiModel.update { oldValue ->
+            oldValue.update(navModel)
         }
     }
 }

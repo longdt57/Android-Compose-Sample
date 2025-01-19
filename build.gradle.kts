@@ -20,8 +20,11 @@ detekt {
 
     source = files(
         "app/src/main/java",
-        "data/src/main/java",
-        "domain/src/main/java"
+        "compose/src/main/java",
+        "extension/src/main/java",
+        "gituser/src/main/java",
+        "photosample/src/main/java",
+        "test/src/main/java"
     )
     parallel = false
     config = files("detekt-config.yml")

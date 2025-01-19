@@ -2,9 +2,7 @@ package leegroup.module.photosample.ui.screens.main.photolist
 
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
@@ -19,8 +17,6 @@ import leegroup.module.compose.ui.models.ErrorState
 import leegroup.module.compose.ui.viewmodel.BaseViewModel
 import leegroup.module.extension.orFalse
 import leegroup.module.photosample.domain.models.PhotoModelD
-import leegroup.module.photosample.domain.params.GetPhotoListParam
-import leegroup.module.photosample.domain.params.SaveFavoriteParam
 import leegroup.module.photosample.domain.usecases.photofavorite.ObserveFavoriteListUseCase
 import leegroup.module.photosample.domain.usecases.photofavorite.SaveFavoriteUseCase
 import leegroup.module.photosample.domain.usecases.photolist.GetPhotoListFavoriteFilterUseCase
@@ -28,12 +24,13 @@ import leegroup.module.photosample.domain.usecases.photolist.GetPhotoListUseCase
 import leegroup.module.photosample.domain.usecases.photolist.SavePhotoListFavoriteFilterUseCase
 import leegroup.module.photosample.ui.models.PhotoListUiModel
 import leegroup.module.photosample.ui.models.PhotoUiModel
+import leegroup.module.photosample.ui.models.createSaveParam
 import leegroup.module.photosample.ui.models.mapToUiModels
-import leegroup.module.photosample.ui.screens.main.photolist.PhotoListViewModel.Companion.PER_PAGE
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
+@Suppress("TooManyFunctions")
 internal class PhotoListViewModel @Inject constructor(
     private val dispatchersProvider: DispatchersProvider,
     private val getPhotoListUseCase: GetPhotoListUseCase,
@@ -53,10 +50,23 @@ internal class PhotoListViewModel @Inject constructor(
         observeFavoriteList()
     }
 
+    fun handleAction(action: PhotoListAction) {
+        when (action) {
+            is PhotoListAction.LoadIfEmpty -> loadIfEmpty()
+            is PhotoListAction.LoadMore -> loadMore()
+            is PhotoListAction.FavoriteFilterClick -> handleFavoriteFilterClick()
+            is PhotoListAction.Query -> handleQueryChanged(action)
+            is PhotoListAction.FavoriteItemClick -> handleFavoriteClick(action.item)
+            is PhotoListAction.PhotoClick -> _navigator.tryEmit(action.item)
+        }
+    }
+
     private fun observeFavoriteList() {
         observeFavoriteListUseCase.invoke()
-            .onEach {
-                updateFavoriteList(it)
+            .onEach { favoriteList ->
+                _uiModel.update { oldValue ->
+                    oldValue.updateFavorites(favoriteList)
+                }
             }
             .flowOn(dispatchersProvider.io)
             .catch {
@@ -66,66 +76,45 @@ internal class PhotoListViewModel @Inject constructor(
     }
 
     private fun getFavoriteFilter() {
-        getFavoriteFilterUseCase.invoke()
-            .take(1)
+        getFavoriteFilterUseCase.invoke().take(1)
             .onEach { isEnabled ->
-                updateFavoriteFilter(isEnabled)
-            }
-            .flowOn(dispatchersProvider.io)
+                _uiModel.update { uiState ->
+                    uiState.copy(isFavoriteEnabled = isEnabled)
+                }
+            }.flowOn(dispatchersProvider.io)
             .catch {
                 Timber.e(it)
             }
             .launchIn(viewModelScope)
     }
 
-    fun handleAction(action: PhotoListAction) {
-        when (action) {
-            is PhotoListAction.LoadIfEmpty -> loadIfEmpty()
-            is PhotoListAction.LoadMore -> loadMore()
-            is PhotoListAction.FavoriteFilterClick -> onFavoriteFilterClick()
-            is PhotoListAction.Query -> updateQuery(action)
-            is PhotoListAction.FavoriteItemClick -> handleFavoriteClick(action.item)
-            is PhotoListAction.PhotoClick -> handlePhotoClick(action.item)
-        }
-    }
-
-    private fun onFavoriteFilterClick() {
-        val newFavoriteFilter = _uiModel.value.isFavoriteEnabled.not()
+    private fun handleFavoriteFilterClick() {
         cancelCurrentLoading()
-        updateFavoriteFilter(newFavoriteFilter)
-        saveFavoriteFilterToLocal(newFavoriteFilter)
-        resetListData()
+
+        val newUiModel = _uiModel.value.switchFavoriteFilter().resetData()
+        _uiModel.update { newUiModel }
+
+        saveFavoriteFilterToLocal(newUiModel.isFavoriteEnabled)
         loadMore()
     }
 
     private fun handleFavoriteClick(item: PhotoUiModel) {
         viewModelScope.launch(dispatchersProvider.io) {
-            saveFavoriteUseCase.invoke(
-                SaveFavoriteParam(
-                    id = item.id,
-                    isFavorite = item.isFavorite.not()
-                )
-            )
+            val newItem = item.switchFavorite()
+            saveFavoriteUseCase.invoke(newItem.createSaveParam())
         }
     }
 
-    private fun handlePhotoClick(item: PhotoUiModel) {
-        _navigator.tryEmit(item)
-    }
-
-    private fun updateQuery(query: PhotoListAction.Query) {
+    private fun handleQueryChanged(query: PhotoListAction.Query) {
         if (query.query == _uiModel.value.query) return
 
         cancelCurrentLoading()
-        resetListData()
-        updateUiStateQuery(query)
-        loadMore()
-    }
-
-    private fun resetListData() {
-        _uiModel.update { oldValue ->
-            oldValue.copy(photos = persistentListOf(), hasMore = true)
+        _uiModel.update { uiState ->
+            uiState
+                .resetData()
+                .updateQuery(query.query)
         }
+        loadMore()
     }
 
     private fun loadIfEmpty() {
@@ -134,65 +123,32 @@ internal class PhotoListViewModel @Inject constructor(
         }
     }
 
-    private fun isLoadingJobActive() = loadDataJob?.isActive.orFalse
-
-    private fun canLoadMore(): Boolean {
-        return _uiModel.value.canLoadMore() && isLoadingJobActive().not()
-    }
-
     private fun loadMore() {
         if (canLoadMore().not()) return
 
         val currentState = _uiModel.value
         loadDataJob = viewModelScope.launch(dispatchersProvider.io) {
             showLoading()
-            delayQuery(currentState)
-            getPhotoListUseCase(currentState.createLoadMoreQueryParam())
-                .injectLoading()
+            currentState.delayQuery()
+            getPhotoListUseCase(currentState.createLoadMoreQueryParam()).injectLoading()
                 .onEach { result ->
-                    handleSuccess(result)
-                }
-                .flowOn(dispatchersProvider.io)
-                .catch { e ->
+                    onLoadMoreSuccess(result)
+                }.flowOn(dispatchersProvider.io).catch { e ->
                     handleError(e)
-                }
-                .launchIn(viewModelScope)
-                .join()
+                }.launchIn(viewModelScope).join()
         }
     }
 
-    override fun onErrorConfirmation(errorState: ErrorState) {
-        super.onErrorConfirmation(errorState)
-        when (errorState) {
-            is ErrorState.Api, is ErrorState.Network -> loadMore()
-            else -> Unit
-        }
-    }
-
-    private fun handleSuccess(result: List<PhotoModelD>) {
-        _uiModel.update { oldValue ->
-            oldValue
+    private fun onLoadMoreSuccess(result: List<PhotoModelD>) {
+        _uiModel.update { uiState ->
+            uiState
                 .plusPhotos(result.mapToUiModels())
                 .copy(hasMore = result.isNotEmpty())
         }
     }
 
-    private fun isEmpty() = _uiModel.value.photos.isEmpty()
-
-    private fun updateFavoriteList(favoriteList: Set<Int>) {
-        _uiModel.update { oldValue ->
-            oldValue.updateFavorites(favoriteList)
-        }
-    }
-
     private fun cancelCurrentLoading() {
         loadDataJob?.cancel()
-    }
-
-    private fun updateFavoriteFilter(isEnabled: Boolean) {
-        _uiModel.update { oldValue ->
-            oldValue.copy(isFavoriteEnabled = isEnabled)
-        }
     }
 
     private fun saveFavoriteFilterToLocal(newFavoriteFilter: Boolean) {
@@ -201,26 +157,17 @@ internal class PhotoListViewModel @Inject constructor(
         }
     }
 
-    private fun updateUiStateQuery(query: PhotoListAction.Query) {
-        _uiModel.update { oldValue ->
-            oldValue.copy(query = query.query, delayQuery = query.delay)
-        }
+    private fun canLoadMore(): Boolean {
+        return _uiModel.value.canLoadMore() && isLoadingJobActive().not()
     }
 
-    private suspend fun delayQuery(state: PhotoListUiModel) {
-        if (state.delayQuery > 0) {
-            delay(state.delayQuery)
-        }
-    }
+    private fun isLoadingJobActive() = loadDataJob?.isActive.orFalse
 
-    companion object {
-        const val PER_PAGE = 30
+    override fun onErrorConfirmation(errorState: ErrorState) {
+        super.onErrorConfirmation(errorState)
+        when (errorState) {
+            is ErrorState.Api, is ErrorState.Network -> loadMore()
+            else -> Unit
+        }
     }
 }
-
-internal fun PhotoListUiModel.createLoadMoreQueryParam() = GetPhotoListParam(
-    ids = if (isFavoriteEnabled) favoriteList.toList() else null,
-    titleLike = query,
-    since = photos.lastOrNull()?.id ?: 0,
-    limit = PER_PAGE,
-)

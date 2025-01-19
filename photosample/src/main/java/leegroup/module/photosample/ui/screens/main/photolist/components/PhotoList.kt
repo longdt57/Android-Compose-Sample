@@ -16,6 +16,7 @@ import leegroup.module.compose.ui.components.LoadMore
 import leegroup.module.photosample.ui.models.PhotoUiModel
 
 @Composable
+@Suppress("LongParameterList")
 internal fun PhotoList(
     modifier: Modifier = Modifier,
     photos: ImmutableList<PhotoUiModel>,

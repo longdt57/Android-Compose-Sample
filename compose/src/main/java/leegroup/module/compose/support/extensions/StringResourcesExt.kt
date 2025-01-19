@@ -8,6 +8,8 @@ import androidx.compose.ui.res.stringResource
 @Composable
 @ReadOnlyComposable
 fun stringResourceOrNull(@StringRes id: Int?): String? {
-    if (id == null || id == 0 || id == -1) return null
-    return stringResource(id)
+    return when (id) {
+        null, 0, -1 -> null
+        else -> stringResource(id)
+    }
 }

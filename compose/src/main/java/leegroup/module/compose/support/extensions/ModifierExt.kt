@@ -25,6 +25,7 @@ fun Modifier.widthForFixedItems(numOfItems: Float, totalSpacing: Int): Modifier 
     return width(itemWidth.dp)
 }
 
+@Suppress("MagicNumber", "LongMethod")
 @Composable
 fun Modifier.verticalScrollbar(
     state: LazyGridState,
@@ -60,9 +61,13 @@ fun Modifier.verticalScrollbar(
         derivedStateOf {
             firstVisibleItem?.let { firstVisibleItem ->
                 val layoutInfo = state.layoutInfo
-                val totalRows =
-                    ceil(state.layoutInfo.totalItemsCount.toFloat() / numOfItemsInRow.toFloat()).toInt()
-                totalRows * firstVisibleItem.size.height + layoutInfo.beforeContentPadding + layoutInfo.afterContentPadding + layoutInfo.mainAxisItemSpacing * (totalRows - 1)
+                val totalRows = ceil(
+                    state.layoutInfo.totalItemsCount.toFloat() / numOfItemsInRow.toFloat()
+                ).toInt()
+                totalRows * firstVisibleItem.size.height +
+                        layoutInfo.beforeContentPadding +
+                        layoutInfo.afterContentPadding +
+                        layoutInfo.mainAxisItemSpacing * (totalRows - 1)
             } ?: run {
                 0
             }
@@ -85,8 +90,9 @@ fun Modifier.verticalScrollbar(
                 0f
             } else {
                 firstVisibleItem?.let { firstVisibleItem ->
-                    val scrollOffset =
-                        firstVisibleItem.index / numOfItemsInRow * (firstVisibleItem.size.height + state.layoutInfo.mainAxisItemSpacing) + state.firstVisibleItemScrollOffset
+                    val scrollOffset = firstVisibleItem.index / numOfItemsInRow *
+                            (firstVisibleItem.size.height + state.layoutInfo.mainAxisItemSpacing) +
+                            state.firstVisibleItemScrollOffset
                     scrollOffset.toFloat() / (totalHeight - state.layoutInfo.viewportSize.height).toFloat()
                 } ?: run { 0f }
             }

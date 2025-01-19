@@ -70,7 +70,7 @@ internal fun PhotoListItem(
 
 @Preview(showBackground = true)
 @Composable
-@SuppressWarnings
+@Suppress("MagicNumber")
 private fun Preview() {
     ComposeTheme {
         PhotoListItem(
