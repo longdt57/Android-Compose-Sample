@@ -68,7 +68,7 @@ internal fun PhotoListScreen(
 }
 
 @Composable
-private fun PhotoListContent(
+internal fun PhotoListContent(
     modifier: Modifier = Modifier,
     uiModel: PhotoListUiModel,
     showRefresh: Boolean,

@@ -49,7 +49,7 @@ internal fun PhotoDetailScreen(
 }
 
 @Composable
-private fun PhotoDetailContent(
+internal fun PhotoDetailContent(
     modifier: Modifier = Modifier,
     uiModel: PhotoDetailUiModel,
     onBack: () -> Unit = {},
