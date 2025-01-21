@@ -37,8 +37,6 @@ dependencies {
 
     implementation(project(":compose"))
     implementation(libs.bundles.test)
-    implementation(libs.androidx.ui.test.junit4)
-    implementation(platform(libs.androidx.compose.bom))
 
 }
 
