@@ -1,6 +1,6 @@
 package leegroup.module.compose.ui.components
 
-import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -9,25 +9,23 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 
-const val LOAD_MORE_FROM_BOTTOM_ITEM = 4
-
 @Composable
-fun LoadMore(
+fun LoadMoreGrid(
     fromBottom: Int = LOAD_MORE_FROM_BOTTOM_ITEM,
-    listState: LazyListState,
+    gridState: LazyGridState,
     onLoadMore: () -> Unit
 ) {
-    // Detect when user scrolls near the bottom of the list
+    // Detect when user scrolls near the bottom of the grid
     var previousScrollOffset by remember { mutableIntStateOf(0) } // To track scroll direction
-    LaunchedEffect(listState) {
-        snapshotFlow { listState.firstVisibleItemScrollOffset }
+    LaunchedEffect(gridState) {
+        snapshotFlow { gridState.firstVisibleItemScrollOffset }
             .collect { currentOffset ->
                 val totalItemsCount =
-                    listState.layoutInfo.totalItemsCount.takeIf { it > 0 } ?: return@collect
+                    gridState.layoutInfo.totalItemsCount.takeIf { it > 0 } ?: return@collect
                 val lastVisibleItemIndex =
-                    listState.layoutInfo.visibleItemsInfo.lastOrNull()?.index ?: 0
+                    gridState.layoutInfo.visibleItemsInfo.lastOrNull()?.index ?: 0
 
-                // Check if scrolling down and near the end of the list
+                // Check if scrolling down and near the end of the grid
                 if (currentOffset > previousScrollOffset &&
                     lastVisibleItemIndex >= totalItemsCount - fromBottom
                 ) {

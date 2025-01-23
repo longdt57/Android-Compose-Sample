@@ -32,17 +32,15 @@ class PhotoDetailScreenTest {
         // Start the app
         composeTestRule.setContent {
             ComposeTheme {
-                ComposeTheme {
-                    PhotoDetailContent(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(MaterialTheme.colorScheme.background)
-                            .navigationBarsPadding(),
-                        uiModel = PhotoDetailUiModel(),
-                        onBack = {},
-                        onFavoriteClick = {}
-                    )
-                }
+                PhotoDetailContent(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(MaterialTheme.colorScheme.background)
+                        .navigationBarsPadding(),
+                    uiModel = PhotoDetailUiModel(),
+                    onBack = {},
+                    onFavoriteClick = {}
+                )
             }
         }
 
@@ -59,16 +57,14 @@ class PhotoDetailScreenTest {
         )
         composeTestRule.setContent {
             ComposeTheme {
-                ComposeTheme {
-                    PhotoDetailContent(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(MaterialTheme.colorScheme.background)
-                            .navigationBarsPadding(),
-                        uiModel = sampleUiModel,
-                        onFavoriteClick = {}
-                    )
-                }
+                PhotoDetailContent(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(MaterialTheme.colorScheme.background)
+                        .navigationBarsPadding(),
+                    uiModel = sampleUiModel,
+                    onFavoriteClick = {}
+                )
             }
         }
 

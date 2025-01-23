@@ -33,20 +33,18 @@ class PhotoListScreenTest {
         // Start the app
         composeTestRule.setContent {
             ComposeTheme {
-                ComposeTheme {
-                    PhotoListContent(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(MaterialTheme.colorScheme.background)
-                            .navigationBarsPadding(),
-                        uiModel = PhotoListUiModel(
-                            query = "nature",
-                            photos = persistentListOf(),
-                            hasMore = true
-                        ),
-                        showRefresh = false
-                    )
-                }
+                PhotoListContent(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(MaterialTheme.colorScheme.background)
+                        .navigationBarsPadding(),
+                    uiModel = PhotoListUiModel(
+                        query = "nature",
+                        photos = persistentListOf(),
+                        hasMore = true
+                    ),
+                    showRefresh = false
+                )
             }
         }
 
@@ -83,20 +81,18 @@ class PhotoListScreenTest {
         )
         composeTestRule.setContent {
             ComposeTheme {
-                ComposeTheme {
-                    PhotoListContent(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(MaterialTheme.colorScheme.background)
-                            .navigationBarsPadding(),
-                        uiModel = PhotoListUiModel(
-                            query = "nature",
-                            photos = samplePhotos,
-                            hasMore = true
-                        ),
-                        showRefresh = false
-                    )
-                }
+                PhotoListContent(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(MaterialTheme.colorScheme.background)
+                        .navigationBarsPadding(),
+                    uiModel = PhotoListUiModel(
+                        query = "nature",
+                        photos = samplePhotos,
+                        hasMore = true
+                    ),
+                    showRefresh = false
+                )
             }
         }
 
