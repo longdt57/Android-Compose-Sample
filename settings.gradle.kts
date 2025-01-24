@@ -24,6 +24,7 @@ rootProject.name = "Android Clean Architecture"
 include(":app")
 include(":gituser")
 include(":photosample")
+include(":note")
 
 include(":compose")
 include(":extension")

@@ -10,22 +10,23 @@ prod = "prod"
 staging = "staging"
 
 androidTracking = "1.0.9"
-activityCompose = "1.9.3"
+activityCompose = "1.10.0"
 agp = "8.7.3"
-appDistribution = "5.0.0"
+appDistribution = "5.1.0"
 chucker = "4.0.0"
 coil = "2.7.0"
-composeBom = "2024.12.01"
+composeBom = "2025.01.00"
 core = "1.6.1"
 coreKtx = "1.15.0"
 coroutineTest = "1.8.1"
 coroutines = "1.8.1"
 crashlytic = "3.0.2"
-datastorePreferences = "1.1.1"
+datastorePreferences = "1.1.2"
 detektVersion = "1.23.0"
 espressoCore = "3.6.1"
-firebaseBom = "33.7.0"
+firebaseBom = "33.8.0"
 firebasePref = "1.4.2"
+firebaseFirestore = "25.1.1"
 googleService = "4.4.2"
 hiltAndroid = "2.51.1"
 hiltNavigationCompose = "1.2.0"
@@ -58,6 +59,7 @@ androidx-core = { module = "androidx.test:core", version.ref = "core" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
+androidx-hilt-work = { module = "androidx.hilt:hilt-work", version.ref = "hiltNavigationCompose" }
 androidx-lifecycle-process = { module = "androidx.lifecycle:lifecycle-process", version.ref = "lifecycleRuntimeKtx" }
 androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleRuntimeKtx" }
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleRuntimeKtx" }
@@ -82,6 +84,7 @@ firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "fir
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-config = { module = "com.google.firebase:firebase-config" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
+firebase-firestore = { module = "com.google.firebase:firebase-firestore", version.ref = "firebaseFirestore" }
 firebase-inappmessaging-display-ktx = { module = "com.google.firebase:firebase-inappmessaging-display-ktx" }
 firebase-messaging-ktx = { module = "com.google.firebase:firebase-messaging-ktx" }
 firebase-perf = { module = "com.google.firebase:firebase-perf" }
