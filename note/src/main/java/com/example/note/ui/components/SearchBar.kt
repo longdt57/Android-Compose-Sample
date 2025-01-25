@@ -50,8 +50,6 @@ internal fun SearchBar(
         modifier = modifier,
         shape = MaterialTheme.shapes.medium,
         colors = TextFieldDefaults.colors(
-            focusedContainerColor = MaterialTheme.colorScheme.surface,
-            unfocusedContainerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.8f),
             focusedIndicatorColor = Color.Transparent, // Remove the focused underline
             unfocusedIndicatorColor = Color.Transparent, // Remove the unfocused underline
         )

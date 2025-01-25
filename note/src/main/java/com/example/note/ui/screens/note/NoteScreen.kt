@@ -1,12 +1,8 @@
 package com.example.note.ui.screens.note
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
@@ -33,9 +29,10 @@ import leegroup.module.compose.ui.theme.ComposeTheme
 
 @Composable
 internal fun NoteScreen(
-    viewModel: NoteViewModel = hiltViewModel(),
     navigator: (destination: Any) -> Unit,
-) = BaseScreen(viewModel) {
+    modifier: Modifier = Modifier,
+) {
+    val viewModel: NoteViewModel = hiltViewModel()
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val loading by viewModel.loading.collectAsStateWithLifecycle()
@@ -52,16 +49,19 @@ internal fun NoteScreen(
         }
     }
 
-    NoteScreenContent(
-        uiState,
-        showEmpty = showEmpty,
-        onDelete = { viewModel.onDeleteNote(it.id) },
-        onClick = { navigator.invoke(it) },
-        onAdd = { viewModel.onAddNote(it) },
-        onQueryChanged = { viewModel.onQueryChanged(it) },
-        onQueryClear = { viewModel.onQueryChanged("") },
-        onLoadMore = { viewModel.loadNotes() }
-    )
+    BaseScreen(viewModel) {
+        NoteScreenContent(
+            modifier = modifier,
+            uiState = uiState,
+            showEmpty = showEmpty,
+            onDelete = { viewModel.onDeleteNote(it.id) },
+            onClick = { navigator.invoke(it) },
+            onAdd = { viewModel.onAddNote(it) },
+            onQueryChanged = { viewModel.onQueryChanged(it) },
+            onQueryClear = { viewModel.onQueryChanged("") },
+            onLoadMore = { viewModel.loadNotes() }
+        )
+    }
 }
 
 @Composable
@@ -73,14 +73,11 @@ internal fun NoteScreenContent(
     onClick: (NoteUiModel) -> Unit = {},
     onAdd: (String) -> Unit = {},
     onQueryChanged: (String) -> Unit = {},
-    onQueryClear: () -> Unit = {}
+    onQueryClear: () -> Unit = {},
+    modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(uiState.backgroundColor)
-            .navigationBarsPadding()
-            .statusBarsPadding()
+        modifier = modifier
     ) {
         NoteAppBar()
         SearchBar(

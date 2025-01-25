@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,22 +29,21 @@ import leegroup.module.photosample.ui.screens.main.photodetail.components.PhotoD
 
 @Composable
 internal fun PhotoDetailScreen(
-    viewModel: PhotoDetailViewModel = hiltViewModel(),
     navigator: (destination: Any) -> Unit,
-) = BaseScreen(viewModel) {
+    modifier: Modifier = Modifier,
+) {
+    val viewModel: PhotoDetailViewModel = hiltViewModel()
     viewModel.navigator.collectAsEffect { destination -> navigator(destination) }
     val uiModel by viewModel.uiState.collectAsStateWithLifecycle()
 
-    PhotoDetailContent(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-            .navigationBarsPadding()
-            .statusBarsPadding(),
-        uiModel = uiModel,
-        onBack = { navigator.invoke(BaseDestination.Up()) },
-        onFavoriteClick = { viewModel.switchFavorite() }
-    )
+    BaseScreen(viewModel) {
+        PhotoDetailContent(
+            modifier = modifier,
+            uiModel = uiModel,
+            onBack = { navigator.invoke(BaseDestination.Up()) },
+            onFavoriteClick = { viewModel.switchFavorite() }
+        )
+    }
 }
 
 @Composable

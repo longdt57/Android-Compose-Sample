@@ -1,13 +1,9 @@
 package leegroup.module.sample.gituser.ui.screens.gituser
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
@@ -31,10 +27,11 @@ import leegroup.module.sample.gituser.ui.screens.gituser.components.GitUserListA
 import leegroup.module.sample.gituser.ui.screens.gituser.components.GitUserListEmpty
 
 @Composable
-internal fun GitUserListScreen(
-    viewModel: GitUserListViewModel = hiltViewModel(),
+fun GitUserListScreen(
+    modifier: Modifier = Modifier,
     navigator: (destination: Any) -> Unit,
-) = BaseScreen(viewModel) {
+) {
+    val viewModel: GitUserListViewModel = hiltViewModel()
     viewModel.navigator.collectAsEffect { destination -> navigator(destination) }
     val uiModel by viewModel.uiState.collectAsStateWithLifecycle()
     val loading by viewModel.loading.collectAsStateWithLifecycle()
@@ -51,25 +48,23 @@ internal fun GitUserListScreen(
         viewModel.handleAction(GitUserListAction.TrackLaunch)
     }
 
-    GitUserListScreenContent(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-            .navigationBarsPadding()
-            .statusBarsPadding(),
-        showRefresh = showRefresh,
-        users = uiModel.users,
-        onLoadMore = {
-            viewModel.handleAction(GitUserListAction.LoadMore)
-        },
-        onClick = { user ->
-            viewModel.handleAction(GitUserListAction.TrackOpenUserDetail(user.login))
-            navigator(GitUserDestination.GitUserDetail.GitUserDetailNav(user.login))
-        },
-        onRefresh = {
-            viewModel.handleAction(GitUserListAction.LoadIfEmpty)
-        }
-    )
+    BaseScreen(viewModel) {
+        GitUserListScreenContent(
+            modifier = modifier,
+            showRefresh = showRefresh,
+            users = uiModel.users,
+            onLoadMore = {
+                viewModel.handleAction(GitUserListAction.LoadMore)
+            },
+            onClick = { user ->
+                viewModel.handleAction(GitUserListAction.TrackOpenUserDetail(user.login))
+                navigator(GitUserDestination.GitUserDetail.GitUserDetailNav(user.login))
+            },
+            onRefresh = {
+                viewModel.handleAction(GitUserListAction.LoadIfEmpty)
+            }
+        )
+    }
 }
 
 @Composable

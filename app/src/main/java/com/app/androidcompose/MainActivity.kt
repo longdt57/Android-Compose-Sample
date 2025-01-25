@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.rememberNavController
-import com.app.androidcompose.ui.AppNavGraph
+import com.app.androidcompose.ui.screens.navigationbar.BottomNavigationApp
 import dagger.hilt.android.AndroidEntryPoint
 import leegroup.module.compose.ui.theme.ComposeTheme
 
@@ -17,7 +17,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ComposeTheme {
-                AppNavGraph(navController = rememberNavController())
+                BottomNavigationApp(navController = rememberNavController())
             }
         }
     }

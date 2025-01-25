@@ -1,13 +1,8 @@
 package leegroup.module.sample.gituser.ui.screens.gituserdetail
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -27,21 +22,20 @@ import leegroup.module.sample.gituser.ui.screens.gituserdetail.components.GitUse
 
 @Composable
 internal fun GitUserDetailScreen(
-    viewModel: GitUserDetailViewModel = hiltViewModel(),
     navigator: (destination: Any) -> Unit,
-) = BaseScreen(viewModel) {
+    modifier: Modifier = Modifier,
+) {
+    val viewModel: GitUserDetailViewModel = hiltViewModel()
     viewModel.navigator.collectAsEffect { destination -> navigator(destination) }
     val uiModel by viewModel.uiState.collectAsStateWithLifecycle()
 
-    GitUserDetailScreenContent(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-            .navigationBarsPadding()
-            .statusBarsPadding(),
-        uiModel = uiModel,
-        onBack = { navigator(BaseDestination.Up()) }
-    )
+    BaseScreen(viewModel) {
+        GitUserDetailScreenContent(
+            modifier = modifier,
+            uiModel = uiModel,
+            onBack = { navigator(BaseDestination.Up()) }
+        )
+    }
 }
 
 @Composable

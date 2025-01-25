@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -32,9 +31,10 @@ import leegroup.module.photosample.ui.screens.main.photolist.components.PhotoLis
 
 @Composable
 internal fun PhotoListScreen(
-    viewModel: PhotoListViewModel = hiltViewModel(),
     navigator: (destination: Any) -> Unit,
-) = BaseScreen(viewModel) {
+    modifier: Modifier = Modifier,
+) {
+    val viewModel: PhotoListViewModel = hiltViewModel()
     viewModel.navigator.collectAsEffect { destination -> navigator(destination) }
 
     val uiModel by viewModel.uiState.collectAsStateWithLifecycle()
@@ -50,21 +50,19 @@ internal fun PhotoListScreen(
         viewModel.handleActionLoadIfEmpty()
     }
 
-    PhotoListContent(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-            .navigationBarsPadding()
-            .statusBarsPadding(),
-        uiModel = uiModel,
-        onQueryChange = { query -> viewModel.handleQueryChanged(query) },
-        onPhotoClick = { navigator(it) },
-        onFavoriteFilterClick = { viewModel.handleFavoriteFilterClick() },
-        onFavoriteClick = { viewModel.handleFavoriteClick(it) },
-        onLoadMore = { viewModel.loadMore() },
-        onRefresh = { viewModel.handleActionLoadIfEmpty() },
-        showRefresh = showRefresh
-    )
+    BaseScreen(viewModel) {
+        PhotoListContent(
+            modifier = modifier,
+            uiModel = uiModel,
+            onQueryChange = { query -> viewModel.handleQueryChanged(query) },
+            onPhotoClick = { navigator(it) },
+            onFavoriteFilterClick = { viewModel.handleFavoriteFilterClick() },
+            onFavoriteClick = { viewModel.handleFavoriteClick(it) },
+            onLoadMore = { viewModel.loadMore() },
+            onRefresh = { viewModel.handleActionLoadIfEmpty() },
+            showRefresh = showRefresh
+        )
+    }
 }
 
 @Composable

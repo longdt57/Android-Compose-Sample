@@ -30,8 +30,8 @@ fun MainScreen(
 ) {
     val listScreen = listOf(
         GitUserDestination.GitUserRoot,
-        PhotoDestination.PhotoRoot,
-        NoteDestination.NoteRoot,
+        PhotoDestination.PhotoList,
+        NoteDestination.NoteScreen,
     )
     LazyColumn(
         modifier = Modifier
@@ -53,7 +53,7 @@ fun MainScreen(
                 elevation = CardDefaults.cardElevation(4.dp),
                 shape = RoundedCornerShape(8.dp),
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.background
+                    containerColor = MaterialTheme.colorScheme.secondary
                 )
             ) {
                 Text(
