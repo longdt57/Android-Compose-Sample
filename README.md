@@ -1,6 +1,8 @@
 [![Build Status](https://app.bitrise.io/app/5b770be4-c4df-4d2c-8172-14153a7d9f78/status.svg?token=c01b64vut84jbfo1YIjnmg&branch=develop)](https://app.bitrise.io/app/5b770be4-c4df-4d2c-8172-14153a7d9f78)
-# Clean Architecture
-https://github.com/longdt57/Android-Clean-Architecture
+
+# Compose
+
+https://github.com/longdt57/Android-Compose
 
 ## Setup
 

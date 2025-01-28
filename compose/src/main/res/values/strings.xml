@@ -11,4 +11,5 @@
     <string name="popup_error_timeout_body">"Apologies for the inconvenience! We’ll be back soon. Please try again later."</string>
     <string name="popup_error_no_connection_title">"You are currently offline!"</string>
     <string name="popup_error_no_connection_body">"Looks like your connection is interrupted. Check network connection and try again."</string>
+    <string name="common_refresh">Refresh</string>
 </resources>

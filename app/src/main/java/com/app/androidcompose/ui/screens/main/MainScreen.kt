@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import com.example.note.ui.NoteDestination
 import leegroup.module.compose.ui.theme.ComposeTheme
 import leegroup.module.photosample.ui.screens.main.PhotoDestination
+import leegroup.module.phototopdf.ui.PhotoToPdfDestination
 import leegroup.module.sample.gituser.ui.screens.GitUserDestination
 
 @Composable
@@ -32,6 +33,7 @@ fun MainScreen(
         GitUserDestination.GitUserRoot,
         PhotoDestination.PhotoList,
         NoteDestination.NoteScreen,
+        PhotoToPdfDestination.PhotoToPdfMainScreen,
     )
     LazyColumn(
         modifier = Modifier

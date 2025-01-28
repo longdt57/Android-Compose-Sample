@@ -10,6 +10,7 @@ import com.example.note.ui.noteNavGraph
 import leegroup.module.compose.support.extensions.appNavigate
 import leegroup.module.compose.support.extensions.launchSingleTopNavOptions
 import leegroup.module.photosample.ui.screens.main.photoNavGraph
+import leegroup.module.phototopdf.ui.photoToPdfNavGraph
 import leegroup.module.sample.gituser.ui.screens.gitUserNavGraph
 
 @Composable
@@ -36,5 +37,6 @@ fun AppNavGraph(
         photoNavGraph(navController = navController)
         gitUserNavGraph(navController = navController)
         noteNavGraph(navController = navController)
+        photoToPdfNavGraph(navController)
     }
 }

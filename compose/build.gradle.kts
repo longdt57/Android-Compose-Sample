@@ -49,8 +49,6 @@ android {
 
 dependencies {
 
-    implementation(project(":extension"))
-
     // Lifecycle
     implementation(libs.bundles.androidx.lifecycle)
 
@@ -63,8 +61,11 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.navigation.compose)
-    implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.work.runtime.ktx)
+
+    // Data
+    implementation(libs.androidx.datastore.preferences)
+    implementation(libs.androidx.security.crypto)
 
     // Coroutines
     implementation(libs.kotlin.coroutines.core)
@@ -77,7 +78,7 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
 
     // Retrofit
-    implementation(libs.retrofit)
+    implementation(libs.bundles.networking)
 
     testImplementation(libs.bundles.test)
     testImplementation(libs.androidx.ui.test.junit4)

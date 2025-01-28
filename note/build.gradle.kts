@@ -18,7 +18,6 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
 
-        buildConfigField("String", "BASE_API_URL", "\"https://jsonplaceholder.typicode.com/\"")
     }
 
     buildTypes {
@@ -59,7 +58,6 @@ android {
 dependencies {
 
     implementation(project(":compose"))
-    implementation(project(":extension"))
 
     // Lifecycle
     implementation(libs.bundles.androidx.lifecycle)

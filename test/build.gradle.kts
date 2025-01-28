@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
-    id("maven-publish")
 }
 
 android {
@@ -38,18 +37,4 @@ dependencies {
     implementation(project(":compose"))
     implementation(libs.bundles.test)
 
-}
-
-publishing {
-    publications {
-        register<MavenPublication>("release") {
-            groupId = "leegroup.module"
-            artifactId = "test"
-            version = "1.0"
-
-            afterEvaluate {
-                from(components["release"])
-            }
-        }
-    }
 }

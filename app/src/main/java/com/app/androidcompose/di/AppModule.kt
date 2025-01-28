@@ -1,13 +1,13 @@
 package com.app.androidcompose.di
 
 import android.content.Context
-import leegroup.module.compose.support.util.DispatchersProvider
-import leegroup.module.compose.support.util.DispatchersProviderImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import leegroup.module.compose.support.util.DispatchersProvider
+import leegroup.module.compose.support.util.DispatchersProviderImpl
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -17,6 +17,5 @@ class AppModule {
     fun provideContext(@ApplicationContext context: Context): Context = context
 
     @Provides
-    fun provideDispatchersProvider(dispatcher: DispatchersProviderImpl): DispatchersProvider =
-        dispatcher
+    fun provideDispatchersProvider(): DispatchersProvider = DispatchersProviderImpl
 }

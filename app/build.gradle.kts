@@ -126,10 +126,12 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
     implementation(project(":compose"))
-    implementation(project(":extension"))
     implementation(project(":gituser"))
     implementation(project(":photosample"))
     implementation(project(":note"))
+
+    implementation(libs.phototopdf.coreimage)
+    implementation(libs.phototopdf)
 
     // Lifecycle
     implementation(libs.bundles.androidx.lifecycle)
@@ -170,10 +172,6 @@ dependencies {
     // Serialization
     implementation(libs.kotlinx.serialization.json)
 
-    // Inspect
-    debugImplementation(libs.library.chucker)
-    releaseImplementation(libs.library.chucker.no.op)
-
     // Leak Canary
     debugImplementation(libs.squareup.leakcanary)
 
@@ -206,7 +204,6 @@ dependencies {
 
 dependencies {
     kover(project(":compose"))
-    kover(project(":extension"))
     kover(project(":gituser"))
     kover(project(":photosample"))
     kover(project(":note"))

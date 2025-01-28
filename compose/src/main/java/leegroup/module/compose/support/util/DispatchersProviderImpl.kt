@@ -1,9 +1,8 @@
 package leegroup.module.compose.support.util
 
 import kotlinx.coroutines.Dispatchers
-import javax.inject.Inject
 
-class DispatchersProviderImpl @Inject constructor() : DispatchersProvider {
+object DispatchersProviderImpl : DispatchersProvider {
 
     override val io = Dispatchers.IO
 
