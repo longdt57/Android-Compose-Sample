@@ -2,7 +2,6 @@ package com.example.note.ui.screens.note
 
 import androidx.lifecycle.viewModelScope
 import com.example.note.NoteConfig.NOTE_PER_PAGE
-import com.example.note.di.NoteModule.NoteDispatcherProvider
 import com.example.note.domain.models.NoteD
 import com.example.note.domain.param.GetNoteParam
 import com.example.note.domain.usecases.AddNoteUseCase
@@ -27,7 +26,7 @@ import javax.inject.Inject
 @HiltViewModel
 @Suppress("TooManyFunctions")
 internal class NoteViewModel @Inject constructor(
-    @NoteDispatcherProvider private val dispatchersProvider: DispatchersProvider,
+    private val dispatchersProvider: DispatchersProvider,
     private val getNotesUseCase: GetNotesUseCase,
     private val addNoteUseCase: AddNoteUseCase,
     private val deleteNoteUseCase: DeleteNoteUseCase,

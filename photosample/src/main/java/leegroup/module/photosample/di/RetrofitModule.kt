@@ -1,12 +1,10 @@
 package leegroup.module.photosample.di
 
-import android.content.Context
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import leegroup.module.di.RetrofitProvider
+import leegroup.module.compose.di.RetrofitProvider
 import leegroup.module.photosample.BuildConfig
 import leegroup.module.photosample.data.remote.services.PhotoApiService
 import retrofit2.Retrofit
@@ -22,11 +20,8 @@ internal class RetrofitModule {
 
     @PhotoRetrofit
     @Provides
-    fun provideAppRetrofit(
-        @ApplicationContext context: Context,
-    ): Retrofit {
+    fun provideAppRetrofit(): Retrofit {
         return RetrofitProvider.provideAppRetrofit(
-            context = context,
             isLoggingEnable = BuildConfig.DEBUG,
             baseUrl = BuildConfig.BASE_API_URL
         )

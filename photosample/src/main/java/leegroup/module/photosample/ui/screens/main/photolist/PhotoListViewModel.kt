@@ -9,11 +9,11 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.launch
+import leegroup.module.compose.support.extensions.orFalse
+import leegroup.module.compose.support.extensions.orZero
 import leegroup.module.compose.support.util.DispatchersProvider
 import leegroup.module.compose.ui.models.ErrorState
 import leegroup.module.compose.ui.viewmodel.StateViewModel
-import leegroup.module.extension.orFalse
-import leegroup.module.extension.orZero
 import leegroup.module.photosample.domain.models.PhotoModelD
 import leegroup.module.photosample.domain.params.GetPhotoListParam
 import leegroup.module.photosample.domain.params.SaveFavoriteParam

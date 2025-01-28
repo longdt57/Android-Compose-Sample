@@ -5,7 +5,7 @@ import app.cash.turbine.test
 import io.mockk.coVerify
 import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
-import leegroup.module.extension.JsonUtil
+import leegroup.module.compose.support.util.JsonUtil
 import leegroup.module.photosample.domain.params.SaveFavoriteParam
 import leegroup.module.photosample.domain.usecases.photofavorite.SaveFavoriteUseCase
 import leegroup.module.photosample.ui.screens.main.PhotoDetailNav

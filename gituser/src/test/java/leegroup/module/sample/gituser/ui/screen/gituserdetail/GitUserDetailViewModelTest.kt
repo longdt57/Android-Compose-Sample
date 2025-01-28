@@ -11,8 +11,8 @@ import junit.framework.TestCase.assertTrue
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
+import leegroup.module.compose.support.util.JsonUtil
 import leegroup.module.compose.ui.models.ErrorState
-import leegroup.module.extension.JsonUtil
 import leegroup.module.sample.gituser.MockUtil
 import leegroup.module.sample.gituser.domain.models.GitUserDetailModel
 import leegroup.module.sample.gituser.domain.usecases.gituser.GetGitUserDetailLocalUseCase

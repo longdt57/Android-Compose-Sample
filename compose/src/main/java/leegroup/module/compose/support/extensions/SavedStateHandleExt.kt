@@ -4,7 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.JsonPrimitive
-import leegroup.module.extension.JsonUtil
+import leegroup.module.compose.support.util.JsonUtil
 
 /**
  * Similar to [SavedStateHandle.toNavModel]
