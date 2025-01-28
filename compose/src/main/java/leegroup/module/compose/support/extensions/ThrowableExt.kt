@@ -1,8 +1,8 @@
 package leegroup.module.compose.support.extensions
 
+import leegroup.module.compose.support.util.JsonUtil
 import leegroup.module.compose.ui.models.ErrorModel
 import leegroup.module.compose.ui.models.ErrorState
-import leegroup.module.extension.JsonUtil
 import retrofit2.HttpException
 import java.io.InterruptedIOException
 import java.net.ConnectException

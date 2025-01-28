@@ -1,4 +1,5 @@
 [versions]
+accompanistPermissions = "0.36.0"
 minSdk = "24"
 targetSdk = "35"
 compileSdk = "35"
@@ -23,6 +24,7 @@ coroutines = "1.8.1"
 crashlytic = "3.0.2"
 datastorePreferences = "1.1.2"
 detektVersion = "1.23.0"
+dexter = "6.2.3"
 espressoCore = "3.6.1"
 firebaseBom = "33.8.0"
 firebasePref = "1.4.2"
@@ -54,6 +56,7 @@ turbine = "0.13.0"
 workRuntimeKtx = "2.10.0"
 
 [libraries]
+accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanistPermissions" }
 android-tracking = { module = "com.github.longdt57:Android-Tracking", version.ref = "androidTracking" }
 androidx-core = { module = "androidx.test:core", version.ref = "core" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -79,6 +82,8 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+
+dexter = { module = "com.karumi:dexter", version.ref = "dexter" }
 
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }

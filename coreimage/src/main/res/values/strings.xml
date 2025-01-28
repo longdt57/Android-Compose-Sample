@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="close">Close</string>
+    <string name="go_to_setting">Go To Setting</string>
+    <string name="grant_access">Grant access</string>
+    <string name="share_pdf">Share PDF</string>
+</resources>

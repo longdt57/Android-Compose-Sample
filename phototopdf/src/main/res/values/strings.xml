@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="photo_to_pdf_screen_title">PDF List</string>
+    <string name="photo_to_pdf_list_title">%d Documents</string>
+    <string name="fab_take_photo">Take Photo</string>
+    <string name="photo_library">Photo Library</string>
+    <string name="pages">pages</string>
+    <string name="page">page</string>
+    <string name="no_media_found_title">"No media found.
+Please grant access to Photo Library."
+    </string>
+    <string name="no_media_found_message">Your media will stay on your device and won’t be uploaded anywhere.</string>
+    <string name="setting_permission_media">Please allow \"Pdf AI\" to access media in order to load and edit your images</string>
+    <string name="saved_to_documents">Saved to documents</string>
+</resources>
