@@ -40,15 +40,6 @@ private val LightColorScheme = lightColorScheme(
     onSurface = Black100,
 )
 
-enum class ThemeType(val value: String) {
-    DARK("Dark"), LIGHT("Light"), SYSTEM("System");
-
-    companion object {
-        fun fromCode(value: String): ThemeType {
-            return entries.first { it.value.equals(value, ignoreCase = true) }
-        }
-    }
-}
 
 @Composable
 fun ComposeTheme(
