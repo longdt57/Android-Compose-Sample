@@ -12,4 +12,5 @@
     <string name="popup_error_no_connection_title">"You are currently offline!"</string>
     <string name="popup_error_no_connection_body">"Looks like your connection is interrupted. Check network connection and try again."</string>
     <string name="common_refresh">Refresh</string>
+    <string name="back">Back</string>
 </resources>

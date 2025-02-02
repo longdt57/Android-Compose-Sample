@@ -20,6 +20,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.note.ui.NoteDestination
+import leegroup.modul.sample.ui.SampleDestination
 import leegroup.module.compose.ui.theme.ComposeTheme
 import leegroup.module.photosample.ui.screens.main.PhotoDestination
 import leegroup.module.sample.gituser.ui.screens.GitUserDestination
@@ -32,6 +33,7 @@ fun MainScreen(
         GitUserDestination.GitUserRoot,
         PhotoDestination.PhotoList,
         NoteDestination.NoteScreen,
+        SampleDestination.SampleScreen,
     )
     LazyColumn(
         modifier = Modifier

@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.app.androidcompose.ui.screens.main.MainScreen
 import com.example.note.ui.noteNavGraph
+import leegroup.modul.sample.ui.sampleNavGraph
 import leegroup.module.compose.support.extensions.appNavigate
 import leegroup.module.compose.support.extensions.launchSingleTopNavOptions
 import leegroup.module.photosample.ui.screens.main.photoNavGraph
@@ -36,5 +37,6 @@ fun AppNavGraph(
         photoNavGraph(navController = navController)
         gitUserNavGraph(navController = navController)
         noteNavGraph(navController = navController)
+        sampleNavGraph(navController = navController)
     }
 }

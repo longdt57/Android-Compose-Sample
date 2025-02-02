@@ -129,6 +129,7 @@ dependencies {
     implementation(project(":gituser"))
     implementation(project(":photosample"))
     implementation(project(":note"))
+    implementation(project(":sample"))
 
     // Lifecycle
     implementation(libs.bundles.androidx.lifecycle)
