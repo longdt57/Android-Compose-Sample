@@ -2,6 +2,7 @@ package leegroup.module.sample.gituser.ui.screens.gituser
 
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
@@ -27,6 +28,7 @@ internal class GitUserListViewModel @Inject internal constructor(
 
     fun handleAction(action: GitUserListAction) {
         when (action) {
+            is GitUserListAction.Refresh -> refresh()
             is GitUserListAction.LoadIfEmpty -> loadIfEmpty()
             is GitUserListAction.LoadMore -> loadMore()
             is GitUserListAction.TrackLaunch -> trackLaunch()
@@ -38,6 +40,11 @@ internal class GitUserListViewModel @Inject internal constructor(
         if (isEmpty()) {
             loadMore()
         }
+    }
+
+    private fun refresh() {
+        update { state -> state.copy(users = persistentListOf()) }
+        loadMore()
     }
 
     private fun loadMore() {

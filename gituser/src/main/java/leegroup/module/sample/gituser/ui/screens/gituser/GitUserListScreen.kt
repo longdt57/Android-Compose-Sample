@@ -61,7 +61,7 @@ fun GitUserListScreen(
                 navigator(GitUserDestination.GitUserDetail.GitUserDetailNav(user.login))
             },
             onRefresh = {
-                viewModel.handleAction(GitUserListAction.LoadIfEmpty)
+                viewModel.handleAction(GitUserListAction.Refresh)
             }
         )
     }
@@ -87,7 +87,8 @@ private fun GitUserListScreenContent(
                     .padding(horizontal = 20.dp),
                 users = users,
                 onClick = onClick,
-                onLoadMore = onLoadMore
+                onLoadMore = onLoadMore,
+                onRefresh = onRefresh,
             )
         } else if (showRefresh) {
             GitUserListEmpty(
